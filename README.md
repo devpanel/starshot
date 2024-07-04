@@ -11,7 +11,7 @@ You can use Devpanel to set up Starshot on [DrupalForge.org](https://www.drupalf
 2.Open DevPanel VS Code and run the following commands::
 ```bash
   cd /var/www/html/starshot-prototype
-  git remote add upstream https://<github_username>:<github_personal_toketen>@github.com/<github_username>/<github_repo>
+  git remote add upstream https://<github_username>:<github_personal_token>@github.com/<github_username>/<github_repo>
 
 ```
 3.Work on your issue, then push your work to your repository:
