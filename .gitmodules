@@ -1,0 +1,3 @@
+[submodule "starshot-prototype"]
+	path = starshot-prototype
+	url = https://github.com/phenaproxima/starshot-prototype.git
