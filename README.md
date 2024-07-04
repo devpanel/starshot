@@ -6,18 +6,16 @@ This is the repository for using DevPanel to contribute to [Drupal Starshot](htt
 1. [Fork](https://github.com/phenaproxima/starshot-prototype/fork) the Starshot prototype repository.
 
 2. Open DevPanel VS Code and run the following commands:
-   ```
-   bash
+   ```bash
    cd /var/www/html/starshot-prototype
    git remote add <github_username> https://<github_username>:<github_personal_token>@github.com/<github_username>/<github_repo>
    ```
 3. Create a branch for your issue:
-   ```
+   ```bash
    git checkout -b <issue-branch>
    ```
 5. Work on your issue, then push your work to your repository:
-   ```
-   bash
+   ```bash
    git push -u <github_username> HEAD
    ```
 5. Create a pull request back to the official [starshot-prototype](https://github.com/phenaproxima/starshot-prototype) repository.
