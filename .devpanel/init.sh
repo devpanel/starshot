@@ -15,15 +15,10 @@
 # For GNU Affero General Public License see <https://www.gnu.org/licenses/>.
 # ----------------------------------------------------------------------
 
-STATIC_FILES_PATH="$WEB_ROOT/sites/default/files"
-SETTINGS_FILES_PATH="$WEB_ROOT/sites/default/settings.php"
 #== Clone source code
 if [ ! -d "$APP_ROOT/starshot-prototype" ]; then
-  git clone https://github.com/phenaproxima/starshot-prototype.git starshot-prototype
+  git clone -b install-fails-with-database-url-argument https://github.com/darrenoh/starshot-prototype.git
 fi
-
-#== Setup settings.php file
-sudo cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILES_PATH
 
 #== Composer install.
 cd $APP_ROOT/starshot-prototype
@@ -31,15 +26,5 @@ composer install;
 
 #== Site install.
 if [[ $(mysql -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASSWORD $DB_NAME -e "show tables;") == '' ]]; then
-  drush si --account-name=devpanel --account-pass=devpanel  --site-name="Drupal Starshot" --db-url=mysql://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME -y
+  composer drupal:install-dev mysql://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME
 fi
-#== Webform library install.
-drush webform-libraries-download
-
-
-#== Update permission
-echo 'Update permission ....'
-drush cr
-sudo chown -R www-data:www-data $STATIC_FILES_PATH
-sudo chown www:www $SETTINGS_FILES_PATH
-sudo chmod 664 $SETTINGS_FILES_PATH
