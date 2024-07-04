@@ -14,4 +14,6 @@
 #
 # For GNU Affero General Public License see <https://www.gnu.org/licenses/>.
 # ----------------------------------------------------------------------
-bash $APP_ROOT/init.sh
+
+bash $APP_ROOT/.devpanel/init.sh
+rm -rf $APP_ROOT/lost+found
