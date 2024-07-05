@@ -1,23 +1,21 @@
-# Devpanel Starshot
-## Introduction
-This is the repository for users to set up projects on the Devpanel platform contributing to [starshot-prototype](https://www.github.com/octokatherine)
+# DevPanel Starshot
 
-You can use Devpanel to set up Starshot on [DrupalForge.org](https://www.drupalforge.org/form/subscription?template=14)
+This is the repository for using DevPanel to contribute to [Drupal Starshot](https://www.drupal.org/about/starshot). You can use [Drupal Forge](https://www.drupalforge.org/form/subscription?template=14) to set up the Starshot prototype with DevPanel.
 
+## Contributing to the Starshot prototype
+1. [Fork](https://github.com/phenaproxima/starshot-prototype/fork) the Starshot prototype repository.
 
-## Contributing to starshot-prototype
-1.Fork the repository [starshot-prototype](https://www.github.com/octokatherine) to your account
-
-2.Open DevPanel VS Code and run the following commands::
-```bash
-  cd /var/www/html/starshot-prototype
-  git remote add upstream https://<github_username>:<github_personal_token>@github.com/<github_username>/<github_repo>
-
-```
-3.Work on your issue, then push your work to your repository:
-```bash
-  git push upstream main
-```
-4. Create a pull request back to the official repository [starshot-prototype](https://www.github.com/octokatherine)
-## License
-This project is licensed under the [MIT License](LICENSE).
+2. Open DevPanel VS Code and run the following commands:
+   ```bash
+   cd /var/www/html/starshot-prototype
+   git remote add <github_username> https://<github_username>:<github_personal_token>@github.com/<github_username>/<github_repo>
+   ```
+3. Create a branch for your issue:
+   ```bash
+   git checkout -b <issue-branch>
+   ```
+5. Work on your issue, then push your work to your repository:
+   ```bash
+   git push -u <github_username> HEAD
+   ```
+5. Create a pull request back to the official [starshot-prototype](https://github.com/phenaproxima/starshot-prototype) repository.
