@@ -18,7 +18,7 @@
 STATIC_FILES_PATH="$WEB_ROOT/sites/default/files"
 SETTINGS_FILES_PATH="$WEB_ROOT/sites/default/settings.php"
 #== Update source code
-git submodule update --remote starshot-prototype
+git submodule update --init --remote --recursive
 
 #== Setup settings.php file
 sudo cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILES_PATH
