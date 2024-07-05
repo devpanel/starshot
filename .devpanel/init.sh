@@ -17,7 +17,7 @@
 
 #== Clone source code
 if [ ! -d "$APP_ROOT/starshot-prototype" ]; then
-  git clone -b install-fails-with-database-url-argument https://github.com/darrenoh/starshot-prototype.git
+  git clone https://github.com/phenaproxima/starshot-prototype.git starshot-prototype
 fi
 
 #== Composer install.
@@ -26,5 +26,5 @@ composer install;
 
 #== Site install.
 if [[ $(mysql -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASSWORD $DB_NAME -e "show tables;") == '' ]]; then
-  composer drupal:install-dev mysql://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME
+  DB=mysql://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME composer drupal:install-dev
 fi
