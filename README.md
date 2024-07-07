@@ -19,4 +19,4 @@ This is the repository for using DevPanel to contribute to [Drupal Starshot](htt
    ```bash
    git push -u <github_username> HEAD
    ```
-5. Create a pull request back to the official [starshot-prototype](https://github.com/phenaproxima/starshot-prototype) repository.
+5. Create a GitHub pull request from your fork back to the official [starshot-prototype](https://github.com/phenaproxima/starshot-prototype) repository.
