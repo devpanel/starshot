@@ -15,7 +15,7 @@ This is the repository for using DevPanel to contribute to [Drupal Starshot](htt
    ```bash
    git checkout -b <issue-branch>
    ```
-5. Work on your issue, then push your work to your repository:
+5. When you have committed your work, push the branch to your fork:
    ```bash
    git push -u <github_username> HEAD
    ```
