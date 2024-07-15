@@ -17,15 +17,17 @@
 
 STATIC_FILES_PATH="$WEB_ROOT/sites/default/files"
 SETTINGS_FILES_PATH="$WEB_ROOT/sites/default/settings.php"
-#== Update source code
-git submodule update --init --remote --recursive
+#== Clone source code
+if [ -z "$(ls -A $APP_ROOT/starshot-prototype)" ]; then
+  git submodule update --init --remote --recursive
+  cd $APP_ROOT/starshot-prototype
+  git checkout main
+fi
 
 #== Setup settings.php file
 sudo cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILES_PATH
 
 #== Composer install.
-cd $APP_ROOT/starshot-prototype
-git checkout main
 composer install;
 
 #== Site install.
