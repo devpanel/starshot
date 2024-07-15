@@ -15,5 +15,7 @@
 # For GNU Affero General Public License see <https://www.gnu.org/licenses/>.
 # ----------------------------------------------------------------------
 
+sudo chown -R www-data:www-data $APP_ROOT
+sudo chmod -R 755 $APP_ROOT
 bash $APP_ROOT/.devpanel/init.sh
 rm -rf $APP_ROOT/lost+found
