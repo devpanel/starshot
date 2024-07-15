@@ -25,6 +25,7 @@ sudo cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILES_PATH
 
 #== Composer install.
 cd $APP_ROOT/starshot-prototype
+git checkout main
 composer install;
 
 #== Site install.
