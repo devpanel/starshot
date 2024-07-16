@@ -18,15 +18,16 @@
 STATIC_FILES_PATH="$WEB_ROOT/sites/default/files"
 SETTINGS_FILES_PATH="$WEB_ROOT/sites/default/settings.php"
 #== Clone source code
-if [ ! -d "$APP_ROOT/starshot-prototype" ]; then
-  git clone https://github.com/phenaproxima/starshot-prototype.git starshot-prototype
+if [ -z "$(ls -A $APP_ROOT/starshot-prototype)" ]; then
+  git submodule update --init --remote --recursive
+  cd $APP_ROOT/starshot-prototype
+  git checkout main
 fi
 
 #== Setup settings.php file
 sudo cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILES_PATH
 
 #== Composer install.
-cd $APP_ROOT/starshot-prototype
 composer install;
 
 #== Site install.
