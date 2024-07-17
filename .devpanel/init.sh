@@ -16,8 +16,10 @@
 # ----------------------------------------------------------------------
 
 #== Clone source code
-if [ ! -d "$APP_ROOT/starshot-prototype" ]; then
-  git clone https://github.com/phenaproxima/starshot-prototype.git starshot-prototype
+if [ -z "$(ls -A $APP_ROOT/starshot-prototype)" ]; then
+  git submodule update --init --remote --recursive
+  cd $APP_ROOT/starshot-prototype
+  git checkout main
 fi
 
 #== Composer install.
