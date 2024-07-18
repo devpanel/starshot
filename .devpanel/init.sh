@@ -32,15 +32,7 @@ composer install;
 
 #== Site install.
 if [[ $(mysql -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASSWORD $DB_NAME -e "show tables;") == '' ]]; then
-  drush si --account-name=devpanel --account-pass=devpanel  --site-name="Drupal Starshot" --db-url=mysql://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME -y
+  drush si --account-name=admin --account-pass=admin  --site-name="Drupal Starshot" --db-url=mysql://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME -y
 fi
 #== Webform library install.
 drush webform-libraries-download
-
-
-#== Update permission
-echo 'Update permission ....'
-drush cr
-sudo chown -R www-data:www-data $STATIC_FILES_PATH
-sudo chown www:www $SETTINGS_FILES_PATH
-sudo chmod 664 $SETTINGS_FILES_PATH
