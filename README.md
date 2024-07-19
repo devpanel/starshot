@@ -1,7 +1,6 @@
 [![About Drupal Starshot](https://github.com/user-attachments/assets/9a2bffa5-9e75-4063-8f97-1b6773ae661e)](https://www.drupal.org/about/starshot)
+
 # DevPanel Starshot
-
-
 This is the repository for using DevPanel to contribute to the Drupal Starshot prototype. You can launch the Starshot prototype with a cloud development environment from Drupal Forge.
 
 <div align="center">
