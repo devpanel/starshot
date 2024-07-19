@@ -1,6 +1,19 @@
+[![About Drupal Starshot](https://github.com/user-attachments/assets/9a2bffa5-9e75-4063-8f97-1b6773ae661e)](https://www.drupal.org/about/starshot)
 # DevPanel Starshot
 
-This is the repository for using DevPanel to contribute to [Drupal Starshot](https://www.drupal.org/about/starshot). You can use [Drupal Forge](https://www.drupalforge.org/form/subscription?template=14) to set up the Starshot prototype with DevPanel.
+
+This is the repository for using DevPanel to contribute to the Drupal Starshot prototype. You can launch the Starshot prototype with a cloud development environment from Drupal Forge.
+
+<div align="center">
+   <a href="https://www.drupalforge.org/form/subscription?template=14">
+      <figure>
+         <img src="https://github.com/user-attachments/assets/69745ec7-d9a6-498f-9f47-8b60795195bb" height="100px" />
+         <br />
+         <figcaption>Launch from Drupal Forge</figcaption>
+      </figure>
+   </a>
+</div>
+
 
 ## Contributing to the Starshot prototype
 1. [Fork](https://github.com/phenaproxima/starshot-prototype/fork) the Starshot prototype repository.
