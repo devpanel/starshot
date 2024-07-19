@@ -30,4 +30,9 @@ drush cr
 #== Site install.
 if [[ $(mysql -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASSWORD $DB_NAME -e "show tables;") == '' ]]; then
   DB=mysql://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME composer drupal:install-dev
+  chmod u+w $WEB_ROOT/sites/default/settings.php
+  echo "\$settings['trusted_host_patterns'] = [
+  '^.+\.app\.devpanel\.com$',
+];" \ >> $WEB_ROOT/sites/default/settings.php
+  chmod u-w $WEB_ROOT/sites/default/settings.php
 fi
