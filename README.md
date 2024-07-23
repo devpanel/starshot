@@ -1,7 +1,7 @@
 [![About Drupal Starshot](https://github.com/user-attachments/assets/966249f9-3378-4358-8211-ee8d7b4bc3a0)](https://www.drupal.org/about/starshot)
 
 # Starshot
-Launch the Drupal Starshot prototype from Drupal Forge. If you launch with a cloud development environment, you can use it to contribute to Starshot.
+Launch the Drupal Starshot prototype on Drupal Forge. If you launch with a cloud development environment, you can use it to contribute to Starshot.
 
 <div align="center">
    <a href="https://www.drupalforge.org/form/subscription?template=14">
