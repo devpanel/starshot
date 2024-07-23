@@ -1,20 +1,20 @@
-[![About Drupal Starshot](https://github.com/user-attachments/assets/9a2bffa5-9e75-4063-8f97-1b6773ae661e)](https://www.drupal.org/about/starshot)
+[![About Drupal Starshot](https://github.com/user-attachments/assets/966249f9-3378-4358-8211-ee8d7b4bc3a0)](https://www.drupal.org/about/starshot)
 
-# DevPanel Starshot
-This is the repository for using DevPanel to contribute to the Drupal Starshot prototype. You can launch the Starshot prototype with a cloud development environment from Drupal Forge.
+# Starshot
+Launch the Drupal Starshot prototype from Drupal Forge. If you launch with a cloud development environment, you can use it to contribute to Starshot.
 
 <div align="center">
    <a href="https://www.drupalforge.org/form/subscription?template=14">
       <figure>
          <img src="https://github.com/user-attachments/assets/69745ec7-d9a6-498f-9f47-8b60795195bb" height="100px" />
          <br />
-         <figcaption>Launch from Drupal Forge</figcaption>
+         <figcaption>Launch Starshot</figcaption>
       </figure>
    </a>
 </div>
 
 
-## Contributing to the Starshot prototype
+## Contributing to Starshot
 1. [Fork](https://github.com/phenaproxima/starshot-prototype/fork) the Starshot prototype repository.
 
 2. Open DevPanel VS Code and run the following commands:
