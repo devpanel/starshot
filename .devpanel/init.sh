@@ -33,4 +33,5 @@ if [[ $(mysql -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASSWORD $DB_NAME -e "show 
   '^.+\.app\.devpanel\.com$',
 ];" \ >> $WEB_ROOT/sites/default/settings.php
   chmod u-w $WEB_ROOT/sites/default/settings.php
+  drush cr
 fi
