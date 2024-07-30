@@ -17,7 +17,9 @@
 
 #== Clone source code
 if [ -z "$(ls -A $APP_ROOT/starshot-prototype)" ]; then
-  git submodule update --init --recursive
+  git submodule update --init --remote --recursive
+  cd $APP_ROOT/starshot-prototype
+  git checkout main
 fi
 
 #== Composer install.
