@@ -17,7 +17,9 @@
 
 #== Clone source code
 if [ -z "$(ls -A $APP_ROOT/starshot-prototype)" ]; then
-  git submodule update --init --recursive
+  git submodule update --init --remote --recursive
+  cd $APP_ROOT/starshot-prototype
+  git checkout main
 fi
 
 #== Composer install.
@@ -34,4 +36,6 @@ if [[ $(mysql -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASSWORD $DB_NAME -e "show 
 ];" \ >> $WEB_ROOT/sites/default/settings.php
   chmod u-w $WEB_ROOT/sites/default/settings.php
   drush cr
+  #== Webform library install.
+  drush webform-libraries-download
 fi
