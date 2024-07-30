@@ -34,4 +34,6 @@ if [[ $(mysql -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASSWORD $DB_NAME -e "show 
 ];" \ >> $WEB_ROOT/sites/default/settings.php
   chmod u-w $WEB_ROOT/sites/default/settings.php
   drush cr
+  #== Webform library install.
+  drush webform-libraries-download
 fi
