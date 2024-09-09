@@ -16,6 +16,7 @@
 # ----------------------------------------------------------------------
 
 #== Clone source code
+SETTINGS_FILES_PATH=$WEB_ROOT/sites/default/settings.php
 if [ -z "$(ls -A $APP_ROOT/starshot-prototype)" ]; then
   git submodule update --init --remote --recursive
   cd $APP_ROOT/starshot-prototype
@@ -25,17 +26,16 @@ fi
 #== Composer install.
 cd $APP_ROOT/starshot-prototype
 composer install
-drush cr
 
 #== Site install.
 if [[ $(mysql -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASSWORD $DB_NAME -e "show tables;") == '' ]]; then
   DB=mysql://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME composer drupal:install-dev
-  chmod u+w $WEB_ROOT/sites/default/settings.php
-  echo "\$settings['trusted_host_patterns'] = [
-  '^.+\.app\.devpanel\.com$',
-];" \ >> $WEB_ROOT/sites/default/settings.php
-  chmod u-w $WEB_ROOT/sites/default/settings.php
+  #== Setup settings.php file
+  echo "Setup settings.php file"
+  sudo cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILES_PATH
+  chmod u-w $SETTINGS_FILES_PATH
   drush cr
+
   #== Webform library install.
   drush webform-libraries-download
 fi
