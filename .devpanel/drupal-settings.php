@@ -905,5 +905,5 @@ $databases['default']['default'] = array (
 $settings['config_sync_directory'] = '../config/sync';
 $settings['trusted_host_patterns'] = [
   '^.+\.app\.devpanel\.com$',
-  '^.+\.drupalforge\.app$',
+  '^.+\.drupalforge.+',
 ];
