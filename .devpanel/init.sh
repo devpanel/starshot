@@ -17,20 +17,20 @@
 
 #== Clone source code
 SETTINGS_FILES_PATH=$WEB_ROOT/sites/default/settings.php
-if [ -z "$(ls -A $APP_ROOT/starshot-prototype)" ]; then
+if [ -z "$(ls -A $APP_ROOT/drupal_cms)" ]; then
   git submodule update --init --remote --recursive
-  cd $APP_ROOT/starshot-prototype
+  cd $APP_ROOT/drupal_cms
   git checkout main
 fi
 
 #== Composer install.
-cd $APP_ROOT/starshot-prototype
-composer config --no-plugins allow-plugins.tbachert/spi true
-yes | composer install 
+cd $APP_ROOT/drupal_cms
+cp -f ./project_template/composer.json .
+find . -maxdepth 1 -type d -name 'drupal_cms*' -exec composer config --global repositories.{} path {} ';'
+composer require --dev drupal/default_content
 
 #== Site install.
 if [[ $(mysql -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASSWORD $DB_NAME -e "show tables;") == '' ]]; then
-  DB=mysql://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME composer drupal:install-dev
   #== Setup settings.php file
   echo "Setup settings.php file"
   sudo cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILES_PATH
