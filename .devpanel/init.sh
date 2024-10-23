@@ -36,7 +36,4 @@ if [[ $(mysql -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASSWORD $DB_NAME -e "show 
   sudo cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILES_PATH
   chmod u-w $SETTINGS_FILES_PATH
   drush cr
-
-  #== Webform library install.
-  drush webform-libraries-download
 fi
