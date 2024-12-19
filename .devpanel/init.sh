@@ -17,26 +17,21 @@
 
 #== Clone source code
 SETTINGS_FILES_PATH=$WEB_ROOT/sites/default/settings.php
-if [ -z "$(ls -A $APP_ROOT/drupal_cms)" ]; then
+if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   git submodule update --init --remote --recursive
-  cd $APP_ROOT/drupal_cms
-  git checkout main
 fi
 
 #== Composer install.
-cd $APP_ROOT/drupal_cms
-cp -f ./project_template/composer.json .
-find . -maxdepth 1 -type d -name 'drupal_cms*' -exec composer config --global repositories.{} path {} ';'
-composer require --dev drupal/default_content
+cd $APP_ROOT
+sudo rm -rf lost+found
+.devpanel/generate-composer-json > composer.json
+composer install
+ln -s -f $(realpath -s --relative-to=$WEB_ROOT/profiles repos/drupal/drupal_cms/project_template/$WEB_ROOT/profiles/drupal_cms_installer) $WEB_ROOT/profiles
+test -d node_modules || npm clean-install --foreground-scripts
 
 #== Site install.
 if [[ $(mysql -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASSWORD $DB_NAME -e "show tables;") == '' ]]; then
   #== Setup settings.php file
   echo "Setup settings.php file"
   sudo cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILES_PATH
-  chmod u-w $SETTINGS_FILES_PATH
-  drush cr
-
-  #== Webform library install.
-  drush webform-libraries-download
 fi

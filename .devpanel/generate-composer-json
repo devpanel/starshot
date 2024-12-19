@@ -1,0 +1,30 @@
+#!/usr/bin/env php
+<?php
+
+// Generates the development-ready `composer.json` file by merging our
+// development requirements into the project template. This script must
+// be run from the repository root.
+
+$read_json = function (string $file): array {
+  $data = file_get_contents($file);
+  return json_decode($data, TRUE, flags: JSON_THROW_ON_ERROR);
+};
+
+$data = array_merge_recursive(
+  $read_json('repos/drupal/drupal_cms/project_template/composer.json'),
+  $read_json('repos/drupal/drupal_cms/dev.composer.json'),
+);
+
+array_walk($data['repositories'], function (array &$repository): void {
+  if ($repository['type'] === 'path') {
+    $repository['url'] = 'repos/drupal/drupal_cms/' . $repository['url'];
+  }
+});
+
+// Make packages.drupal.org the lowest-priority repository, which will force the
+// components' local path repositories to take precedence.
+$repository = $data['repositories']['drupal'];
+unset($data['repositories']['drupal']);
+$data['repositories']['drupal'] = $repository;
+
+echo json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);

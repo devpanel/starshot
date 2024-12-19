@@ -10,4 +10,4 @@
 # ----------------------------------------------------------------------
 
 sudo apt-get update
-sudo apt-get install -y nano
+sudo apt-get install -y nano npm
