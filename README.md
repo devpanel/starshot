@@ -19,9 +19,9 @@ Starshot is an initiative to create a Drupal CMS for non-technical users by the 
 
 2. Create or get push access to the [issue fork](https://www.drupal.org/docs/develop/git/using-gitlab-to-contribute-to-drupal/creating-issue-forks).
 
-3. Open DevPanel VS Code and run the following commands:
+3. Open a terminal in the cloud dev environment and run the following commands:
    ```bash
-   cd /var/www/html/drupal_cms
+   cd /var/www/html/repos/drupal/drupal_cms
    git remote add <issue_number> https://<drupal.org_username>:<personal_access_token>@git.drupalcode.org/issue/drupal_cms-<issue_number>.git
    ```
    It is best practice to generate a [personal access token](https://git.drupalcode.org/-/user_settings/personal_access_tokens) rather than use your drupal.org password for `<personal_access_token>`.
