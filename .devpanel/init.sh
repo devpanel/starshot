@@ -21,6 +21,8 @@ SETTINGS_FILES_PATH=$WEB_ROOT/sites/default/settings.php
 #== Clone source code
 if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   git submodule update --init --remote --recursive
+  cd $APP_ROOT/repos/drupal/drupal_cms
+  git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d '/')
 fi
 
 #== Composer install.
