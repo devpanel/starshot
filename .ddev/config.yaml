@@ -15,22 +15,22 @@ corepack_enable: false
 ddev_version_constraint: '>= 1.24.0'
 hooks:
   post-start:
-    # Get a local copy of Drupal CMS.
-    - exec: 'git submodule update --init --remote --recursive'
-    # Check out the default branch.
-    - exec: 'cd repos/drupal/drupal_cms; git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d "/")'
-    # @see homeadditions/bin/generate-composer-json
+    # Set up debugging.
+    - exec: 'test -f .vscode/launch.json || (mkdir -p .vscode && cp .ddev/launch.json .vscode/)'
+    # Get a local copy of Drupal CMS and check out the default branch.
+    - exec: 'cd repos/drupal/drupal_cms && test -z $(ls -A) && git submodule update --init --remote --recursive && git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d "/")'
+    # Generate composer.json.
     - exec: '.devpanel/generate-composer-json > composer.json'
     # Install all dependencies.
     - composer: 'install'
     # The installer is part of the project template, so symlink it into the web root.
     # It needs to be a relative symlink, or it will break Package Manager.
-    - exec: 'ln -s -f $(realpath -s --relative-to=$DDEV_DOCROOT/profiles repos/drupal/drupal_cms/project_template/$DDEV_DOCROOT/profiles/drupal_cms_installer) $DDEV_DOCROOT/profiles'
+    - exec: 'ln -s -f $(realpath -s --relative-to=$DDEV_DOCROOT/profiles repos/drupal/drupal_cms/project_template/web/profiles/drupal_cms_installer) $DDEV_DOCROOT/profiles'
     # Install JavaScript dependencies if needed. The `--foreground-scripts`
     # option is needed to ensure the Cypress binary is actually downloaded;
     # see the warning about Node.js Snap for Linux at
     # https://docs.cypress.io/guides/getting-started/installing-cypress.
-    - exec: 'cd repos/drupal/drupal_cms; test -d node_modules || npm clean-install --foreground-scripts'
+    - exec: 'cd repos/drupal/drupal_cms && test -d node_modules || npm clean-install --foreground-scripts'
 web_environment:
   # For faster performance, don't audit dependencies automatically.
   - COMPOSER_NO_AUDIT=1

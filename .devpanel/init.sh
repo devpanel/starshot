@@ -19,7 +19,7 @@ DDEV_DOCROOT=${WEB_ROOT##*/}
 SETTINGS_FILES_PATH=$WEB_ROOT/sites/default/settings.php
 
 #== Clone source code
-if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
+if [ -z $(ls -A $APP_ROOT/repos/drupal/drupal_cms) ]; then
   git submodule update --init --remote --recursive
   cd $APP_ROOT/repos/drupal/drupal_cms
   git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d '/')
@@ -31,8 +31,7 @@ sudo rm -rf lost+found
 .devpanel/generate-composer-json > composer.json
 composer install
 ln -s -f $(realpath -s --relative-to=$DDEV_DOCROOT/profiles repos/drupal/drupal_cms/project_template/$DDEV_DOCROOT/profiles/drupal_cms_installer) $DDEV_DOCROOT/profiles
-cd repos/drupal/drupal_cms
-test -d node_modules || npm clean-install --foreground-scripts
+cd repos/drupal/drupal_cms && test -d node_modules || npm clean-install --foreground-scripts
 
 #== Site install.
 if [[ $(mysql -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASSWORD $DB_NAME -e "show tables;") == '' ]]; then
