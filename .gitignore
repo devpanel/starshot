@@ -1,9 +1,10 @@
+/.cache/
 /.editorconfig
 /.gitattributes
 /composer.json
 /composer.lock
-/config
+/config/
 /patches.lock.json
-/recipes
-/vendor
-/web
+/recipes/
+/vendor/
+/web/
