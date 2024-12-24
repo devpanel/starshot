@@ -18,7 +18,7 @@ hooks:
     # Set up debugging.
     - exec: 'test -f .vscode/launch.json || (mkdir -p .vscode && cp .ddev/launch.json .vscode/)'
     # Get a local copy of Drupal CMS and check out the default branch.
-    - exec: 'cd repos/drupal/drupal_cms && test -z $(ls -A) && git submodule update --init --remote --recursive && git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d "/")'
+    - exec: 'cd repos/drupal/drupal_cms && test -n "$(ls -A)" || (git submodule update --init --remote --recursive && git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d "/"))'
     # Generate composer.json.
     - exec: '.devpanel/generate-composer-json > composer.json'
     # Install all dependencies.
