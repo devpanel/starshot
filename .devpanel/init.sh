@@ -49,6 +49,7 @@ if [[ $(mysql -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASSWORD $DB_NAME -e "show 
   sudo cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILES_PATH
   sudo chown $USER:$GROUP $SETTINGS_FILES_PATH
   #== Pre-install starter recipe.
-  curl "$DP_HOSTNAME/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS"
-  until drush recipe $APP_ROOT/recipes/drupal_cms_starter; do :; done
+  if [ curl "$DP_HOSTNAME/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS" ]; then
+    until drush recipe $APP_ROOT/recipes/drupal_cms_starter; do :; done
+  fi
 fi
