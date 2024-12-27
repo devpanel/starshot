@@ -35,21 +35,26 @@ cd repos/drupal/drupal_cms && test -d node_modules || npm clean-install --foregr
 
 #== Copy recipes cache.
 cd $APP_ROOT
-if [ ! grep -qxF "/project_template/web/profiles/drupal_cms_installer/cache/*" .git/modules/repos/drupal/drupal_cms/info/exclude ]; then
-  echo "/project_template/web/profiles/drupal_cms_installer/cache/*" >> .git/modules/repos/drupal/drupal_cms/info/exclude
+if ! grep -qxF '/project_template/web/profiles/drupal_cms_installer/cache/*' .git/modules/repos/drupal/drupal_cms/info/exclude; then
+  echo '/project_template/web/profiles/drupal_cms_installer/cache/*' >> .git/modules/repos/drupal/drupal_cms/info/exclude
 fi
-if [ -d web/profiles/drupal_cms_installer/cache && -z "$(git status --porcelain repos/drupal/drupal_cms)" ]; then
+if [ -d web/profiles/drupal_cms_installer/cache ] && [ -z "$(git status --porcelain repos/drupal/drupal_cms)" ]; then
   cp -n .devpanel/drupal_cms_cache/* web/profiles/drupal_cms_installer/cache
 fi
 
 #== Site install.
-if [[ $(mysql -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASSWORD $DB_NAME -e "show tables;") == '' ]]; then
-  #== Setup settings.php file
-  echo "Setup settings.php file"
-  sudo cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILES_PATH
-  sudo chown $USER:$GROUP $SETTINGS_FILES_PATH
+if [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables')" ]; then
+  #== Set up settings.php file
+  echo "Set up settings.php file"
+  cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILES_PATH
   #== Pre-install starter recipe.
-  if [ curl "$DP_HOSTNAME/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS" ]; then
-    until drush recipe $APP_ROOT/recipes/drupal_cms_starter; do :; done
+  if [ -d recipes/drupal_cms_starter ]; then
+    while [ -z "$(drush status --fields=bootstrap)" ]; do
+      curl -Is "localhost/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS" > /dev/null
+    done
+    until drush recipe $APP_ROOT/recipes/drupal_cms_starter; do
+      :
+    done
+    drush cr
   fi
 fi
