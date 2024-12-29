@@ -1,7 +1,7 @@
 [![About Drupal Starshot](starshot.png)](https://www.drupal.org/about/starshot)
 
 # Starshot
-Starshot is an initiative to create a Drupal CMS for non-technical users by the end of 2024. Launch Starshot on Drupal Forge. If you launch with a cloud development environment, you can use it to contribute to Drupal CMS.
+Starshot is an initiative to release Drupal CMS, a distribution of Drupal for non-technical users. Launch Drupal CMS on Drupal Forge. With a Drupal Forge cloud development environment, you can contribute to Drupal CMS.
 
 <div align="center">
    <a href="https://www.drupalforge.org/form/subscription?template=14">
@@ -34,3 +34,9 @@ Starshot is an initiative to create a Drupal CMS for non-technical users by the 
    git pull --rebase
    git push
    ```
+
+
+## Contributing to other projects
+1. Clone the project repository in the repos directory. To prevent project name collisions, use vendor subdirectories to separate projects from different sources.
+
+2. Either symlink the project to where it is needed or [add it to composer.json](https://www.drupal.org/docs/develop/using-composer/tricks-for-using-composer-in-local-development).
