@@ -1,0 +1,79 @@
+From cacf23a0084a9ceb66bcadb2c7c985e054842870 Mon Sep 17 00:00:00 2001
+From: Darren Oh <9472-darrenoh@users.noreply.drupalcode.org>
+Date: Sat, 28 Dec 2024 20:10:12 -0500
+Subject: [PATCH] Issue #3496399: Add ability to skip starter recipe if it was
+ preinstalled
+
+---
+ .../drupal_cms_installer.profile                 |  7 ++++++-
+ .../src/Form/RecipesForm.php                     | 16 +++++++++++++++-
+ 2 files changed, 21 insertions(+), 2 deletions(-)
+
+diff --git a/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile b/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile
+index c382d1ec..319b2373 100644
+--- a/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile
++++ b/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile
+@@ -235,13 +235,18 @@ function _drupal_cms_installer_password_value(&$element, $input, FormStateInterf
+  *   The batch job definition.
+  */
+ function drupal_cms_installer_apply_recipes(array &$install_state): array {
++  // Remove empty placeholder recipe.
++  $recipes = array_filter($install_state['parameters']['recipes']);
++  if (empty($recipes)) {
++    return [];
++  }
+   $batch = install_profile_modules($install_state);
+   $batch['title'] = t('Setting up your site');
+ 
+   ['install_path' => $cookbook_path] = InstalledVersions::getRootPackage();
+   $cookbook_path .= '/recipes';
+ 
+-  foreach ($install_state['parameters']['recipes'] as $recipe) {
++  foreach ($recipes as $recipe) {
+     $recipe = RecipeLoader::load(
+       $cookbook_path . '/' . $recipe,
+       // Only save a cached copy of the recipe if this environment variable is
+diff --git a/project_template/web/profiles/drupal_cms_installer/src/Form/RecipesForm.php b/project_template/web/profiles/drupal_cms_installer/src/Form/RecipesForm.php
+index 5bf6e271..9e0c0e6b 100644
+--- a/project_template/web/profiles/drupal_cms_installer/src/Form/RecipesForm.php
++++ b/project_template/web/profiles/drupal_cms_installer/src/Form/RecipesForm.php
+@@ -5,6 +5,7 @@ namespace Drupal\drupal_cms_installer\Form;
+ use Composer\InstalledVersions;
+ use Drupal\Component\Serialization\Yaml;
+ use Drupal\Core\Form\FormStateInterface;
++use Drupal\Core\Installer\Exception\AlreadyInstalledException;
+ use Drupal\Core\Render\Element\Checkboxes;
+ 
+ /**
+@@ -91,7 +92,16 @@ final class RecipesForm extends InstallerFormBase {
+    */
+   public function submitForm(array &$form, FormStateInterface $form_state): void {
+     global $install_state;
+-    $install_state['parameters']['recipes'] = ['drupal_cms_starter'];
++    try {
++      install_verify_database_ready();
++      // Add the starter recipe to the list of recipes to install.
++      $install_state['parameters']['recipes'] = ['drupal_cms_starter'];
++    }
++    catch (AlreadyInstalledException $e) {
++      // If the starter recipe is already installed, add an empty placeholder
++      // recipe so the installer can proceed.
++      $install_state['parameters']['recipes'] = [''];
++    }
+ 
+     $pressed_button = $form_state->getTriggeringElement();
+     // Only choose add-ons if the Next button was pressed, or if the form was
+@@ -99,6 +109,10 @@ final class RecipesForm extends InstallerFormBase {
+     if (($pressed_button && $pressed_button['#op'] === 'submit') || $form_state->isProgrammed()) {
+       $add_ons = $form_state->getValue('add_ons', []);
+       $add_ons = array_filter($add_ons);
++      if (!empty($add_ons)) {
++        // If there are add-ons, we don't need a placeholder recipe.
++        $install_state['parameters']['recipes'] = array_filter($install_state['parameters']['recipes']);
++      }
+       array_push($install_state['parameters']['recipes'], ...array_values($add_ons));
+     }
+   }
+-- 
+GitLab
+
