@@ -23,6 +23,8 @@ if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   git submodule update --init --remote --recursive
   cd $APP_ROOT/repos/drupal/drupal_cms
   git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d '/')
+  #== Patch for issue #3496399.
+  git apply $APP_ROOT/patches/drupal/drupal_cms/349.patch
 fi
 
 #== Composer install.

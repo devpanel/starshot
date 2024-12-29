@@ -18,7 +18,8 @@ hooks:
     # Set up debugging.
     - exec: 'test -f .vscode/launch.json || (mkdir -p .vscode && cp .ddev/launch.json .vscode/)'
     # Get a local copy of Drupal CMS and check out the default branch.
-    - exec: 'cd repos/drupal/drupal_cms && test -n "$(ls -A)" || (git submodule update --init --remote --recursive && git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d "/"))'
+    # Patch for issue #3496399.
+    - exec: 'cd repos/drupal/drupal_cms && test -n "$(ls -A)" || (git submodule update --init --remote --recursive && git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d "/")) && git apply $DDEV_COMPOSER_ROOT/patches/drupal/drupal_cms/349.patch'
     # Generate composer.json.
     - exec: '.devpanel/generate-composer-json > composer.json'
     # Install all dependencies.
