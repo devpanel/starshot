@@ -54,9 +54,11 @@ if [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 
     while [ -z "$(drush status --fields=bootstrap)" ]; do
       curl -Is "localhost/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS" > /dev/null
     done
+    drush ev "require_once 'core/includes/install.core.inc'; install_core_entity_type_definitions();"
     until drush recipe $APP_ROOT/recipes/drupal_cms_starter; do
       :
     done
+    drush -n pmu drupal_cms_installer
     drush cr
   fi
 fi
