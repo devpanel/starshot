@@ -19,7 +19,7 @@ hooks:
     - exec: 'test -f .vscode/launch.json || (mkdir -p .vscode && cp .ddev/launch.json .vscode/)'
     # Get a local copy of Drupal CMS and check out the default branch.
     # Patch for issue #3496399.
-    - exec: 'cd repos/drupal/drupal_cms && test -n "$(ls -A)" || (git submodule update --init --remote --recursive && git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d "/")) && git apply $DDEV_COMPOSER_ROOT/patches/drupal/drupal_cms/349.patch'
+    - exec: 'cd repos/drupal/drupal_cms && test -n "$(ls -A)" || (git submodule update --init --remote --recursive && git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d "/") && git apply $DDEV_COMPOSER_ROOT/patches/drupal/drupal_cms/349.patch)'
     # Generate composer.json.
     - exec: '.devpanel/generate-composer-json > composer.json'
     # Install all dependencies.
@@ -36,7 +36,7 @@ hooks:
     - exec: 'grep -qxF "/project_template/web/profiles/drupal_cms_installer/cache/*" .git/modules/repos/drupal/drupal_cms/info/exclude || echo "/project_template/web/profiles/drupal_cms_installer/cache/*" >> .git/modules/repos/drupal/drupal_cms/info/exclude'
     - exec: 'test -d web/profiles/drupal_cms_installer/cache && test -z "$(git status --porcelain repos/drupal/drupal_cms)" && cp -n .devpanel/drupal_cms_cache/* web/profiles/drupal_cms_installer/cache || true'
     # Pre-install starter recipe.
-    - exec: 'test -d recipes/drupal_cms_starter && test -z "$(drush status --fields=bootstrap)" && curl -Is "$DDEV_PRIMARY_URL/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS" > /dev/null && until drush recipe ../recipes/drupal_cms_starter; do :; done && drush cr || true'
+    - exec: 'test -d recipes/drupal_cms_starter && test -z "$(drush status --fields=bootstrap)" && curl -Is "$DDEV_PRIMARY_URL/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS" > /dev/null && drush ev "require_once ''core/includes/install.core.inc''; install_core_entity_type_definitions();" && until drush recipe ../recipes/drupal_cms_starter; do :; done && drush -n pmu drupal_cms_installer && drush cr || true'
 web_environment:
   # For faster performance, don't audit dependencies automatically.
   - COMPOSER_NO_AUDIT=1
