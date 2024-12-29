@@ -1,4 +1,4 @@
-From cacf23a0084a9ceb66bcadb2c7c985e054842870 Mon Sep 17 00:00:00 2001
+From e5501ce8d906c3288bbde458e311e8137cfc661f Mon Sep 17 00:00:00 2001
 From: Darren Oh <9472-darrenoh@users.noreply.drupalcode.org>
 Date: Sat, 28 Dec 2024 20:10:12 -0500
 Subject: [PATCH] Issue #3496399: Add ability to skip starter recipe if it was
@@ -10,10 +10,10 @@ Subject: [PATCH] Issue #3496399: Add ability to skip starter recipe if it was
  2 files changed, 21 insertions(+), 2 deletions(-)
 
 diff --git a/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile b/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile
-index c382d1ec..319b2373 100644
+index 2efa9e6c..cb90873d 100644
 --- a/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile
 +++ b/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile
-@@ -235,13 +235,18 @@ function _drupal_cms_installer_password_value(&$element, $input, FormStateInterf
+@@ -235,6 +235,11 @@ function _drupal_cms_installer_password_value(&$element, $input, FormStateInterf
   *   The batch job definition.
   */
  function drupal_cms_installer_apply_recipes(array &$install_state): array {
@@ -25,8 +25,9 @@ index c382d1ec..319b2373 100644
    $batch = install_profile_modules($install_state);
    $batch['title'] = t('Setting up your site');
  
-   ['install_path' => $cookbook_path] = InstalledVersions::getRootPackage();
-   $cookbook_path .= '/recipes';
+@@ -243,7 +248,7 @@ function drupal_cms_installer_apply_recipes(array &$install_state): array {
+ 
+   $recipe_operations = [];
  
 -  foreach ($install_state['parameters']['recipes'] as $recipe) {
 +  foreach ($recipes as $recipe) {
