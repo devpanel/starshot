@@ -17,6 +17,7 @@
 
 DDEV_DOCROOT=${WEB_ROOT##*/}
 SETTINGS_FILES_PATH=$WEB_ROOT/sites/default/settings.php
+PATCH_CMS=false
 
 #== Clone source code.
 if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
@@ -24,7 +25,9 @@ if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   cd $APP_ROOT/repos/drupal/drupal_cms
   git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d '/')
   #== Patch for issue #3496399.
-  git apply $APP_ROOT/patches/drupal/drupal_cms/349.patch
+  if ! git merge-base --is-ancestor e5501ce8d906c3288bbde458e311e8137cfc661f HEAD; then
+    PATCH_CMS=true
+  fi
 fi
 
 #== Composer install.
@@ -42,6 +45,14 @@ if ! grep -qxF '/project_template/web/profiles/drupal_cms_installer/cache/*' .gi
 fi
 if [ -d web/profiles/drupal_cms_installer/cache ] && [ -z "$(git status --porcelain repos/drupal/drupal_cms)" ]; then
   cp -n .devpanel/drupal_cms_cache/* web/profiles/drupal_cms_installer/cache
+fi
+
+#== Patch for issue #3496399. We do this now so the changes don't prevent
+#== the recipes cache from being copied.
+if $PATCH_CMS; then
+  cd $APP_ROOT/repos/drupal/drupal_cms
+  git apply $APP_ROOT/patches/drupal/drupal_cms/349.patch
+  cd $APP_ROOT
 fi
 
 #== Site install.
