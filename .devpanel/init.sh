@@ -16,7 +16,7 @@
 # ----------------------------------------------------------------------
 
 DDEV_DOCROOT=${WEB_ROOT##*/}
-SETTINGS_FILES_PATH=$WEB_ROOT/sites/default/settings.php
+SETTINGS_FILE_PATH=$WEB_ROOT/sites/default/settings.php
 PATCH_CMS=false
 
 #== Clone source code.
@@ -55,21 +55,21 @@ if $PATCH_CMS; then
   cd $APP_ROOT
 fi
 
-#== Site install.
-if [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables')" ]; then
-  #== Set up settings.php file
-  echo "Set up settings.php file"
-  cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILES_PATH
-  #== Pre-install starter recipe.
-  if [ -d recipes/drupal_cms_starter ]; then
-    while [ -z "$(drush status --fields=bootstrap)" ]; do
-      curl -Is "localhost/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS" > /dev/null
-    done
-    drush ev "require_once 'core/includes/install.core.inc'; install_core_entity_type_definitions();"
-    until drush recipe $APP_ROOT/recipes/drupal_cms_starter; do
-      :
-    done
-    drush -n pmu drupal_cms_installer
-    drush cr
-  fi
+#== Set up settings.php file.
+if [ ! -f $SETTINGS_FILE_PATH ]; then
+  echo "Set up settings.php file."
+  cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILE_PATH
+fi
+
+#== Pre-install starter recipe.
+if [ -d recipes/drupal_cms_starter ] && [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables')" ]; then
+  while [ -z "$(drush status --fields=bootstrap)" ]; do
+    curl -Is "$DP_HOSTNAME/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS" > /dev/null
+  done
+  drush ev "require_once 'core/includes/install.core.inc'; install_core_entity_type_definitions();"
+  until drush recipe $APP_ROOT/recipes/drupal_cms_starter; do
+    :
+  done
+  drush -n pmu drupal_cms_installer
+  drush cr
 fi
