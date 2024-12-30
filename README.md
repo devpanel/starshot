@@ -42,6 +42,6 @@ Starshot is an initiative to release Drupal CMS, a distribution of Drupal for no
 
 ## Contributing to other projects
 
-1. Clone the project repository in the repos directory. To prevent project name collisions, use vendor subdirectories to separate projects from different sources.
+1. Clone project repositories in the [repos](repos) directory. To avoid project name collisions, use subdirectories to separate projects from different sources.
 
-2. Either symlink the project to where it is needed or [add it to composer.json](https://www.drupal.org/docs/develop/using-composer/tricks-for-using-composer-in-local-development).
+2. Either symlink project files to where they are needed or [add them to composer.json](https://www.drupal.org/docs/develop/using-composer/tricks-for-using-composer-in-local-development).
