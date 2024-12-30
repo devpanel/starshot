@@ -5,11 +5,11 @@
 Starshot is an initiative to release Drupal CMS, a distribution of Drupal for non-technical users. Launch Drupal CMS on Drupal Forge. With a Drupal Forge cloud development environment, you can contribute to Drupal CMS.
 
 <div align="center">
-   <a href="https://www.drupalforge.org/form/subscription?template=14">
+   <a href="https://www.drupalforge.org/template/drupal-cms">
       <figure>
          <img src="drupalforge.svg" height="100px" />
          <br />
-         <figcaption>Launch Starshot</figcaption>
+         <figcaption>Launch Drupal CMS</figcaption>
       </figure>
    </a>
 </div>
@@ -24,7 +24,7 @@ Starshot is an initiative to release Drupal CMS, a distribution of Drupal for no
 3. Open a terminal in the cloud dev environment and run the following commands:
    ```bash
    cd /var/www/html/repos/drupal/drupal_cms
-   git remote add <issue_number> https://<drupal.org_username>:<personal_access_token>@git.drupalcode.org/issue/drupal_cms-<issue_number>.git
+   git remote add -t <issue_branch> drupal_cms-<issue_number> https://<drupal.org_username>:<personal_access_token>@git.drupalcode.org/issue/drupal_cms-<issue_number>.git
    ```
    It is best practice to generate a [personal access token](https://git.drupalcode.org/-/user_settings/personal_access_tokens) rather than use your drupal.org password for `<personal_access_token>`.
 
