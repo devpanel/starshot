@@ -25,7 +25,7 @@ if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   cd $APP_ROOT/repos/drupal/drupal_cms
   git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d '/')
   #== Patch for issue #3496399.
-  if ! git merge-base --is-ancestor e5501ce8d906c3288bbde458e311e8137cfc661f HEAD; then
+  if ! git merge-base --is-ancestor 15bb5e08c734a44e3a86ae676b5a922669868ced HEAD; then
     PATCH_CMS=true
   fi
 fi
