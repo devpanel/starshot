@@ -2,7 +2,7 @@
 
 # Starshot
 
-Starshot is an initiative to release Drupal CMS, a distribution of Drupal for non-technical users. Launch Drupal CMS on Drupal Forge. With a Drupal Forge cloud development environment, you can contribute to Drupal CMS.
+Starshot is an initiative to release Drupal CMS, a fast-moving open source product that will enable site builders without Drupal experience to easily create a new Drupal site and extend it with pre-packaged recipes, all using their browser. Launch Drupal CMS on Drupal Forge.
 
 <div align="center">
    <a href="https://www.drupalforge.org/template/drupal-cms">
@@ -16,6 +16,8 @@ Starshot is an initiative to release Drupal CMS, a distribution of Drupal for no
 
 
 ## Contributing to Drupal CMS
+
+With the cloud development environment provided by Drupal Forge, you can help build Drupal CMS.
 
 1. Review the Drupal CMS [issue queue](https://www.drupal.org/project/issues/drupal_cms). Find or create an issue for your contribution.
 
