@@ -1,31 +1,32 @@
-From fb6e8207c144fe0a2d65110942a35f1fa2bb8f0d Mon Sep 17 00:00:00 2001
+From da50b02570428882e056c32061621dc175bba3ba Mon Sep 17 00:00:00 2001
 From: Darren Oh <9472-darrenoh@users.noreply.drupalcode.org>
 Date: Sat, 28 Dec 2024 20:10:12 -0500
-Subject: [PATCH] Issue #3496399: Add ability to skip starter recipe if it was
- preinstalled
+Subject: [PATCH] Issue #3496399: Add ability to skip previously applied
+ recipes
 
 ---
- .../drupal_cms_installer.profile                 |  7 ++++++-
- .../src/Form/RecipesForm.php                     | 16 +++++++++++++++-
- 2 files changed, 21 insertions(+), 2 deletions(-)
+ .../drupal_cms_installer/drupal_cms_installer.profile     | 8 +++++++-
+ .../drupal_cms_installer/src/Form/RecipesForm.php         | 6 ++++++
+ 2 files changed, 13 insertions(+), 1 deletion(-)
 
 diff --git a/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile b/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile
-index 2efa9e6c..cb90873d 100644
+index 2efa9e6c..dea4eb7d 100644
 --- a/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile
 +++ b/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile
-@@ -235,6 +235,11 @@ function _drupal_cms_installer_password_value(&$element, $input, FormStateInterf
+@@ -235,6 +235,12 @@ function _drupal_cms_installer_password_value(&$element, $input, FormStateInterf
   *   The batch job definition.
   */
  function drupal_cms_installer_apply_recipes(array &$install_state): array {
-+  // Remove empty placeholder recipe.
-+  $recipes = array_filter($install_state['parameters']['recipes']);
++  // Skip previously applied recipes.
++  $applied_recipes = array_map('basename', \Drupal::state()->get('project_browser.applied_recipes', []));
++  $recipes = array_diff($install_state['parameters']['recipes'], $applied_recipes);
 +  if (empty($recipes)) {
 +    return [];
 +  }
    $batch = install_profile_modules($install_state);
    $batch['title'] = t('Setting up your site');
  
-@@ -243,7 +248,7 @@ function drupal_cms_installer_apply_recipes(array &$install_state): array {
+@@ -243,7 +249,7 @@ function drupal_cms_installer_apply_recipes(array &$install_state): array {
  
    $recipe_operations = [];
  
@@ -35,46 +36,29 @@ index 2efa9e6c..cb90873d 100644
        $cookbook_path . '/' . $recipe,
        // Only save a cached copy of the recipe if this environment variable is
 diff --git a/project_template/web/profiles/drupal_cms_installer/src/Form/RecipesForm.php b/project_template/web/profiles/drupal_cms_installer/src/Form/RecipesForm.php
-index 5bf6e271..9e0c0e6b 100644
+index 5bf6e271..4266623a 100644
 --- a/project_template/web/profiles/drupal_cms_installer/src/Form/RecipesForm.php
 +++ b/project_template/web/profiles/drupal_cms_installer/src/Form/RecipesForm.php
-@@ -5,6 +5,7 @@ namespace Drupal\drupal_cms_installer\Form;
- use Composer\InstalledVersions;
- use Drupal\Component\Serialization\Yaml;
- use Drupal\Core\Form\FormStateInterface;
-+use Drupal\Core\Installer\Exception\AlreadyInstalledException;
- use Drupal\Core\Render\Element\Checkboxes;
+@@ -49,6 +49,7 @@ final class RecipesForm extends InstallerFormBase {
+     $composer = json_decode($composer, TRUE, flags: JSON_THROW_ON_ERROR);
+     $optional_recipes = array_keys($composer['suggest'] ?? []);
  
- /**
-@@ -91,7 +92,16 @@ final class RecipesForm extends InstallerFormBase {
-    */
-   public function submitForm(array &$form, FormStateInterface $form_state): void {
-     global $install_state;
--    $install_state['parameters']['recipes'] = ['drupal_cms_starter'];
-+    try {
-+      install_verify_database_ready();
-+      // Add the starter recipe to the list of recipes to install.
-+      $install_state['parameters']['recipes'] = ['drupal_cms_starter'];
-+    }
-+    catch (AlreadyInstalledException $e) {
-+      // If the starter recipe is already installed, add an empty placeholder
-+      // recipe so the installer can proceed.
-+      $install_state['parameters']['recipes'] = [''];
-+    }
- 
-     $pressed_button = $form_state->getTriggeringElement();
-     // Only choose add-ons if the Next button was pressed, or if the form was
-@@ -99,6 +109,10 @@ final class RecipesForm extends InstallerFormBase {
-     if (($pressed_button && $pressed_button['#op'] === 'submit') || $form_state->isProgrammed()) {
-       $add_ons = $form_state->getValue('add_ons', []);
-       $add_ons = array_filter($add_ons);
-+      if (!empty($add_ons)) {
-+        // If there are add-ons, we don't need a placeholder recipe.
-+        $install_state['parameters']['recipes'] = array_filter($install_state['parameters']['recipes']);
-+      }
-       array_push($install_state['parameters']['recipes'], ...array_values($add_ons));
++    $applied_recipes = array_map('basename', \Drupal::state()->get('project_browser.applied_recipes', []));
+     foreach ($optional_recipes as $name) {
+       $recipe = $cookbook_path . '/' . basename($name) . '/recipe.yml';
+       if (file_exists($recipe)) {
+@@ -56,6 +57,11 @@ final class RecipesForm extends InstallerFormBase {
+         $recipe = Yaml::decode($recipe);
+         $key = basename($name);
+         $form['add_ons']['#options'][$key] = $recipe['name'];
++        // Previously applied recipes are selected and cannot be deselected.
++        if (in_array($key, $applied_recipes)) {
++          $form['add_ons']['#default_value'][] = $key;
++          $form['add_ons'][$key]['#disabled'] = TRUE;
++        }
+       }
      }
-   }
+ 
 -- 
 GitLab
 
