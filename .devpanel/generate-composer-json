@@ -13,6 +13,7 @@ $read_json = function (string $file): array {
 $data = array_merge_recursive(
   $read_json('repos/drupal/drupal_cms/project_template/composer.json'),
   $read_json('repos/drupal/drupal_cms/dev.composer.json'),
+  $read_json('drupalforge.composer.json'),
 );
 
 array_walk($data['repositories'], function (array &$repository): void {
