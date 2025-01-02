@@ -24,10 +24,6 @@ if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   git submodule update --init --remote --recursive
   cd $APP_ROOT/repos/drupal/drupal_cms
   git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d '/')
-  #== Patch for issue #3496399.
-  if ! git merge-base --is-ancestor da50b02570428882e056c32061621dc175bba3ba HEAD; then
-    PATCH_CMS=true
-  fi
 fi
 
 #== Composer install.
@@ -45,14 +41,6 @@ if ! grep -qxF '/project_template/web/profiles/drupal_cms_installer/cache/*' .gi
 fi
 if [ -d web/profiles/drupal_cms_installer/cache ] && [ -z "$(git status --porcelain repos/drupal/drupal_cms)" ]; then
   cp -n .devpanel/drupal_cms_cache/* web/profiles/drupal_cms_installer/cache
-fi
-
-#== Patch for issue #3496399. We do this now so the changes don't prevent
-#== the recipes cache from being copied.
-if $PATCH_CMS; then
-  cd $APP_ROOT/repos/drupal/drupal_cms
-  git apply $APP_ROOT/patches/drupal/drupal_cms/349.patch
-  cd $APP_ROOT
 fi
 
 #== Set up settings.php file.
