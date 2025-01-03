@@ -37,14 +37,13 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v4
       with:
-        path: /var/www/html  # Set the path where the repo will be cloned.
+        path: repo
 
-    - name: Verify directory
+    - name: Move repository
       run: |
-        echo "Checking the /var/www/html directory"
-        ls -l /var/www/html
-        # Additional commands can be executed here
-
+        mkdir -p /var/www/html
+        mv repo/* /var/www/html
+        mv repo/.* /var/www/html || true  # Moves hidden files, ignoring any errors if no hidden files exist
 
     - name: Setup Drupal
       run: |
