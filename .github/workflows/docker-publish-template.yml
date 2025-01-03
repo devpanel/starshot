@@ -51,10 +51,8 @@ jobs:
         pwd 
         cd $APP_ROOT
         ls -al
-        #bash .devpanel/custom_package_installer.sh
-        #bash .devpanel/init.sh
-        mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables'
-        
+        bash .devpanel/custom_package_installer.sh
+        bash .devpanel/init.sh
       env:
         WEB_ROOT: '/var/www/html/web'
         DB_HOST: mysql
