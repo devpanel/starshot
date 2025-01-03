@@ -55,7 +55,7 @@ jobs:
         bash .devpanel/init.sh
         
       env:
-        # Environment variables for connecting to MySQL
+        WEB_ROOT: '/var/www/html/web'
         DB_HOST: 127.0.0.1
         DB_PORT: 3306
         DB_ROOT_PASSWORD: root
