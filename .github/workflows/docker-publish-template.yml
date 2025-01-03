@@ -30,15 +30,12 @@ jobs:
           --health-retries=5
 
     steps:
-    - name: PWD
-      id: PWD
-      run: |
-        pwd 
     - name: Check out code
       uses: actions/checkout@v4
 
     - name: Setup Drupal
       run: |
+        pwd 
         ls -l
         bash $APP_ROOT.devpanel/init.sh
         
