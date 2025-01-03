@@ -8,6 +8,10 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: devpanel/php:8.3-base
+    defaults:
+      run:
+        shell: bash
+        working-directory: /var/www/html
     services:
       mysql:
         image: mysql:8.0
@@ -25,6 +29,10 @@ jobs:
           --health-retries=5
 
     steps:
+    - name: PWD
+      id: PWD
+      run: |
+        pwd 
     - name: Check out code
       uses: actions/checkout@v4
 
