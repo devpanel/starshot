@@ -51,6 +51,7 @@ jobs:
         pwd 
         cd $APP_ROOT
         ls -al
+        bash .devpanel/custom_package_installer.sh
         bash .devpanel/init.sh
         
       env:
