@@ -10,4 +10,4 @@
 # ----------------------------------------------------------------------
 
 sudo apt-get update
-sudo apt-get install -y nano npm
+sudo apt-get install -y nano npm curl
