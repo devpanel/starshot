@@ -9,6 +9,8 @@ jobs:
     container:
       image: devpanel/php:8.3-base
       options: --user root
+      ports:
+        - 80:80
     defaults:
       run:
         shell: bash
