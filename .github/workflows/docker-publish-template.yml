@@ -32,8 +32,8 @@ jobs:
     steps:
     - name: Go to app root
       run: |
-        cd $APP_ROOT
-        
+        cd $WEB_ROOT
+
     - name: Check out code
       uses: actions/checkout@v4
 
@@ -41,7 +41,7 @@ jobs:
       run: |
         pwd 
         ls -l
-        bash $APP_ROOT.devpanel/init.sh
+        #bash $APP_ROOT.devpanel/init.sh
         
       env:
         # Environment variables for connecting to MySQL
