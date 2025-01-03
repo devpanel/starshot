@@ -37,9 +37,6 @@ jobs:
     - name: Check out code
       uses: actions/checkout@v4
 
-    - name: Install Composer dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
-
     - name: Setup Drupal
       run: |
         export | grep DB
