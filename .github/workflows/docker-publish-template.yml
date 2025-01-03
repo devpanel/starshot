@@ -38,7 +38,7 @@ jobs:
         # Environment variables for connecting to MySQL
         DB_HOST: 127.0.0.1
         DB_PORT: 3306
-        DB_PASSWORD: root
+        DB_ROOT_PASSWORD: root
         DB_DATABASE: drupaldb
         DB_USER: user
         DB_PASSWORD: pass
