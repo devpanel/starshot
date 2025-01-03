@@ -39,7 +39,8 @@ jobs:
 
     - name: Setup Drupal
       run: |
-        bash $APP_ROOT/.devpanel/init.sh
+        ls -l
+        bash $APP_ROOT.devpanel/init.sh
         
       env:
         # Environment variables for connecting to MySQL
