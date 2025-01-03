@@ -30,6 +30,10 @@ jobs:
           --health-retries=5
 
     steps:
+    - name: Go to app root
+      run: |
+        cd $APP_ROOT
+        
     - name: Check out code
       uses: actions/checkout@v4
 
