@@ -1,0 +1,41 @@
+name: Docker build and push template
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    container:
+      image: devpanel/php:8.3-base
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_USER: user
+          MYSQL_PASSWORD: pass
+          MYSQL_DATABASE: drupaldb
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -u root --password=root"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v3
+
+    - name: Install Composer dependencies
+      run: composer install --prefer-dist --no-progress --no-suggest
+
+    - name: Setup Drupal
+      run: |
+        export | grep DB
+      env:
+        # Environment variables for connecting to MySQL
+        DB_HOST: 127.0.0.1
+        DB_PORT: 3306
+        DB_PASSWORD: root
+        DB_DATABASE: drupaldb
+        DB_USER: user
+        DB_PASSWORD: pass
