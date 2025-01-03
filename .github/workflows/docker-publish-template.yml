@@ -36,6 +36,15 @@ jobs:
 
     - name: Check out code
       uses: actions/checkout@v4
+      with:
+        path: /var/www/html  # Set the path where the repo will be cloned.
+
+    - name: Verify directory
+      run: |
+        echo "Checking the /var/www/html directory"
+        ls -l /var/www/html
+        # Additional commands can be executed here
+
 
     - name: Setup Drupal
       run: |
