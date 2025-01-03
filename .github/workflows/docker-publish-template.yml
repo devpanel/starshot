@@ -39,7 +39,8 @@ jobs:
 
     - name: Setup Drupal
       run: |
-        export | grep DB
+        echo $USER
+        export 
       env:
         # Environment variables for connecting to MySQL
         DB_HOST: 127.0.0.1
