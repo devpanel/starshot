@@ -8,6 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: devpanel/php:8.3-base
+      options: --user www
     defaults:
       run:
         shell: bash
