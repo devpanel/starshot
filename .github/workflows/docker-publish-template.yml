@@ -41,6 +41,7 @@ jobs:
 
     - name: Move repository
       run: |
+        rm -rf /var/www/html
         mkdir -p /var/www/html
         mv /__w/starshot/starshot/repo/* /var/www/html
         mv /__w/starshot/starshot/repo/.* /var/www/html || true  # Moves hidden files, ignoring any errors if no hidden files exist
