@@ -42,12 +42,13 @@ jobs:
     - name: Move repository
       run: |
         mkdir -p /var/www/html
-        mv repo/* /var/www/html
-        mv repo/.* /var/www/html || true  # Moves hidden files, ignoring any errors if no hidden files exist
+        mv /__w/starshot/starshot/repo/* /var/www/html
+        mv /__w/starshot/starshot/repo/.* /var/www/html || true  # Moves hidden files, ignoring any errors if no hidden files exist
 
     - name: Setup Drupal
       run: |
         pwd 
+        cd $APP_ROOT
         ls -l
         #bash $APP_ROOT.devpanel/init.sh
         
