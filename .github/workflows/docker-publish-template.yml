@@ -50,8 +50,8 @@ jobs:
       run: |
         pwd 
         cd $APP_ROOT
-        ls -l
-        #bash $APP_ROOT.devpanel/init.sh
+        ls -al
+        bash .devpanel/init.sh
         
       env:
         # Environment variables for connecting to MySQL
