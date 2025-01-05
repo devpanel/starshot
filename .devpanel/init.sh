@@ -17,7 +17,6 @@
 
 DDEV_DOCROOT=${WEB_ROOT##*/}
 SETTINGS_FILE_PATH=$WEB_ROOT/sites/default/settings.php
-PATCH_CMS=false
 
 #== Clone source code.
 if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
@@ -26,13 +25,31 @@ if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d '/')
 fi
 
-#== Composer install.
+#== Remove root-owned files.
 cd $APP_ROOT
 sudo rm -rf lost+found
-.devpanel/generate-composer-json > composer.json
-composer install
+
+#== Composer install.
+if [ ! -d vendor ]; then
+  .devpanel/generate-composer-json > composer.json
+  composer install
+fi
+
+#== Symlink the installer into the web root.
 ln -s -f $(realpath -s --relative-to=$DDEV_DOCROOT/profiles repos/drupal/drupal_cms/project_template/$DDEV_DOCROOT/profiles/drupal_cms_installer) $DDEV_DOCROOT/profiles
-cd repos/drupal/drupal_cms && test -d node_modules || npm clean-install --foreground-scripts
+
+#== Install JavaScript dependencies if needed.
+cd $APP_ROOT/repos/drupal/drupal_cms
+if [ ! -d node_modules ]; then
+  npm clean-install --foreground-scripts
+fi
+
+#== Build Experience Builder's JavaScript bundle, if needed.
+XB_UI_PATH=$DDEV_DOCROOT/modules/contrib/experience_builder/ui
+if [ -d $XB_UI_PATH/dist ]; then
+  npm --prefix $XB_UI_PATH install
+  npm --prefix $XB_UI_PATH run build
+fi
 
 #== Copy recipes cache.
 cd $APP_ROOT
@@ -41,6 +58,12 @@ if ! grep -qxF '/project_template/web/profiles/drupal_cms_installer/cache/*' .gi
 fi
 if [ -d web/profiles/drupal_cms_installer/cache ] && [ -z "$(git status --porcelain repos/drupal/drupal_cms)" ]; then
   cp -n .devpanel/drupal_cms_cache/* web/profiles/drupal_cms_installer/cache
+  #== Patch for issue #3497485. We do this now so the changes don't prevent
+  #== the recipes cache from being copied.
+  cd $APP_ROOT/repos/drupal/drupal_cms
+  if ! git merge-base --is-ancestor 4a30663d422184a459164049987a6b455ccf5bf5 HEAD; then
+    git apply $APP_ROOT/patches/drupal/drupal_cms/373.patch
+  fi
 fi
 
 #== Set up settings.php file.
@@ -50,6 +73,7 @@ if [ ! -f $SETTINGS_FILE_PATH ]; then
 fi
 
 #== Pre-install starter recipe.
+cd $APP_ROOT
 if [ -d recipes/drupal_cms_starter ] && [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables')" ]; then
   while [ -z "$(drush status --fields=bootstrap)" ]; do
     curl -Is "localhost/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS" > /dev/null
