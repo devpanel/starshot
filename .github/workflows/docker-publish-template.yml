@@ -51,10 +51,11 @@ jobs:
         mv /__w/starshot/starshot/repo/* /var/www/html
         mv /__w/starshot/starshot/repo/.* /var/www/html || true  # Moves hidden files, ignoring any errors if no hidden files exist
         sudo chown -R www:www /var/www/html
-        git config --global --add safe.directory '/var/www/html'
+
     - name: Setup Drupal
       run: |
         set -e
+        git config --global --add safe.directory '/var/www/html'
         pwd 
         cd $APP_ROOT
         mkdir -p $WEB_ROOT
