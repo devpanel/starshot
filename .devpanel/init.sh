@@ -32,8 +32,13 @@ sudo rm -rf lost+found
 
 #== Composer install.
 if [ ! -d vendor ]; then
+  #Fix error "Scaffold file xb_page.yml not found in package drupal/cms."
+  if [ -f $APP_ROOT/repos/drupal/drupal_cms/xb_page.yml ]; then
+    cp $APP_ROOT/repos/drupal/drupal_cms/xb_page.yml $APP_ROOT/.
+  fi
   .devpanel/generate-composer-json > composer.json
   composer install
+
 fi
 
 #== Symlink the installer into the web root.
