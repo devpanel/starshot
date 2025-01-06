@@ -1,0 +1,12 @@
+{
+    "require": {
+        "leongersen/nouislider": "15.5.1"
+    },
+    "extra": {
+        "drupal-scaffold": {
+            "file-mapping": {
+                "[web-root]/libraries/nouislider/nouislider.min.js": "vendor/leongersen/nouislider/dist/nouislider.min.js"
+            }
+        }
+    }
+}

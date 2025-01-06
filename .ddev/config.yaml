@@ -20,10 +20,9 @@ hooks:
     # Get a local copy of Drupal CMS and check out the default branch.
     # Patch for issue #3496399.
     - exec: 'cd repos/drupal/drupal_cms && test -n "$(ls -A)" || (git submodule update --init --remote --recursive && git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d "/"))'
-    # Generate composer.json.
-    - exec: '.devpanel/generate-composer-json > composer.json'
-    # Install all dependencies.
-    - composer: 'install'
+    # If needed, regenerate `composer.json` and install dependencies.
+    # @see homeadditions/bin/generate-composer-json
+    - exec: 'test -d vendor || (.devpanel/generate-composer-json > composer.json && composer install)'
     # The installer is part of the project template, so symlink it into the web root.
     # It needs to be a relative symlink, or it will break Package Manager.
     - exec: 'ln -s -f $(realpath -s --relative-to=$DDEV_DOCROOT/profiles repos/drupal/drupal_cms/project_template/web/profiles/drupal_cms_installer) $DDEV_DOCROOT/profiles'
@@ -32,9 +31,11 @@ hooks:
     # see the warning about Node.js Snap for Linux at
     # https://docs.cypress.io/guides/getting-started/installing-cypress.
     - exec: 'cd repos/drupal/drupal_cms && test -d node_modules || npm clean-install --foreground-scripts'
+    # Build Experience Builder's JavaScript bundle, if needed.
+    - exec: 'XB_UI_PATH=$DDEV_DOCROOT/modules/contrib/experience_builder/ui; test -d $XB_UI_PATH/dist || ( npm --prefix $XB_UI_PATH install && npm --prefix $XB_UI_PATH run build )'
     # Copy recipes cache.
     - exec: 'grep -qxF "/project_template/web/profiles/drupal_cms_installer/cache/*" .git/modules/repos/drupal/drupal_cms/info/exclude || echo "/project_template/web/profiles/drupal_cms_installer/cache/*" >> .git/modules/repos/drupal/drupal_cms/info/exclude'
-    - exec: 'test -d web/profiles/drupal_cms_installer/cache && test -z "$(git status --porcelain repos/drupal/drupal_cms)" && cp -n .devpanel/drupal_cms_cache/* web/profiles/drupal_cms_installer/cache || true'
+    - exec: 'test -d web/profiles/drupal_cms_installer/cache && test -z "$(git status --porcelain repos/drupal/drupal_cms)" && cp -n .devpanel/drupal_cms_cache/* web/profiles/drupal_cms_installer/cache && cd repos/drupal/drupal_cms && (git merge-base --is-ancestor 4a30663d422184a459164049987a6b455ccf5bf5 HEAD || git apply $DDEV_COMPOSER_ROOT/patches/drupal/drupal_cms/373.patch) || true'
     # Pre-install starter recipe.
     - exec: 'test -d recipes/drupal_cms_starter && test -z "$(drush status --fields=bootstrap)" && curl -Is "$DDEV_PRIMARY_URL/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS" > /dev/null && drush ev "require_once ''core/includes/install.core.inc''; install_core_entity_type_definitions();" && until drush recipe ../recipes/drupal_cms_starter; do :; done && drush -n pmu drupal_cms_installer && drush cr || true'
 web_environment:

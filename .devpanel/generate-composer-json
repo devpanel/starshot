@@ -13,6 +13,7 @@ $read_json = function (string $file): array {
 $data = array_merge_recursive(
   $read_json('repos/drupal/drupal_cms/project_template/composer.json'),
   $read_json('repos/drupal/drupal_cms/dev.composer.json'),
+  $read_json('drupalforge.composer.json'),
 );
 
 array_walk($data['repositories'], function (array &$repository): void {
@@ -20,6 +21,12 @@ array_walk($data['repositories'], function (array &$repository): void {
     $repository['url'] = 'repos/drupal/drupal_cms/' . $repository['url'];
   }
 });
+
+// If we're in "canary" mode, allow dev versions of all dependencies.
+if (getenv('CANARY')) {
+  $data['minimum-stability'] = 'dev';
+  $data['prefer-stable'] = FALSE;
+}
 
 // Make packages.drupal.org the lowest-priority repository, which will force the
 // components' local path repositories to take precedence.
