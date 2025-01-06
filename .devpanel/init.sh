@@ -46,6 +46,7 @@ fi
 #== Set up settings.php file.
 if [ ! -f $SETTINGS_FILE_PATH ]; then
   echo "Set up settings.php file."
+  mkdir -p $WEB_ROOT/sites/default
   cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILE_PATH
 fi
 
