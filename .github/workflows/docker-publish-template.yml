@@ -72,8 +72,9 @@ jobs:
         git config --global --add safe.directory '/var/www/html'
         pwd 
         cd $APP_ROOT
-        sudo chown -R www:www $APP_ROOT
+        echo "Hello" > $WEB_ROOT/index.php
         mkdir -p $WEB_ROOT
+        sudo chown -R www:www $APP_ROOT
         ls -al
         ls -al $APP_ROOT/repos/drupal/drupal_cms
         export
@@ -85,7 +86,7 @@ jobs:
         cat /etc/apache2/sites-enabled/000-default.conf
 
         sudo service apache2 start
-        echo "Hello" > $WEB_ROOT/index.php
+    
  
         # bash .devpanel/custom_package_installer.sh
         # bash .devpanel/init.sh
