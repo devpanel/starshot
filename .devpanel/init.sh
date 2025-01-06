@@ -66,6 +66,12 @@ if [ -d web/profiles/drupal_cms_installer/cache ] && [ -z "$(git status --porcel
   fi
 fi
 
+#== Create the private files directory.
+cd $APP_ROOT
+if [ ! -d private ]; then
+  mkdir private
+fi
+
 #== Set up settings.php file.
 if [ ! -f $SETTINGS_FILE_PATH ]; then
   echo "Set up settings.php file."
