@@ -36,7 +36,7 @@ jobs:
       run: |
         sudo -u www whoami
         echo ${USER}
-        
+
     - name: Check out code
       uses: actions/checkout@v3
       with:
@@ -44,8 +44,11 @@ jobs:
 
     - name: Move repository
       run: |
+        sudo -u www whoami
+        echo ${USER}
         sudo rm -rf /var/www/html
         sudo mkdir -p /var/www/html
+        sudo chown -R www:www /var/www/html
         mv /__w/starshot/starshot/repo/* /var/www/html
         mv /__w/starshot/starshot/repo/.* /var/www/html || true  # Moves hidden files, ignoring any errors if no hidden files exist
 
