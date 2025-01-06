@@ -54,6 +54,9 @@ jobs:
     - name: Setup Drupal
       run: |
         set -e
+        git status
+        git branch
+        git remote -v
         pwd 
         cd $APP_ROOT
         mkdir -p $WEB_ROOT
