@@ -53,6 +53,7 @@ jobs:
 
     - name: Setup Drupal
       run: |
+        set -e
         pwd 
         cd $APP_ROOT
         mkdir -p $WEB_ROOT

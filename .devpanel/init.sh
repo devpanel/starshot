@@ -55,9 +55,6 @@ if [ -d recipes/drupal_cms_starter ] && [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u
   while [ -z "$(drush status --fields=bootstrap)" ]; do
     echo "RUN CURL"
     curl -Is "http://localhost/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS" > /dev/null
-
-    #drush si drupal_cms_installer --account-name=devpanel --account-pass=devpanel  --site-name="Drupal CMS" --db-url=mysql://$DB_USER:$DB_PASSWORD@$DB_HOST:$DB_PORT/$DB_NAME -y
-
   done
   exit
   drush ev "require_once 'core/includes/install.core.inc'; install_core_entity_type_definitions();"
