@@ -64,7 +64,7 @@ jobs:
         echo ${USER}
         sudo service apache2 start
         echo "Hello" >$WEB_ROOT/index.php
-        curl -I http://127.0.0.1:80 || echo "Failed to make HTTP request to port 80"
+        curl -I http://localhost || echo "Failed to make HTTP request to port 80"
         
         # bash .devpanel/custom_package_installer.sh
         # bash .devpanel/init.sh
