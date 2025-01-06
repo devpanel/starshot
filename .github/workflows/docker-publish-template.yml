@@ -69,11 +69,11 @@ jobs:
         cat /etc/apache2/sites-enabled/000-default.conf
 
         sudo service apache2 start
-        echo "Hello" >$WEB_ROOT/index.php
-        curl -I http://localhost || echo "Failed to make HTTP request to port 80"
+        # echo "Hello" >$WEB_ROOT/index.php
+        # curl -I http://localhost || echo "Failed to make HTTP request to port 80"
         
-        # bash .devpanel/custom_package_installer.sh
-        # bash .devpanel/init.sh
+        bash .devpanel/custom_package_installer.sh
+        bash .devpanel/init.sh
       env:
         APP_ROOT: '/var/www/html'        
         WEB_ROOT: '/var/www/html/web'
