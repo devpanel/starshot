@@ -59,7 +59,7 @@ jobs:
         mkdir -p $WEB_ROOT
         ls -al
         export
-        bash  /scripts/apache-start.sh >> /dev/null
+        bash  /scripts/apache-start.sh > /dev/null &
         bash .devpanel/custom_package_installer.sh
         bash .devpanel/init.sh
       env:
