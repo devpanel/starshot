@@ -32,17 +32,20 @@ jobs:
           --health-retries=5
 
     steps:
-    - name: Check out code
-      uses: actions/checkout@v4
-      with:
-        path: repo
-
-    - name: Move repository
+    - name: Prepare dir
       run: |
         rm -rf /var/www/html
         mkdir -p /var/www/html
-        mv /__w/starshot/starshot/repo/* /var/www/html
-        mv /__w/starshot/starshot/repo/.* /var/www/html || true  # Moves hidden files, ignoring any errors if no hidden files exist
+
+    - name: Check out code
+      uses: actions/checkout@v3
+      with:
+        path: /var/www/html
+
+    # - name: Move repository
+    #   run: |
+    #     mv /__w/starshot/starshot/repo/* /var/www/html
+    #     mv /__w/starshot/starshot/repo/.* /var/www/html || true  # Moves hidden files, ignoring any errors if no hidden files exist
 
     - name: Setup Drupal
       run: |
@@ -56,7 +59,7 @@ jobs:
       env:
         APP_ROOT: '/var/www/html'        
         WEB_ROOT: '/var/www/html/web'
-        CODES_ENABLE: no
+        CODES_ENABLE: 'no'
         DB_HOST: mysql
         DB_PORT: 3306
         DB_ROOT_PASSWORD: root
