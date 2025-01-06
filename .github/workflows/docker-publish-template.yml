@@ -65,6 +65,7 @@ jobs:
         bash /scripts/apache-start.sh &
         echo "RUN CURL" 
         curl -Is "http://localhost"
+        echo "STOP RUN CURL" 
         # bash .devpanel/custom_package_installer.sh
         # bash .devpanel/init.sh
       env:
