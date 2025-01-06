@@ -36,6 +36,10 @@ hooks:
     # Copy recipes cache.
     - exec: 'grep -qxF "/project_template/web/profiles/drupal_cms_installer/cache/*" .git/modules/repos/drupal/drupal_cms/info/exclude || echo "/project_template/web/profiles/drupal_cms_installer/cache/*" >> .git/modules/repos/drupal/drupal_cms/info/exclude'
     - exec: 'test -d web/profiles/drupal_cms_installer/cache && test -z "$(git status --porcelain repos/drupal/drupal_cms)" && cp -n .devpanel/drupal_cms_cache/* web/profiles/drupal_cms_installer/cache && cd repos/drupal/drupal_cms && (git merge-base --is-ancestor 4a30663d422184a459164049987a6b455ccf5bf5 HEAD || git apply $DDEV_COMPOSER_ROOT/patches/drupal/drupal_cms/373.patch) || true'
+    # Create the private files directory.
+    - exec: 'test -d private || mkdir private'
+    # Add the private files path to settings.php.
+    - exec: 'grep -qxF "\$settings[''file_private_path''] = ''../private'';" web/sites/default/settings.php || echo "\$settings[''file_private_path''] = ''../private'';" >> web/sites/default/settings.php'
     # Pre-install starter recipe.
     - exec: 'test -d recipes/drupal_cms_starter && test -z "$(drush status --fields=bootstrap)" && curl -Is "$DDEV_PRIMARY_URL/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS" > /dev/null && drush ev "require_once ''core/includes/install.core.inc''; install_core_entity_type_definitions();" && until drush recipe ../recipes/drupal_cms_starter; do :; done && drush -n pmu drupal_cms_installer && drush cr || true'
 web_environment:
