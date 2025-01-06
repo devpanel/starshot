@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: devpanel/php:8.3-base
-      options: --user www
+      options: --user root
       ports:
         - 80:80
     defaults:
@@ -32,11 +32,13 @@ jobs:
           --health-retries=5
 
     steps:
-    - name: Prepare dir
+    - name: Create new user and switch
       run: |
-        rm -rf /var/www/html
-        mkdir -p /var/www/html
-
+        sudo useradd -m www
+        sudo -u newuser www
+        sudo rm -rf /var/www/html
+        sudo mkdir -p /var/www/html
+        echo ${USER}
     - name: Check out code
       uses: actions/checkout@v3
       with:
