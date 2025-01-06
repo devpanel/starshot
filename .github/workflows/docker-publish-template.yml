@@ -32,13 +32,6 @@ jobs:
           --health-retries=5
 
     steps:
-    - name: Test connectivity
-      run: curl -Is https://www.google.com
-    
-    - name: Go to app root
-      run: |
-        cd $WEB_ROOT
-
     - name: Check out code
       uses: actions/checkout@v4
       with:
@@ -54,19 +47,16 @@ jobs:
     - name: Setup Drupal
       run: |
         set -e
-        git status
-        git branch
-        git remote -v
         pwd 
         cd $APP_ROOT
-        mkdir -p $WEB_ROOT
         ls -al
-        sudo service apache2 start
+        sudo bash -E /scripts/apache-start.sh
         bash .devpanel/custom_package_installer.sh
         bash .devpanel/init.sh
       env:
         APP_ROOT: '/var/www/html'        
         WEB_ROOT: '/var/www/html/web'
+        CODES_ENABLE: no
         DB_HOST: mysql
         DB_PORT: 3306
         DB_ROOT_PASSWORD: root
