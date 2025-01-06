@@ -63,11 +63,8 @@ jobs:
         export
         echo ${USER}
         sudo service apache2 start
-        echo "RUN CURL" 
-        curl -Is "http://localhost"
-        echo "STOP RUN CURL" 
-        # bash .devpanel/custom_package_installer.sh
-        # bash .devpanel/init.sh
+        bash .devpanel/custom_package_installer.sh
+        bash .devpanel/init.sh
       env:
         APP_ROOT: '/var/www/html'        
         WEB_ROOT: '/var/www/html/web'
