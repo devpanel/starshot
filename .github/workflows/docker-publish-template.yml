@@ -62,8 +62,9 @@ jobs:
         ls -al
         export
         bash /scripts/apache-start.sh > /dev/null &
-        bash .devpanel/custom_package_installer.sh
-        bash .devpanel/init.sh
+        curl -Is "localhost"
+        # bash .devpanel/custom_package_installer.sh
+        # bash .devpanel/init.sh
       env:
         APP_ROOT: '/var/www/html'        
         WEB_ROOT: '/var/www/html/web'
