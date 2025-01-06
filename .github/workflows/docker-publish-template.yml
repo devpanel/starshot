@@ -58,6 +58,7 @@ jobs:
         mkdir -p $WEB_ROOT
         ls -al
         sudo service apache2 start
+        bash .devpanel/custom_package_installer.sh
         bash .devpanel/init.sh
       env:
         WEB_ROOT: '/var/www/html/web'
