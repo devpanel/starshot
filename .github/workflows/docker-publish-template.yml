@@ -72,8 +72,8 @@ jobs:
         git config --global --add safe.directory '/var/www/html'
         pwd 
         cd $APP_ROOT
-        echo "Hello" > $WEB_ROOT/index.php
         mkdir -p $WEB_ROOT
+        echo "Hello" > $WEB_ROOT/index.php
         sudo chown -R www:www $APP_ROOT
         ls -al
         ls -al $APP_ROOT/repos/drupal/drupal_cms
