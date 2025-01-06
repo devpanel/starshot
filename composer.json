@@ -1,0 +1,229 @@
+{
+    "name": "drupal/cms",
+    "description": "Drupal with a bunch of useful stuff.",
+    "type": "project",
+    "license": "GPL-2.0-or-later",
+    "homepage": "https://www.drupal.org/project/drupal",
+    "support": {
+        "docs": "https://drupal.org/docs/user_guide/en/index.html",
+        "chat": "https://drupal.org/node/314178"
+    },
+    "repositories": {
+        "accessibility_tools": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_accessibility_tools"
+        },
+        "admin_ui": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_admin_ui"
+        },
+        "ai": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_ai"
+        },
+        "analytics": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_analytics"
+        },
+        "anti_spam": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_anti_spam"
+        },
+        "authentication": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_authentication"
+        },
+        "blog": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_blog"
+        },
+        "case_study": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_case_study"
+        },
+        "content_type_base": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_content_type_base"
+        },
+        "events": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_events"
+        },
+        "forms": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_forms"
+        },
+        "image": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_image"
+        },
+        "news": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_news"
+        },
+        "olivero": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/drupal_cms_olivero"
+        },
+        "page": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_page"
+        },
+        "person": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_person"
+        },
+        "privacy_basic": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_privacy_basic"
+        },
+        "project": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_project"
+        },
+        "remote_video": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_remote_video"
+        },
+        "search": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_search"
+        },
+        "seo_basic": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_seo_basic"
+        },
+        "seo_tools": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_seo_tools"
+        },
+        "starter": {
+            "type": "path",
+            "url": "repos/drupal/drupal_cms/recipes/drupal_cms_starter"
+        },
+        "drupal": {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        }
+    },
+    "require": {
+        "composer/installers": "^2.3",
+        "drupal/core-composer-scaffold": "^11.1",
+        "drupal/core-project-message": "^11.1",
+        "drupal/core-recommended": "^11.1",
+        "drupal/drupal_cms_starter": "*",
+        "drupal/drupal_cms_analytics": "*",
+        "drupal/drupal_cms_accessibility_tools": "*",
+        "drupal/drupal_cms_ai": "*",
+        "drupal/drupal_cms_blog": "*",
+        "drupal/drupal_cms_case_study": "*",
+        "drupal/drupal_cms_events": "*",
+        "drupal/drupal_cms_forms": "*",
+        "drupal/drupal_cms_news": "*",
+        "drupal/drupal_cms_person": "*",
+        "drupal/drupal_cms_project": "*",
+        "drupal/drupal_cms_seo_tools": "*",
+        "drush/drush": "^13",
+        "cweagans/composer-patches": "^2",
+        "leongersen/nouislider": "15.5.1"
+    },
+    "conflict": {
+        "drupal/drupal": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "drupal/core-composer-scaffold": true,
+            "drupal/core-project-message": true,
+            "php-http/discovery": true,
+            "cweagans/composer-patches": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "phpstan/extension-installer": true,
+            "tbachert/spi": true
+        },
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "drupal-scaffold": {
+            "locations": {
+                "web-root": "web/"
+            },
+            "file-mapping": {
+                "[web-root]/libraries/nouislider/nouislider.min.js": "vendor/leongersen/nouislider/dist/nouislider.min.js"
+            }
+        },
+        "installer-paths": {
+            "web/core": [
+                "type:drupal-core"
+            ],
+            "web/libraries/{$name}": [
+                "type:drupal-library"
+            ],
+            "web/modules/contrib/{$name}": [
+                "type:drupal-module"
+            ],
+            "web/profiles/contrib/{$name}": [
+                "type:drupal-profile"
+            ],
+            "web/themes/contrib/{$name}": [
+                "type:drupal-theme"
+            ],
+            "drush/Commands/contrib/{$name}": [
+                "type:drupal-drush"
+            ],
+            "web/modules/custom/{$name}": [
+                "type:drupal-custom-module"
+            ],
+            "web/profiles/custom/{$name}": [
+                "type:drupal-custom-profile"
+            ],
+            "recipes/{$name}": [
+                "type:drupal-recipe"
+            ],
+            "web/themes/custom/{$name}": [
+                "type:drupal-custom-theme"
+            ]
+        },
+        "drupal-core-project-message": {
+            "include-keys": [
+                "homepage",
+                "support"
+            ],
+            "post-create-project-cmd-message": [
+                "<bg=blue;fg=white>                                                   </>",
+                "<bg=blue;fg=white>  Congratulations, you\u2019ve installed Drupal CMS!    </>",
+                "<bg=blue;fg=white>                                                   </>",
+                "",
+                "<bg=yellow;fg=black>Next steps</>:",
+                "  * Run <fg=yellow>./launch-drupal-cms.sh</> to initialize Drupal CMS and open it in a browser.",
+                "  * Read the user guide: https://www.drupal.org/docs/user_guide/en/index.html",
+                "  * Get support: https://drupal.org/support",
+                "  * Get involved with the Drupal community: https://drupal.org/getting-involved"
+            ]
+        },
+        "patches": {
+            "drupal/core": {
+                "#3481164: Announcements Feed breaks `test-site.php install`": "https://www.drupal.org/files/issues/2024-10-16/3481164.patch"
+            },
+            "drupal/default_content": {
+                "#3160146: Add a Normalizer and Denormalizer to support Layout Builder": "https://git.drupalcode.org/project/default_content/-/merge_requests/15.diff"
+            }
+        }
+    },
+    "_info": [
+        "This file contains internal development dependencies and patches for Drupal CMS.",
+        "Do NOT use it to build a real site!"
+    ],
+    "require-dev": {
+        "drupal/core-dev": "^11.1",
+        "drupal/default_content": "^2"
+    },
+    "autoload-dev": {
+        "files": [
+            "recipes/drupal_cms_content_type_base/tests/src/ContentModelTestTrait.php"
+        ]
+    }
+}

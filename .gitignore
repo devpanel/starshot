@@ -2,8 +2,6 @@
 /.editorconfig
 /.gitattributes
 /.vscode/
-/composer.json
-/composer.lock
 /config/
 /patches.lock.json
 /recipes/
