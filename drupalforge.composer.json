@@ -201,18 +201,10 @@
         "jquery/select2": "*",
         "jquery/textcounter": "*",
         "jquery/timepicker": "*",
-        "leongersen/nouislider": "15.5.1",
         "popperjs/popperjs": "*",
         "progress-tracker/progress-tracker": "*",
         "signature_pad/signature_pad": "*",
         "tabby/tabby": "*",
         "tippyjs/tippyjs": "*"
-    },
-    "extra": {
-        "drupal-scaffold": {
-            "file-mapping": {
-                "[web-root]/libraries/nouislider/nouislider.min.js": "vendor/leongersen/nouislider/dist/nouislider.min.js"
-            }
-        }
     }
 }
