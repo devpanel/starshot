@@ -22,6 +22,7 @@ array_walk($data['repositories'], function (array &$repository): void {
   }
 });
 $data['extra']['drupal-scaffold']['file-mapping']['[web-root]/modules/contrib/experience_builder/content/xb_page/xb_page.yml'] = 'repos/drupal/drupal_cms/xb_page.yml';
+unset($data['extra']['patches']['drupal/experience_builder']['#3497256: ComponentTreeItem\'s $values property can get out of sync with the values of its sub-properties']);
 
 // If we're in "canary" mode, allow dev versions of all dependencies.
 if (getenv('CANARY')) {
