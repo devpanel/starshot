@@ -73,10 +73,8 @@ jobs:
         pwd 
         cd $APP_ROOT
         mkdir -p $WEB_ROOT
-        echo "Hello" > $WEB_ROOT/index.php
-        sudo chown -R www:www $APP_ROOT
-        ls -al
-        ls -al $APP_ROOT/repos/drupal/drupal_cms
+        # echo "Hello" > $WEB_ROOT/index.php
+ 
         export
         echo ${USER}
         sudo cp /templates/000-default.conf /etc/apache2/sites-enabled/000-default.conf
@@ -88,9 +86,15 @@ jobs:
         sudo service apache2 start
     
  
-        # bash .devpanel/custom_package_installer.sh
-        # bash .devpanel/init.sh
+        bash .devpanel/custom_package_installer.sh
+        bash .devpanel/init.sh
+        sudo chown -R www:www $APP_ROOT
+        echo "WEBROOT"
         ls -al $WEB_ROOT
+        echo "APPROOT"
+        ls -al
+        echo "DRUPAL CMS"
+        ls -al $APP_ROOT/repos/drupal/drupal_cms
         curl -I http://localhost || echo "Failed to make HTTP request to port 80"
         wget http://localhost
         
