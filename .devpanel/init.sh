@@ -28,6 +28,7 @@ fi
 
 #== Composer install.
 cd $APP_ROOT
+echo "Composer install"
 sudo rm -rf lost+found
 .devpanel/generate-composer-json > composer.json
 composer install
@@ -36,6 +37,7 @@ cd repos/drupal/drupal_cms && test -d node_modules || npm clean-install --foregr
 
 #== Copy recipes cache.
 cd $APP_ROOT
+echo "Copy recipes cache"
 if ! grep -qxF '/project_template/web/profiles/drupal_cms_installer/cache/*' .git/modules/repos/drupal/drupal_cms/info/exclude; then
   echo '/project_template/web/profiles/drupal_cms_installer/cache/*' >> .git/modules/repos/drupal/drupal_cms/info/exclude
 fi
@@ -46,7 +48,6 @@ fi
 #== Set up settings.php file.
 if [ ! -f $SETTINGS_FILE_PATH ]; then
   echo "Set up settings.php file."
-  mkdir -p $WEB_ROOT/sites/default
   cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILE_PATH
 fi
 
@@ -54,7 +55,7 @@ fi
 if [ -d recipes/drupal_cms_starter ] && [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables')" ]; then
   while [ -z "$(drush status --fields=bootstrap)" ]; do
     echo "RUN CURL"
-    curl -Is "http://localhost/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS" > /dev/null
+    curl -Is "localhost/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS" > /dev/null
   done
   exit
   drush ev "require_once 'core/includes/install.core.inc'; install_core_entity_type_definitions();"
