@@ -62,8 +62,9 @@ jobs:
         ls -al
         export
         echo ${USER}
-        bash /scripts/apache-start.sh& 
-        curl -Is "localhost"
+        bash /scripts/apache-start.sh &
+        echo "RUN CURL" 
+        curl -Is "http://localhost"
         # bash .devpanel/custom_package_installer.sh
         # bash .devpanel/init.sh
       env:
