@@ -48,10 +48,9 @@ jobs:
         echo ${USER}
         sudo rm -rf /var/www/html
         sudo mkdir -p /var/www/html
-        sudo chown -R www:www /var/www/html
         mv /__w/starshot/starshot/repo/* /var/www/html
         mv /__w/starshot/starshot/repo/.* /var/www/html || true  # Moves hidden files, ignoring any errors if no hidden files exist
-
+        sudo chown -R www:www /var/www/html
     - name: Setup Drupal
       run: |
         set -e
