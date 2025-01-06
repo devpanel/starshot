@@ -35,18 +35,19 @@ jobs:
     - name: Create new user and switch
       run: |
         sudo -u www whoami
-        sudo rm -rf /var/www/html
-        sudo mkdir -p /var/www/html
         echo ${USER}
+        
     - name: Check out code
       uses: actions/checkout@v3
       with:
-        path: /var/www/html
+        path: repo
 
-    # - name: Move repository
-    #   run: |
-    #     mv /__w/starshot/starshot/repo/* /var/www/html
-    #     mv /__w/starshot/starshot/repo/.* /var/www/html || true  # Moves hidden files, ignoring any errors if no hidden files exist
+    - name: Move repository
+      run: |
+        sudo rm -rf /var/www/html
+        sudo mkdir -p /var/www/html
+        mv /__w/starshot/starshot/repo/* /var/www/html
+        mv /__w/starshot/starshot/repo/.* /var/www/html || true  # Moves hidden files, ignoring any errors if no hidden files exist
 
     - name: Setup Drupal
       run: |
