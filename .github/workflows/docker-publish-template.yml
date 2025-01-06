@@ -62,6 +62,11 @@ jobs:
         ls -al
         export
         echo ${USER}
+        [ ! -z "$APP_ROOT" ] &&  sudo sed -i "s|{{APP_ROOT}}|${APP_ROOT}|" /etc/apache2/sites-enabled/000-default.conf
+        [ ! -z "$WEB_ROOT" ] &&  sudo sed -i "s|{{WEB_ROOT}}|${WEB_ROOT}|" /etc/apache2/sites-enabled/000-default.conf
+        [ ! -z "$SERVER_NAME" ] && sudo sed -i "s|{{SERVER_NAME}}|${SERVER_NAME}|" /etc/apache2/sites-enabled/000-default.conf
+        cat /etc/apache2/sites-enabled/000-default.conf
+        
         sudo service apache2 start
         echo "Hello" >$WEB_ROOT/index.php
         curl -I http://localhost || echo "Failed to make HTTP request to port 80"
