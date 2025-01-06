@@ -61,6 +61,7 @@ jobs:
         mkdir -p $WEB_ROOT
         ls -al
         export
+        echo ${USER}
         sudo -E bash /scripts/apache-start.sh &
         curl -Is "localhost"
         # bash .devpanel/custom_package_installer.sh
