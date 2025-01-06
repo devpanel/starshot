@@ -31,7 +31,7 @@ cd $APP_ROOT
 echo "Composer install"
 sudo rm -rf lost+found
 .devpanel/generate-composer-json > composer.json
-composer install
+composer install -vvv
 ln -s -f $(realpath -s --relative-to=$DDEV_DOCROOT/profiles repos/drupal/drupal_cms/project_template/$DDEV_DOCROOT/profiles/drupal_cms_installer) $DDEV_DOCROOT/profiles
 cd repos/drupal/drupal_cms && test -d node_modules || npm clean-install --foreground-scripts
 
