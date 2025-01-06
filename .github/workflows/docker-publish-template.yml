@@ -62,7 +62,7 @@ jobs:
         sudo mkdir -p /var/www/html
         mv /__w/starshot/starshot/repo/* /var/www/html
         mv /__w/starshot/starshot/repo/.* /var/www/html || true  # Moves hidden files, ignoring any errors if no hidden files exist
-        sudo chown -R www:www /var/www/html
+     
 
     - name: Setup Drupal
       run: |
@@ -70,6 +70,7 @@ jobs:
         git config --global --add safe.directory '/var/www/html'
         pwd 
         cd $APP_ROOT
+        sudo chown -R www:www $APP_ROOT
         mkdir -p $WEB_ROOT
         ls -al
         ls -al $APP_ROOT/repos/drupal/drupal_cms
@@ -83,8 +84,8 @@ jobs:
 
         sudo service apache2 start
  
-        bash .devpanel/custom_package_installer.sh
-        bash .devpanel/init.sh
+        # bash .devpanel/custom_package_installer.sh
+        # bash .devpanel/init.sh
         ls -al $WEB_ROOT
         curl -I http://localhost || echo "Failed to make HTTP request to port 80"
         
