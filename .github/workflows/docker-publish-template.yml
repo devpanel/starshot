@@ -15,21 +15,21 @@ jobs:
       run:
         shell: bash
         working-directory: /var/www/html
-    # services:
-    #   mysql:
-    #     image: mysql:8.0
-    #     env:
-    #       MYSQL_ROOT_PASSWORD: root
-    #       MYSQL_USER: user
-    #       MYSQL_PASSWORD: pass
-    #       MYSQL_DATABASE: drupaldb
-    #     ports:
-    #       - 3306:3306
-    #     options: >-
-    #       --health-cmd="mysqladmin ping -h localhost -u root --password=root"
-    #       --health-interval=10s
-    #       --health-timeout=5s
-    #       --health-retries=5
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_USER: user
+          MYSQL_PASSWORD: pass
+          MYSQL_DATABASE: drupaldb
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -u root --password=root"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
 
     steps:
     - name: Create new user and switch
