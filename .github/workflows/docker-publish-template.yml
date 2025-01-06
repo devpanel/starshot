@@ -57,7 +57,8 @@ jobs:
         pwd 
         cd $APP_ROOT
         ls -al
-        sudo bash -E /scripts/apache-start.sh
+        export
+        bash  /scripts/apache-start.sh
         bash .devpanel/custom_package_installer.sh
         bash .devpanel/init.sh
       env:
