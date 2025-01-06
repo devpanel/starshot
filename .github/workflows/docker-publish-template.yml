@@ -71,6 +71,7 @@ jobs:
       env:
         APP_ROOT: '/var/www/html'        
         WEB_ROOT: '/var/www/html/web'
+        SERVER_NAME: 'localhost'
         CODES_ENABLE: 'no'
         DB_HOST: mysql
         DB_PORT: 3306
