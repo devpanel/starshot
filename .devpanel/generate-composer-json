@@ -21,6 +21,7 @@ array_walk($data['repositories'], function (array &$repository): void {
     $repository['url'] = 'repos/drupal/drupal_cms/' . $repository['url'];
   }
 });
+$data['extra']['drupal-scaffold']['file-mapping']['[web-root]/modules/contrib/experience_builder/content/xb_page/xb_page.yml'] = 'repos/drupal/drupal_cms/xb_page.yml';
 
 // If we're in "canary" mode, allow dev versions of all dependencies.
 if (getenv('CANARY')) {
