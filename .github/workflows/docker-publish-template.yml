@@ -62,7 +62,7 @@ jobs:
         ls -al
         export
         echo ${USER}
-        bash /scripts/apache-start.sh &
+        sudo service apache2 start
         echo "RUN CURL" 
         curl -Is "http://localhost"
         echo "STOP RUN CURL" 
