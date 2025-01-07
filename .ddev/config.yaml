@@ -20,6 +20,8 @@ hooks:
     # Get a local copy of Drupal CMS and check out the default branch.
     # Patch for issue #3496399.
     - exec: 'cd repos/drupal/drupal_cms && test -n "$(ls -A)" || (git submodule update --init --remote --recursive && git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d "/"))'
+    # Generate packages.json.
+    - exec: '.devpanel/generate-packages-json > packages.json'
     # If needed, regenerate `composer.json` and install dependencies.
     # @see homeadditions/bin/generate-composer-json
     - exec: 'test -d vendor || (.devpanel/generate-composer-json > composer.json && composer install)'
