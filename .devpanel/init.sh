@@ -29,6 +29,9 @@ fi
 cd $APP_ROOT
 sudo rm -rf lost+found
 
+#== Generate packages.json.
+.devpanel/generate-packages-json > packages.json
+
 #== Composer install.
 if [ ! -d vendor ]; then
   .devpanel/generate-composer-json > composer.json
