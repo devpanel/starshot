@@ -30,7 +30,7 @@ cd $APP_ROOT
 sudo rm -rf lost+found
 
 #== Composer install.
-if [ ! -d vendor ]; then
+if [ ! -f composer.lock ]; then
   .devpanel/generate-composer-json > composer.json
   composer install
 fi
@@ -80,10 +80,8 @@ fi
 
 #== Pre-install starter recipe.
 cd $APP_ROOT
-if [ -d recipes/drupal_cms_starter ] && [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables')" ]; then
-  while [ -z "$(drush status --fields=bootstrap)" ]; do
-    curl -Is "localhost/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS" > /dev/null
-  done
+if [ -d recipes/drupal_cms_starter ] && [ -z "$(drush status --fields=bootstrap)" ]; then
+  .devpanel/install
   drush ev "require_once 'core/includes/install.core.inc'; install_core_entity_type_definitions();"
   until drush recipe $APP_ROOT/recipes/drupal_cms_starter; do
     :

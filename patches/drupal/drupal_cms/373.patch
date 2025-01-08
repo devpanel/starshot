@@ -1,4 +1,4 @@
-From 4a30663d422184a459164049987a6b455ccf5bf5 Mon Sep 17 00:00:00 2001
+From 4312efcda4ea322a7be4a64b000d07c34ff031e8 Mon Sep 17 00:00:00 2001
 From: Darren Oh <9472-darrenoh@users.noreply.drupalcode.org>
 Date: Sun, 5 Jan 2025 12:45:04 -0500
 Subject: [PATCH] Issue #3497485: Fix remaining duplication of batch jobs
@@ -8,10 +8,10 @@ Subject: [PATCH] Issue #3497485: Fix remaining duplication of batch jobs
  1 file changed, 20 insertions(+), 5 deletions(-)
 
 diff --git a/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile b/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile
-index 79ef5778..4bf8c279 100644
+index fd25c508..13a5d9e3 100644
 --- a/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile
 +++ b/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile
-@@ -238,9 +238,10 @@ function _drupal_cms_installer_password_value(&$element, $input, FormStateInterf
+@@ -240,9 +240,10 @@ function _drupal_cms_installer_password_value(&$element, $input, FormStateInterf
  function drupal_cms_installer_apply_recipes(array &$install_state): array {
    // If the installer ran before but failed mid-stream, don't reapply any
    // recipes that were successfully applied.
@@ -23,28 +23,25 @@ index 79ef5778..4bf8c279 100644
    );
  
    // If we've already applied all the chosen recipes, there's nothing to do.
-@@ -253,12 +254,18 @@ function drupal_cms_installer_apply_recipes(array &$install_state): array {
+@@ -255,9 +256,15 @@ function drupal_cms_installer_apply_recipes(array &$install_state): array {
    $batch = install_profile_modules($install_state);
    $batch['title'] = t('Setting up your site');
  
+-  $recipe_operations = [];
 +  // If we started applying recipes, profile modules are already installed.
 +  if (!empty($recipes_applied)) {
 +    $batch['operations'] = [];
 +  }
 +
-   ['install_path' => $cookbook_path] = InstalledVersions::getRootPackage();
-   $cookbook_path .= '/recipes';
- 
--  $recipe_operations = [];
 +  $recipe_operations = $applied_operations = [];
  
--  foreach ($recipes_to_apply as $recipe) {
-+  foreach ($install_state['parameters']['recipes'] as $recipe) {
-+    $applied = in_array($recipe, $recipes_applied);
+-  foreach ($recipes_to_apply as $name) {
++  foreach ($install_state['parameters']['recipes'] as $name) {
++    $applied = in_array($name, $recipes_applied);
      $recipe = RecipeLoader::load(
-       $cookbook_path . '/' . $recipe,
+       InstalledVersions::getInstallPath('drupal/' . $name),
        // Only save a cached copy of the recipe if this environment variable is
-@@ -266,12 +273,20 @@ function drupal_cms_installer_apply_recipes(array &$install_state): array {
+@@ -265,12 +272,20 @@ function drupal_cms_installer_apply_recipes(array &$install_state): array {
        // installer performance for first-time users.
        (bool) getenv('DRUPAL_CMS_INSTALLER_WRITE_CACHE'),
      );

@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+
+// Runs the installer steps prior to recipe application.
+
+$_GET['profile'] = 'drupal_cms_installer';
+$_GET['langcode'] = 'en';
+$_GET['recipes'][] = 'drupal_cms_starter';
+$_GET['site_name'] = 'Drupal CMS';
+
+chdir(dirname(__DIR__) . '/web/core');
+include 'install.php';
