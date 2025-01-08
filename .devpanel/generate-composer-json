@@ -10,28 +10,34 @@ $read_json = function (string $file): array {
   return json_decode($data, TRUE, flags: JSON_THROW_ON_ERROR);
 };
 
-$data = array_merge_recursive(
-  $read_json('repos/drupal/drupal_cms/project_template/composer.json'),
-  $read_json('repos/drupal/drupal_cms/dev.composer.json'),
-  $read_json('drupalforge.composer.json'),
-);
+// From \Drupal\Component\Utility\NestedArray::mergeDeep().
+$merge_deep = function (array ...$arrays) use (&$merge_deep): array {
+  $result = [];
+  foreach ($arrays as $array) {
+    foreach ($array as $key => $value) {
+      // Recurse when both values are arrays.
+      if (isset($result[$key]) && is_array($result[$key]) && is_array($value)) {
+        $result[$key] = $merge_deep($result[$key], $value);
+      }
+      // Otherwise, use the latter value, overriding any previous value.
+      else {
+        $result[$key] = $value;
+      }
+    }
+  }
+  return $result;
+};
+
+$base = $read_json('repos/drupal/drupal_cms/project_template/composer.json');
+$dev = $read_json('repos/drupal/drupal_cms/dev.composer.json');
+$drupalforge = $read_json('drupalforge.composer.json');
+$data = $merge_deep($base, $dev, $drupalforge);
 
 array_walk($data['repositories'], function (array &$repository): void {
   if ($repository['type'] === 'path') {
     $repository['url'] = 'repos/drupal/drupal_cms/' . $repository['url'];
   }
 });
-$data['extra']['drupal-scaffold']['file-mapping']['[web-root]/modules/contrib/experience_builder/content/xb_page/xb_page.yml'] = 'repos/drupal/drupal_cms/xb_page.yml';
-
-// Add repository for automatic updates. .git folders are not copied to the
-// tmp directory, so Composer cannot use branch info for versions. If we just
-// replaced the path repositories, the xb_page.yml file would not be copied.
-$data['repositories'] = [
-  'packages' => [
-    'type' => 'composer',
-    'url' => realpath(''),
-  ],
-] + $data['repositories'];
 
 // If we're in "canary" mode, allow dev versions of all dependencies.
 if (getenv('CANARY')) {
