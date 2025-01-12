@@ -19,7 +19,7 @@ hooks:
     - exec: 'test -f .vscode/launch.json || (mkdir -p .vscode && cp .ddev/launch.json .vscode/)'
     # Get a local copy of Drupal CMS and check out the default branch.
     # Patch for issue #3496399.
-    - exec: 'cd repos/drupal/drupal_cms && test -n "$(ls -A)" || (git submodule update --init --remote --recursive && git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d "/"))'
+    - exec: 'cd repos/drupal/drupal_cms && test -n "$(ls -A)" || (git submodule update --init --remote --recursive && git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d "/")) && git merge-base --is-ancestor 86d48c24bdf96494a8a017d15c368574794d580a HEAD 2> /dev/null || git apply $DDEV_COMPOSER_ROOT/patches/drupal/drupal_cms/373.patch || true'
     # If needed, regenerate `composer.json` and install dependencies.
     # @see homeadditions/bin/generate-composer-json
     - exec: 'test -f composer.lock || (.devpanel/generate-composer-json > composer.json && composer install)'
@@ -33,16 +33,12 @@ hooks:
     - exec: 'cd repos/drupal/drupal_cms && test -d node_modules || npm clean-install --foreground-scripts'
     # Build Experience Builder's JavaScript bundle, if needed.
     - exec: 'XB_UI_PATH=$DDEV_DOCROOT/modules/contrib/experience_builder/ui; test -d $XB_UI_PATH/dist || ( npm --prefix $XB_UI_PATH install && npm --prefix $XB_UI_PATH run build )'
-    # Copy recipes cache. Not working now, so patch only.
-    - exec: 'grep -qxF "/project_template/web/profiles/drupal_cms_installer/cache/*" .git/modules/repos/drupal/drupal_cms/info/exclude || echo "/project_template/web/profiles/drupal_cms_installer/cache/*" >> .git/modules/repos/drupal/drupal_cms/info/exclude'
-    #- exec: 'test -d web/profiles/drupal_cms_installer/cache && test -z "$(git status --porcelain repos/drupal/drupal_cms)" && cp -n .devpanel/drupal_cms_cache/* web/profiles/drupal_cms_installer/cache && cd repos/drupal/drupal_cms && (git merge-base --is-ancestor 4312efcda4ea322a7be4a64b000d07c34ff031e8 HEAD || git apply $DDEV_COMPOSER_ROOT/patches/drupal/drupal_cms/373.patch) || true'
-    - exec: 'cd repos/drupal/drupal_cms && (git merge-base --is-ancestor 4312efcda4ea322a7be4a64b000d07c34ff031e8 HEAD 2> /dev/null || git apply $DDEV_COMPOSER_ROOT/patches/drupal/drupal_cms/373.patch) || true'
     # Create the private files directory.
     - exec: 'test -d private || mkdir private'
     # Add the private files path to settings.php.
     - exec: 'grep -qxF "\$settings[''file_private_path''] = ''../private'';" web/sites/default/settings.php || echo "\$settings[''file_private_path''] = ''../private'';" >> web/sites/default/settings.php'
     # Pre-install starter recipe.
-    - exec: 'test -d recipes/drupal_cms_starter && test -z "$(drush status --fields=bootstrap)" && .devpanel/install > /dev/null && drush ev "require_once ''core/includes/install.core.inc''; install_core_entity_type_definitions();" && until drush recipe ../recipes/drupal_cms_starter; do :; done && drush -n pmu drupal_cms_installer && drush cr || true'
+    - exec: 'test -d recipes/drupal_cms_starter && test -z "$(drush status --fields=bootstrap)" && .devpanel/install > /dev/null && until drush recipe ../recipes/drupal_cms_starter; do :; done && drush -n pmu drupal_cms_installer && drush cr || true'
 web_environment:
   # For faster performance, don't audit dependencies automatically.
   - COMPOSER_NO_AUDIT=1
@@ -52,7 +48,6 @@ web_environment:
   # Download Cypress to a directory that won't be blown away every time the
   # project is restarted.
   - CYPRESS_CACHE_FOLDER=/var/www/html/.cache/cypress
-  - DRUPAL_CMS_INSTALLER_WRITE_CACHE=1
   # Use the DDEV-provided database to run PHPUnit tests.
   - SIMPLETEST_DB=$DDEV_DATABASE_FAMILY://db:db@db/db
   - SIMPLETEST_BASE_URL=$DDEV_PRIMARY_URL
