@@ -57,11 +57,11 @@ if ! grep -qxF '/project_template/web/profiles/drupal_cms_installer/cache/*' .gi
   echo '/project_template/web/profiles/drupal_cms_installer/cache/*' >> .git/modules/repos/drupal/drupal_cms/info/exclude
 fi
 if [ -d web/profiles/drupal_cms_installer/cache ] && [ -z "$(git status --porcelain repos/drupal/drupal_cms)" ]; then
-  cp -n .devpanel/drupal_cms_cache/* web/profiles/drupal_cms_installer/cache
+  #cp -n .devpanel/drupal_cms_cache/* web/profiles/drupal_cms_installer/cache
   #== Patch for issue #3497485. We do this now so the changes don't prevent
   #== the recipes cache from being copied.
   cd $APP_ROOT/repos/drupal/drupal_cms
-  if ! git merge-base --is-ancestor 4a30663d422184a459164049987a6b455ccf5bf5 HEAD; then
+  if ! git merge-base --is-ancestor 4312efcda4ea322a7be4a64b000d07c34ff031e8 HEAD 2> /dev/null; then
     git apply $APP_ROOT/patches/drupal/drupal_cms/373.patch
   fi
 fi
@@ -81,7 +81,7 @@ fi
 #== Pre-install starter recipe.
 cd $APP_ROOT
 if [ -d recipes/drupal_cms_starter ] && [ -z "$(drush status --fields=bootstrap)" ]; then
-  .devpanel/install
+  .devpanel/install > /dev/null
   drush ev "require_once 'core/includes/install.core.inc'; install_core_entity_type_definitions();"
   until drush recipe $APP_ROOT/recipes/drupal_cms_starter; do
     :
