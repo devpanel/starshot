@@ -3,6 +3,7 @@
 
 // Runs the installer steps prior to recipe application.
 
+$_SERVER['HTTP_USER_AGENT'] = 'Drupal Forge';
 $_GET['profile'] = 'drupal_cms_installer';
 $_GET['langcode'] = 'en';
 $_GET['recipes'][] = 'drupal_cms_starter';
