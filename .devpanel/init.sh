@@ -23,6 +23,12 @@ if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   git submodule update --init --remote --recursive
   cd $APP_ROOT/repos/drupal/drupal_cms
   git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d '/')
+
+  #== Patch for issue #3497485.
+  cd $APP_ROOT/repos/drupal/drupal_cms
+  if ! git merge-base --is-ancestor 86d48c24bdf96494a8a017d15c368574794d580a HEAD 2> /dev/null; then
+    git apply $APP_ROOT/patches/drupal/drupal_cms/373.patch
+  fi
 fi
 
 #== Remove root-owned files.
@@ -51,21 +57,6 @@ if [ -d $XB_UI_PATH/dist ]; then
   npm --prefix $XB_UI_PATH run build
 fi
 
-#== Copy recipes cache.
-cd $APP_ROOT
-if ! grep -qxF '/project_template/web/profiles/drupal_cms_installer/cache/*' .git/modules/repos/drupal/drupal_cms/info/exclude; then
-  echo '/project_template/web/profiles/drupal_cms_installer/cache/*' >> .git/modules/repos/drupal/drupal_cms/info/exclude
-fi
-if [ -d web/profiles/drupal_cms_installer/cache ] && [ -z "$(git status --porcelain repos/drupal/drupal_cms)" ]; then
-  #cp -n .devpanel/drupal_cms_cache/* web/profiles/drupal_cms_installer/cache
-  #== Patch for issue #3497485. We do this now so the changes don't prevent
-  #== the recipes cache from being copied.
-  cd $APP_ROOT/repos/drupal/drupal_cms
-  if ! git merge-base --is-ancestor 4312efcda4ea322a7be4a64b000d07c34ff031e8 HEAD 2> /dev/null; then
-    git apply $APP_ROOT/patches/drupal/drupal_cms/373.patch
-  fi
-fi
-
 #== Create the private files directory.
 cd $APP_ROOT
 if [ ! -d private ]; then
@@ -80,9 +71,8 @@ fi
 
 #== Pre-install starter recipe.
 cd $APP_ROOT
-if [ -d recipes/drupal_cms_starter ] && [ -z "$(drush status --fields=bootstrap)" ]; then
+if [ -d recipes/drupal_cms_starter ] && [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables')" ]; then
   .devpanel/install > /dev/null
-  drush ev "require_once 'core/includes/install.core.inc'; install_core_entity_type_definitions();"
   until drush recipe $APP_ROOT/recipes/drupal_cms_starter; do
     :
   done

@@ -1,4 +1,4 @@
-From 4312efcda4ea322a7be4a64b000d07c34ff031e8 Mon Sep 17 00:00:00 2001
+From 86d48c24bdf96494a8a017d15c368574794d580a Mon Sep 17 00:00:00 2001
 From: Darren Oh <9472-darrenoh@users.noreply.drupalcode.org>
 Date: Sun, 5 Jan 2025 12:45:04 -0500
 Subject: [PATCH] Issue #3497485: Fix remaining duplication of batch jobs
@@ -8,7 +8,7 @@ Subject: [PATCH] Issue #3497485: Fix remaining duplication of batch jobs
  1 file changed, 20 insertions(+), 5 deletions(-)
 
 diff --git a/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile b/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile
-index fd25c508..13a5d9e3 100644
+index 1ad09758..e3bf9519 100644
 --- a/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile
 +++ b/project_template/web/profiles/drupal_cms_installer/drupal_cms_installer.profile
 @@ -240,9 +240,10 @@ function _drupal_cms_installer_password_value(&$element, $input, FormStateInterf
@@ -23,7 +23,7 @@ index fd25c508..13a5d9e3 100644
    );
  
    // If we've already applied all the chosen recipes, there's nothing to do.
-@@ -255,9 +256,15 @@ function drupal_cms_installer_apply_recipes(array &$install_state): array {
+@@ -255,17 +256,31 @@ function drupal_cms_installer_apply_recipes(array &$install_state): array {
    $batch = install_profile_modules($install_state);
    $batch['title'] = t('Setting up your site');
  
@@ -38,13 +38,8 @@ index fd25c508..13a5d9e3 100644
 -  foreach ($recipes_to_apply as $name) {
 +  foreach ($install_state['parameters']['recipes'] as $name) {
 +    $applied = in_array($name, $recipes_applied);
-     $recipe = RecipeLoader::load(
-       InstalledVersions::getInstallPath('drupal/' . $name),
-       // Only save a cached copy of the recipe if this environment variable is
-@@ -265,12 +272,20 @@ function drupal_cms_installer_apply_recipes(array &$install_state): array {
-       // installer performance for first-time users.
-       (bool) getenv('DRUPAL_CMS_INSTALLER_WRITE_CACHE'),
-     );
+     $recipe = InstalledVersions::getInstallPath('drupal/' . $name);
+     $recipe = Recipe::createFromDirectory($recipe);
 -    $recipe_operations = array_merge($recipe_operations, RecipeRunner::toBatchOperations($recipe));
 +    if ($applied) {
 +      $applied_operations = array_merge($applied_operations, RecipeRunner::toBatchOperations($recipe));
