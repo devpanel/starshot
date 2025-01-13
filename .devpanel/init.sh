@@ -71,7 +71,9 @@ fi
 #== Pre-install starter recipe.
 cd $APP_ROOT
 if [ -d recipes/drupal_cms_starter ] && [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables')" ]; then
-  .devpanel/install > /dev/null
+  while [ -z "$(drush status --fields=bootstrap)" ]; do
+    .devpanel/install > /dev/null
+  done
   until drush recipe $APP_ROOT/recipes/drupal_cms_starter; do
     :
   done
