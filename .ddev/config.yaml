@@ -19,7 +19,7 @@ hooks:
     - exec: 'test -f .vscode/launch.json || (mkdir -p .vscode && cp .ddev/launch.json .vscode/)'
     # Get a local copy of Drupal CMS and check out the default branch.
     # Patch for issue #3496399.
-    - exec: 'cd repos/drupal/drupal_cms && test -n "$(ls -A)" || (git submodule update --init --remote --recursive && git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d "/")) && git merge-base --is-ancestor 86d48c24bdf96494a8a017d15c368574794d580a HEAD 2> /dev/null || git apply $DDEV_COMPOSER_ROOT/patches/drupal/drupal_cms/373.patch || true'
+    - exec: 'cd repos/drupal/drupal_cms && test -n "$(ls -A)" || (git submodule update --init --remote --recursive && git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d "/") && (git merge-base --is-ancestor 86d48c24bdf96494a8a017d15c368574794d580a HEAD 2> /dev/null || git apply $DDEV_COMPOSER_ROOT/patches/drupal/drupal_cms/373.patch))'
     # If needed, regenerate `composer.json` and install dependencies.
     # @see homeadditions/bin/generate-composer-json
     - exec: 'test -f composer.lock || (.devpanel/generate-composer-json > composer.json && composer install)'
