@@ -1,7 +1,0 @@
-{
-    "patches": {
-        "drupal/core": {
-            "#3495988: Add redirect for incomplete install": "https://git.drupalcode.org/project/drupal/-/merge_requests/10680.patch"
-        }
-    }
-}

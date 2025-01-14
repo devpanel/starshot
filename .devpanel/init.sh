@@ -24,6 +24,11 @@ if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   cd $APP_ROOT/repos/drupal/drupal_cms
   git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d '/')
   git pull
+
+  #== Patch for issue #3497485.
+  if ! git merge-base --is-ancestor 86d48c24bdf96494a8a017d15c368574794d580a HEAD 2> /dev/null; then
+    git apply $APP_ROOT/patches/drupal/drupal_cms/373.patch
+  fi
 fi
 
 #== Remove root-owned files.
@@ -32,14 +37,9 @@ echo "Composer install"
 sudo rm -rf lost+found
 
 #== Composer install.
-if [ ! -d vendor ]; then
-  #Fix error "Scaffold file xb_page.yml not found in package drupal/cms."
-  if [ -f $APP_ROOT/repos/drupal/drupal_cms/xb_page.yml ]; then
-    cp $APP_ROOT/repos/drupal/drupal_cms/xb_page.yml $APP_ROOT/.
-  fi
+if [ ! -f composer.lock ]; then
   .devpanel/generate-composer-json > composer.json
   composer install
-
 fi
 
 #== Symlink the installer into the web root.
@@ -58,20 +58,10 @@ if [ -d $XB_UI_PATH/dist ]; then
   npm --prefix $XB_UI_PATH run build
 fi
 
-#== Copy recipes cache.
+#== Create the private files directory.
 cd $APP_ROOT
-echo "Copy recipes cache"
-if ! grep -qxF '/project_template/web/profiles/drupal_cms_installer/cache/*' .git/modules/repos/drupal/drupal_cms/info/exclude; then
-  echo '/project_template/web/profiles/drupal_cms_installer/cache/*' >> .git/modules/repos/drupal/drupal_cms/info/exclude
-fi
-if [ -d web/profiles/drupal_cms_installer/cache ] && [ -z "$(git status --porcelain repos/drupal/drupal_cms)" ]; then
-  cp -n .devpanel/drupal_cms_cache/* web/profiles/drupal_cms_installer/cache
-  #== Patch for issue #3497485. We do this now so the changes don't prevent
-  #== the recipes cache from being copied.
-  cd $APP_ROOT/repos/drupal/drupal_cms
-  if ! git merge-base --is-ancestor 4a30663d422184a459164049987a6b455ccf5bf5 HEAD; then
-    git apply $APP_ROOT/patches/drupal/drupal_cms/373.patch
-  fi
+if [ ! -d private ]; then
+  mkdir private
 fi
 
 #== Set up settings.php file.
@@ -84,12 +74,8 @@ exit
 cd $APP_ROOT
 if [ -d recipes/drupal_cms_starter ] && [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables')" ]; then
   while [ -z "$(drush status --fields=bootstrap)" ]; do
-    echo "RUN CURL"
-    curl "http://localhost/core/install.php?profile=drupal_cms_installer&langcode=en&recipes%5B0%5D=drupal_cms_starter&site_name=Drupal%20CMS" > /dev/null
-    sleep 5
+    .devpanel/install > /dev/null
   done
-  exit
-  drush ev "require_once 'core/includes/install.core.inc'; install_core_entity_type_definitions();"
   until drush recipe $APP_ROOT/recipes/drupal_cms_starter; do
     :
   done

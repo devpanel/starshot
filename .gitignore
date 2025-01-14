@@ -5,7 +5,9 @@
 /composer.json
 /composer.lock
 /config/
+/packages.json
 /patches.lock.json
+/private/
 /recipes/
 /vendor/
 /web/
