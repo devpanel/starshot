@@ -12,7 +12,10 @@ $_GET['site_name'] = 'Drupal CMS';
 register_shutdown_function('_install_drupal_cms_profile_modules');
 
 function _install_drupal_cms_profile_modules() {
-  $install_state['profile_info'] = install_profile_info('drupal_cms_installer');
+  global $install_state;
+  if (!$install_state['base_system_verified']) {
+    throw new Exception('Base system not installed.');
+  }
   $batch = install_profile_modules($install_state);
   $context = ['results' => []];
   foreach ($batch['operations'] as $step) {

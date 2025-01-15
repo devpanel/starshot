@@ -1,6 +1,7 @@
 /.cache/
 /.editorconfig
 /.gitattributes
+/init-*.log
 /.vscode/
 /composer.json
 /composer.lock
