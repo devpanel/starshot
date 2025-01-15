@@ -17,28 +17,8 @@ hooks:
   post-start:
     # Set up debugging.
     - exec: 'test -f .vscode/launch.json || (mkdir -p .vscode && cp .ddev/launch.json .vscode/)'
-    # Get a local copy of Drupal CMS and check out the default branch.
-    # Patch for issue #3496399.
-    - exec: 'cd repos/drupal/drupal_cms && test -n "$(ls -A)" || (git submodule update --init --remote --recursive && git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d "/") && (git merge-base --is-ancestor 86d48c24bdf96494a8a017d15c368574794d580a HEAD 2> /dev/null || git apply $DDEV_COMPOSER_ROOT/patches/drupal/drupal_cms/373.patch))'
-    # If needed, regenerate `composer.json` and install dependencies.
-    # @see homeadditions/bin/generate-composer-json
-    - exec: 'test -f composer.lock || (.devpanel/generate-composer-json > composer.json && composer install)'
-    # The installer is part of the project template, so symlink it into the web root.
-    # It needs to be a relative symlink, or it will break Package Manager.
-    - exec: 'ln -s -f $(realpath -s --relative-to=$DDEV_DOCROOT/profiles repos/drupal/drupal_cms/project_template/web/profiles/drupal_cms_installer) $DDEV_DOCROOT/profiles'
-    # Install JavaScript dependencies if needed. The `--foreground-scripts`
-    # option is needed to ensure the Cypress binary is actually downloaded;
-    # see the warning about Node.js Snap for Linux at
-    # https://docs.cypress.io/guides/getting-started/installing-cypress.
-    - exec: 'cd repos/drupal/drupal_cms && test -d node_modules || npm clean-install --foreground-scripts'
-    # Build Experience Builder's JavaScript bundle, if needed.
-    - exec: 'XB_UI_PATH=$DDEV_DOCROOT/modules/contrib/experience_builder/ui; test -d $XB_UI_PATH/dist || ( npm --prefix $XB_UI_PATH install && npm --prefix $XB_UI_PATH run build )'
-    # Create the private files directory.
-    - exec: 'test -d private || mkdir private'
-    # Add the private files path to settings.php.
-    - exec: 'grep -qxF "\$settings[''file_private_path''] = ''../private'';" web/sites/default/settings.php || echo "\$settings[''file_private_path''] = ''../private'';" >> web/sites/default/settings.php'
-    # Pre-install starter recipe.
-    - exec: 'test -d recipes/drupal_cms_starter && test -z "$(drush status --fields=bootstrap)" && .devpanel/install > /dev/null && until drush recipe ../recipes/drupal_cms_starter; do :; done && drush -n pmu drupal_cms_installer && drush cr || true'
+    # Run initial setup tasks.
+    - exec: '.devpanel/init.sh'
 web_environment:
   # For faster performance, don't audit dependencies automatically.
   - COMPOSER_NO_AUDIT=1
@@ -51,6 +31,14 @@ web_environment:
   # Use the DDEV-provided database to run PHPUnit tests.
   - SIMPLETEST_DB=$DDEV_DATABASE_FAMILY://db:db@db/db
   - SIMPLETEST_BASE_URL=$DDEV_PRIMARY_URL
+  # Set up DevPanel variables.
+  - APP_ROOT=$DDEV_COMPOSER_ROOT
+  - WEB_ROOT=$DDEV_COMPOSER_ROOT/$DDEV_DOCROOT
+  - DB_HOST=db
+  - DB_PORT=3306
+  - DB_USER=db
+  - DB_PASSWORD=db
+  - DB_NAME=db
 webimage_extra_packages:
   # Add Cypress' system dependencies.
   # See https://docs.cypress.io/guides/getting-started/installing-cypress#UbuntuDebian

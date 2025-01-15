@@ -5,6 +5,7 @@
 /composer.json
 /composer.lock
 /config/
+/logs/
 /packages.json
 /patches.lock.json
 /private/
