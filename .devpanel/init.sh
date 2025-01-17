@@ -139,6 +139,7 @@ if [ ! -f $SETTINGS_FILE_PATH ]; then
 fi
 
 #== Pre-install starter recipe.
+cd $APP_ROOT
 if [ -d recipes/drupal_cms_starter ] && [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables')" ]; then
   echo
   echo 'Install Drupal base system.'
