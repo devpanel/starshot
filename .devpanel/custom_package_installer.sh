@@ -17,4 +17,4 @@ sudo pecl install apcu <<< ''
 echo 'extension=apcu.so' | sudo tee /usr/local/etc/php/conf.d/apcu.ini
 sudo pecl install uploadprogress
 echo 'extension=uploadprogress.so' | sudo tee /usr/local/etc/php/conf.d/uploadprogress.ini
-sudo /etc/init.d/apache2 reload
+
