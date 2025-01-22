@@ -24,7 +24,7 @@ echo -e "-------------------------------\n"
 WORK_DIR=$APP_ROOT
 TMP_DIR=/tmp/devpanel/quickstart
 DUMPS_DIR=$TMP_DIR/dumps
-STATIC_FILES_DIR=$WEB_ROOT/$(drush php-eval "echo \Drupal\Core\StreamWrapper\PublicStream::basePath();") # Drupal 8 ways
+STATIC_FILES_DIR=$WEB_ROOT/sites/default/files
 
 mkdir -p $DUMPS_DIR
 

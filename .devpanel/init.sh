@@ -21,9 +21,10 @@ exec > >(tee $LOG_FILE) 2>&1
 TIMEFORMAT=%lR
 DDEV_DOCROOT=${WEB_ROOT##*/}
 SETTINGS_FILE_PATH=$WEB_ROOT/sites/default/settings.php
-
 #== Clone source code.
 if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
+  cd $APP_ROOT/repos/drupal/drupal_cms
+  
   echo
   time git submodule update --init --remote --recursive
   RETURN_CODE=$?
@@ -31,7 +32,6 @@ if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
     exit $RETURN_CODE
   fi
 
-  cd $APP_ROOT/repos/drupal/drupal_cms
   echo
   time git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d '/')
   RETURN_CODE=$?
