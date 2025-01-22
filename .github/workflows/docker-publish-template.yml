@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - develop
+      - feature/*
 jobs:
   build-application:
     runs-on: ubuntu-latest
@@ -11,8 +12,10 @@ jobs:
       webserver:
         image: devpanel/php:8.3-base
         env:
-          APP_ROOT: '/var/www/html'        
-          WEB_ROOT: '/var/www/html/web'
+          APP_ROOT: '/devpanel/build'        
+          WEB_ROOT: '/devpanel/build/web'
+          CODES_USER_DATA_DIR: '/devpanel/build/.vscode'
+          CODES_WORKING_DIR: '/devpanel/build'
           APACHE_RUN_USER: 'www'
           APACHE_RUN_GROUP: 'www'
           CODES_ENABLE: 'yes'
@@ -25,7 +28,7 @@ jobs:
         ports:
           - 80:80
         volumes:
-          - ${{ github.workspace }}:/app/  # Mounting the checked-out code
+          - ${{ github.workspace }}:/devpanel/build/  # Mounting the checked-out code
       mysql:
         image: mysql:8.0
         env:
@@ -50,13 +53,17 @@ jobs:
 
     - name: Setup Drupal
       run: |
-        docker exec ${{ job.services.webserver.id }} bash -c "sudo rm -rf \$APP_ROOT && sudo mkdir -p \$APP_ROOT" 
-        docker exec ${{ job.services.webserver.id }} bash -c "sudo cp -r /app/. \$APP_ROOT/." 
+        echo "PREPARE DIR FOR INSTALL" 
         docker exec ${{ job.services.webserver.id }} bash -c "sudo chown -R www:www \$APP_ROOT"
         docker exec ${{ job.services.webserver.id }} bash -c "export && cd \$APP_ROOT && ls -al"
-        docker exec ${{ job.services.webserver.id }} bash -c "git config --global --add safe.directory \$APP_ROOT" 
+        echo "SET UP GIT" 
+        docker exec ${{ job.services.webserver.id }} bash -c "git config --global --add safe.directory \$APP_ROOT"
+        echo "INSTALL CUSTOM PACKAGE" 
         docker exec ${{ job.services.webserver.id }} bash -c "\$APP_ROOT/.devpanel/custom_package_installer.sh" 
+        echo "INSTALL DRUPAL" 
+        docker exec ${{ job.services.webserver.id }} bash -c "cd \$APP_ROOT/.git && ls -al"
         docker exec ${{ job.services.webserver.id }} bash -c "\$APP_ROOT/.devpanel/init.sh" 
+        echo "DUMPS DATABASE + STATIC FILE" 
         docker exec ${{ job.services.webserver.id }} bash -c "\$APP_ROOT/.devpanel/quickstart/create_quickstart.sh" 
 
     - name: Login to Docker Hub
@@ -66,7 +73,6 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
 
     - name: Set env to testing environment
-      if: endsWith(github.ref, '/develop')
       run: |
         echo "IMAGE_TAG=devpanel/starshot:develop" >> $GITHUB_ENV
 
@@ -79,3 +85,8 @@ jobs:
       run: |
         docker commit ${{ job.services.webserver.id }} ${{ env.IMAGE_TAG }}
         docker push ${{ env.IMAGE_TAG }}
+
+    - name: Push to tag latest
+      if: endsWith(github.ref, '/main')
+      run: |
+        docker push devpanel/starshot:latest
