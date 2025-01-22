@@ -1,0 +1,66 @@
+<script>
+  import { FULL_MODULE_PATH } from '../constants';
+
+  export async function fetchEntity(uri) {
+    let data;
+    const response = await fetch(`${uri}.json`);
+    if (response.ok) {
+      data = await response.json();
+      return data;
+    }
+    throw new Error('Could not load entity');
+  }
+
+  // eslint-disable-next-line import/no-mutable-exports,import/prefer-default-export
+  export let sources;
+  export let index = 0;
+
+  const normalizedSources = sources ? [sources].flat() : [];
+  const { Drupal } = window;
+  const fallbackImage = `${FULL_MODULE_PATH}/images/puzzle-piece-placeholder.svg`;
+  const showFallback = (ev) => {
+    ev.target.src = fallbackImage;
+  };
+
+  /**
+   * Props for the images used in the carousel.
+   *
+   * @param {string} src
+   *   The source attribute.
+   * @param {string} alt
+   *   The alt attribute, defaults to 'Placeholder' if undefined.
+   *
+   * @return {{src, alt: string, class: string}}
+   *   An object of element attributes
+   */
+  const defaultImgProps = (src, alt) => ({
+    src,
+    alt: typeof alt !== 'undefined' ? alt : Drupal.t('Placeholder'),
+    class: `${$$props.class} `,
+  });
+</script>
+
+<!-- svelte-ignore a11y-missing-attribute -->
+{#if normalizedSources.length}
+  {#if normalizedSources[index].file.resource === 'image'}
+    <img
+      src={normalizedSources[index].file.uri}
+      alt=""
+      on:error={showFallback}
+      class={$$props.class}
+    />
+  {:else if (normalizedSources[index].file.resource = 'file')}
+    <!-- Keeping this block for compatibility with the mockapi. -->
+    {#await fetchEntity(normalizedSources[index].file.uri)}
+      <img {...defaultImgProps(fallbackImage)} />
+    {:then file}
+      <img {...defaultImgProps(file.url, '')} on:error={showFallback} alt="" />
+    {:catch error}
+      <span class="image_error" style="color: red">{error.message}</span>
+    {/await}
+  {:else}
+    <img {...defaultImgProps(fallbackImage)} />
+  {/if}
+{:else}
+  <img {...defaultImgProps(fallbackImage)} />
+{/if}

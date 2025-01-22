@@ -1,0 +1,1084 @@
+
+Submodule 'repos/drupal/drupal_cms' (https://git.drupalcode.org/project/drupal_cms.git) registered for path 'repos/drupal/drupal_cms'
+Cloning into '/var/www/html/repos/drupal/drupal_cms'...
+Submodule path 'repos/drupal/drupal_cms': checked out '3d849ac39209fa2841245eb3dfa42a82034bc07e'
+0m3.402s
+
+Switched to branch '1.x'
+Your branch is up to date with 'origin/1.x'.
+0m0.209s
+
+Apply patch for issue #3497485.
+0m0.003s
+
+Remove root-owned files.
+0m0.013s
+
+Generate composer.json.
+0m0.102s
+
+No composer.lock file present. Updating dependencies to latest instead of installing from lock file. See https://getcomposer.org/install for more information.
+Loading composer repositories with package information
+Updating dependencies
+Lock file operations: 323 installs, 0 updates, 0 removals
+  - Locking asm89/stack-cors (v2.2.0)
+  - Locking behat/mink (v1.12.0)
+  - Locking behat/mink-browserkit-driver (v2.2.0)
+  - Locking brick/math (0.12.1)
+  - Locking carbonphp/carbon-doctrine-types (3.2.0)
+  - Locking chi-teck/drupal-code-generator (4.1.0)
+  - Locking clue/stream-filter (v1.7.0)
+  - Locking codemirror/codemirror (5.65.12)
+  - Locking colinodell/psr-testlogger (v1.3.0)
+  - Locking commerceguys/addressing (v2.2.4)
+  - Locking composer/ca-bundle (1.5.5)
+  - Locking composer/class-map-generator (1.5.0)
+  - Locking composer/composer (2.8.5)
+  - Locking composer/installers (v2.3.0)
+  - Locking composer/metadata-minifier (1.0.0)
+  - Locking composer/pcre (3.3.2)
+  - Locking composer/semver (3.4.3)
+  - Locking composer/spdx-licenses (1.5.8)
+  - Locking composer/xdebug-handler (3.0.5)
+  - Locking consolidation/annotated-command (4.10.1)
+  - Locking consolidation/config (3.1.0)
+  - Locking consolidation/filter-via-dot-access-data (2.0.2)
+  - Locking consolidation/log (3.1.0)
+  - Locking consolidation/output-formatters (4.6.0)
+  - Locking consolidation/robo (5.1.0)
+  - Locking consolidation/site-alias (4.1.1)
+  - Locking consolidation/site-process (5.4.2)
+  - Locking cweagans/composer-configurable-plugin (2.0.0)
+  - Locking cweagans/composer-patches (2.0.0-beta2)
+  - Locking davedevelopment/stiphle (0.9.4)
+  - Locking dealerdirect/phpcodesniffer-composer-installer (v1.0.0)
+  - Locking dflydev/dot-access-data (v3.0.3)
+  - Locking doctrine/annotations (2.0.2)
+  - Locking doctrine/collections (2.2.2)
+  - Locking doctrine/deprecations (1.1.4)
+  - Locking doctrine/inflector (2.0.10)
+  - Locking doctrine/instantiator (2.0.0)
+  - Locking doctrine/lexer (2.1.1)
+  - Locking dragonmantank/cron-expression (v3.4.0)
+  - Locking drupal/add_content_by_bundle (1.2.2)
+  - Locking drupal/address (2.0.3)
+  - Locking drupal/addtocal_augment (1.2.3)
+  - Locking drupal/ai (1.0.2)
+  - Locking drupal/ai_agents (1.0.1)
+  - Locking drupal/ai_image_alt_text (1.0.0)
+  - Locking drupal/ai_provider_anthropic (1.0.0)
+  - Locking drupal/ai_provider_openai (1.0.1)
+  - Locking drupal/automatic_updates (3.1.7)
+  - Locking drupal/autosave_form (1.9.0)
+  - Locking drupal/better_exposed_filters (7.0.4)
+  - Locking drupal/bpmn_io (2.0.4)
+  - Locking drupal/captcha (2.0.7)
+  - Locking drupal/checklistapi (2.1.6)
+  - Locking drupal/coder (8.3.28)
+  - Locking drupal/coffee (2.0.1)
+  - Locking drupal/core (11.1.1)
+  - Locking drupal/core-composer-scaffold (11.1.1)
+  - Locking drupal/core-dev (11.1.1)
+  - Locking drupal/core-project-message (11.1.1)
+  - Locking drupal/core-recommended (11.1.1)
+  - Locking drupal/crop (2.4.0)
+  - Locking drupal/ctools (4.1.0)
+  - Locking drupal/dashboard (2.0.0)
+  - Locking drupal/date_augmenter (1.1.1)
+  - Locking drupal/default_content (2.0.0-alpha3)
+  - Locking drupal/drupal_cms_accessibility_tools (1.x-dev)
+  - Locking drupal/drupal_cms_admin_ui (1.x-dev)
+  - Locking drupal/drupal_cms_ai (1.x-dev)
+  - Locking drupal/drupal_cms_analytics (1.x-dev)
+  - Locking drupal/drupal_cms_anti_spam (1.x-dev)
+  - Locking drupal/drupal_cms_authentication (1.x-dev)
+  - Locking drupal/drupal_cms_blog (1.x-dev)
+  - Locking drupal/drupal_cms_case_study (1.x-dev)
+  - Locking drupal/drupal_cms_content_type_base (1.x-dev)
+  - Locking drupal/drupal_cms_events (1.x-dev)
+  - Locking drupal/drupal_cms_forms (1.x-dev)
+  - Locking drupal/drupal_cms_google_analytics (1.x-dev)
+  - Locking drupal/drupal_cms_image (1.x-dev)
+  - Locking drupal/drupal_cms_news (1.x-dev)
+  - Locking drupal/drupal_cms_olivero (1.x-dev)
+  - Locking drupal/drupal_cms_page (1.x-dev)
+  - Locking drupal/drupal_cms_person (1.x-dev)
+  - Locking drupal/drupal_cms_privacy_basic (1.x-dev)
+  - Locking drupal/drupal_cms_project (1.x-dev)
+  - Locking drupal/drupal_cms_remote_video (1.x-dev)
+  - Locking drupal/drupal_cms_search (1.x-dev)
+  - Locking drupal/drupal_cms_seo_basic (1.x-dev)
+  - Locking drupal/drupal_cms_seo_tools (1.x-dev)
+  - Locking drupal/drupal_cms_starter (1.x-dev)
+  - Locking drupal/easy_breadcrumb (2.0.9)
+  - Locking drupal/easy_email (3.0.4)
+  - Locking drupal/easy_email_express (1.0.3)
+  - Locking drupal/easy_email_standard (1.0.2)
+  - Locking drupal/easy_email_text_format (1.0.2)
+  - Locking drupal/easy_email_theme (1.0.0)
+  - Locking drupal/easy_email_types_core (1.0.3)
+  - Locking drupal/easy_email_types_default (1.0.1)
+  - Locking drupal/eca (2.1.1)
+  - Locking drupal/eca_modeller_bpmn (2.1.1)
+  - Locking drupal/eca_ui (2.1.1)
+  - Locking drupal/editoria11y (2.2.3)
+  - Locking drupal/experience_builder (dev-0.x 6568bce)
+  - Locking drupal/field_group (3.6.0)
+  - Locking drupal/focal_point (2.1.2)
+  - Locking drupal/friendly_captcha_challenge (0.9.18)
+  - Locking drupal/friendlycaptcha (1.1.3)
+  - Locking drupal/geocoder (4.26.0)
+  - Locking drupal/geofield (1.64.0)
+  - Locking drupal/gin (4.0.2)
+  - Locking drupal/gin_toolbar (2.0.0)
+  - Locking drupal/google_tag (2.0.7)
+  - Locking drupal/honeypot (2.2.0)
+  - Locking drupal/jquery_ui (1.7.0)
+  - Locking drupal/jquery_ui_resizable (2.1.0)
+  - Locking drupal/key (1.19.0)
+  - Locking drupal/klaro (3.0.0)
+  - Locking drupal/klaro_js (3.0.1)
+  - Locking drupal/leaflet (10.2.35)
+  - Locking drupal/linkit (7.0.2)
+  - Locking drupal/login_emailusername (3.0.0)
+  - Locking drupal/mailsystem (4.5.0)
+  - Locking drupal/menu_link_attributes (1.5.0)
+  - Locking drupal/metatag (2.1.0)
+  - Locking drupal/nouislider_js (15.8.1)
+  - Locking drupal/pathauto (1.13.0)
+  - Locking drupal/project_browser (2.0.0-alpha7)
+  - Locking drupal/redirect (1.11.0)
+  - Locking drupal/robotstxt (1.6.0)
+  - Locking drupal/sam (1.3.2)
+  - Locking drupal/scheduler (2.2.0)
+  - Locking drupal/scheduler_content_moderation_integration (3.0.3)
+  - Locking drupal/search_api (1.37.0)
+  - Locking drupal/search_api_autocomplete (1.10.0)
+  - Locking drupal/search_api_exclude (2.0.3)
+  - Locking drupal/selective_better_exposed_filters (3.0.3)
+  - Locking drupal/seo_checklist (5.2.4)
+  - Locking drupal/simple_search_form (1.6.0)
+  - Locking drupal/simple_sitemap (4.2.2)
+  - Locking drupal/sitemap (2.0.0)
+  - Locking drupal/smart_date (4.2.1)
+  - Locking drupal/svg_image (3.2.1)
+  - Locking drupal/symfony_mailer_lite (2.0.2)
+  - Locking drupal/token (1.15.0)
+  - Locking drupal/token_or (2.3.0)
+  - Locking drupal/trash (3.0.10)
+  - Locking drupal/webform (6.3.0-beta1)
+  - Locking drupal/yoast_seo (2.1.0)
+  - Locking drush/drush (13.3.3)
+  - Locking egulias/email-validator (4.0.3)
+  - Locking enshrined/svg-sanitize (0.21.0)
+  - Locking geocoder-php/common-http (4.6.0)
+  - Locking geocoder-php/nominatim-provider (5.7.0)
+  - Locking goalgorilla/rtseo.js (2.1.0)
+  - Locking google/protobuf (v4.29.3)
+  - Locking grasmash/expander (3.0.1)
+  - Locking grasmash/yaml-cli (3.2.1)
+  - Locking guzzlehttp/guzzle (7.9.2)
+  - Locking guzzlehttp/promises (2.0.4)
+  - Locking guzzlehttp/psr7 (2.7.0)
+  - Locking html2text/html2text (4.3.2)
+  - Locking illuminate/collections (v11.39.0)
+  - Locking illuminate/conditionable (v11.39.0)
+  - Locking illuminate/contracts (v11.39.0)
+  - Locking illuminate/macroable (v11.39.0)
+  - Locking illuminate/support (v11.39.0)
+  - Locking itamair/geophp (1.6)
+  - Locking jquery/inputmask (5.0.9)
+  - Locking jquery/intl-tel-input (17.0.19)
+  - Locking jquery/rateit (1.1.5)
+  - Locking jquery/select2 (4.0.13)
+  - Locking jquery/textcounter (0.9.1)
+  - Locking jquery/timepicker (1.14.0)
+  - Locking justinrainbow/json-schema (5.3.0)
+  - Locking laravel/prompts (v0.1.25)
+  - Locking league/commonmark (2.6.1)
+  - Locking league/config (v1.2.0)
+  - Locking league/container (4.2.4)
+  - Locking league/html-to-markdown (5.1.1)
+  - Locking lullabot/mink-selenium2-driver (v1.7.4)
+  - Locking lullabot/php-webdriver (v2.0.6)
+  - Locking masterminds/html5 (2.9.0)
+  - Locking mck89/peast (v1.16.3)
+  - Locking mglaman/phpstan-drupal (1.3.2)
+  - Locking micheh/phpcs-gitlab (1.1.0)
+  - Locking mikey179/vfsstream (v1.6.12)
+  - Locking mtownsend/xml-to-array (2.0.0)
+  - Locking myclabs/deep-copy (1.12.1)
+  - Locking nesbot/carbon (3.8.4)
+  - Locking nette/schema (v1.3.2)
+  - Locking nette/utils (v4.0.5)
+  - Locking nikic/php-parser (v5.4.0)
+  - Locking nyholm/psr7-server (1.1.0)
+  - Locking open-telemetry/api (1.2.0)
+  - Locking open-telemetry/context (1.1.0)
+  - Locking open-telemetry/exporter-otlp (1.2.0)
+  - Locking open-telemetry/gen-otlp-protobuf (1.5.0)
+  - Locking open-telemetry/sdk (1.2.0)
+  - Locking open-telemetry/sem-conv (1.27.1)
+  - Locking openai-php/client (v0.10.3)
+  - Locking pear/archive_tar (1.5.0)
+  - Locking pear/console_getopt (v1.4.3)
+  - Locking pear/pear-core-minimal (v1.10.16)
+  - Locking pear/pear_exception (v1.0.2)
+  - Locking phar-io/manifest (2.0.4)
+  - Locking phar-io/version (3.2.1)
+  - Locking phootwork/collection (v3.2.3)
+  - Locking phootwork/lang (v3.2.3)
+  - Locking php-http/discovery (1.20.0)
+  - Locking php-http/guzzle7-adapter (1.1.0)
+  - Locking php-http/httplug (2.4.1)
+  - Locking php-http/message (1.16.2)
+  - Locking php-http/multipart-stream-builder (1.4.2)
+  - Locking php-http/promise (1.3.1)
+  - Locking php-tuf/composer-stager (v2.0.0)
+  - Locking phpdocumentor/reflection-common (2.2.0)
+  - Locking phpdocumentor/reflection-docblock (5.6.1)
+  - Locking phpdocumentor/type-resolver (1.10.0)
+  - Locking phpowermove/docblock (v4.0)
+  - Locking phpspec/prophecy (v1.20.0)
+  - Locking phpspec/prophecy-phpunit (v2.3.0)
+  - Locking phpstan/extension-installer (1.4.3)
+  - Locking phpstan/phpdoc-parser (1.33.0)
+  - Locking phpstan/phpstan (1.12.16)
+  - Locking phpstan/phpstan-deprecation-rules (1.2.1)
+  - Locking phpstan/phpstan-phpunit (1.4.2)
+  - Locking phpunit/php-code-coverage (10.1.16)
+  - Locking phpunit/php-file-iterator (4.1.0)
+  - Locking phpunit/php-invoker (4.0.0)
+  - Locking phpunit/php-text-template (3.0.1)
+  - Locking phpunit/php-timer (6.0.0)
+  - Locking phpunit/phpunit (10.5.41)
+  - Locking popperjs/popperjs (2.11.6)
+  - Locking progress-tracker/progress-tracker (2.0.7)
+  - Locking psr/cache (3.0.0)
+  - Locking psr/clock (1.0.0)
+  - Locking psr/container (2.0.2)
+  - Locking psr/event-dispatcher (1.0.0)
+  - Locking psr/http-client (1.0.3)
+  - Locking psr/http-factory (1.1.0)
+  - Locking psr/http-message (2.0)
+  - Locking psr/log (3.0.2)
+  - Locking psr/simple-cache (3.0.0)
+  - Locking psy/psysh (v0.12.7)
+  - Locking ralouphie/getallheaders (3.0.3)
+  - Locking ramsey/collection (2.0.0)
+  - Locking ramsey/uuid (4.7.6)
+  - Locking react/promise (v3.2.0)
+  - Locking revolt/event-loop (v1.0.6)
+  - Locking sebastian/cli-parser (2.0.1)
+  - Locking sebastian/code-unit (2.0.0)
+  - Locking sebastian/code-unit-reverse-lookup (3.0.0)
+  - Locking sebastian/comparator (5.0.3)
+  - Locking sebastian/complexity (3.2.0)
+  - Locking sebastian/diff (5.1.1)
+  - Locking sebastian/environment (6.1.0)
+  - Locking sebastian/exporter (5.1.2)
+  - Locking sebastian/global-state (6.0.2)
+  - Locking sebastian/lines-of-code (2.0.2)
+  - Locking sebastian/object-enumerator (5.0.0)
+  - Locking sebastian/object-reflector (3.0.0)
+  - Locking sebastian/recursion-context (5.0.0)
+  - Locking sebastian/type (4.0.0)
+  - Locking sebastian/version (4.0.1)
+  - Locking seld/jsonlint (1.11.0)
+  - Locking seld/phar-utils (1.2.1)
+  - Locking seld/signal-handler (2.0.2)
+  - Locking signature_pad/signature_pad (2.3.0)
+  - Locking simshaun/recurr (v5.0.3)
+  - Locking sirbrillig/phpcs-variable-analysis (v2.11.22)
+  - Locking slevomat/coding-standard (8.15.0)
+  - Locking squizlabs/php_codesniffer (3.11.2)
+  - Locking symfony/browser-kit (v7.2.0)
+  - Locking symfony/clock (v7.2.0)
+  - Locking symfony/console (v7.2.1)
+  - Locking symfony/css-selector (v7.2.0)
+  - Locking symfony/dependency-injection (v7.2.0)
+  - Locking symfony/deprecation-contracts (v3.5.1)
+  - Locking symfony/dom-crawler (v7.2.0)
+  - Locking symfony/error-handler (v7.2.1)
+  - Locking symfony/event-dispatcher (v7.2.0)
+  - Locking symfony/event-dispatcher-contracts (v3.5.1)
+  - Locking symfony/filesystem (v7.2.0)
+  - Locking symfony/finder (v7.2.2)
+  - Locking symfony/http-foundation (v7.2.2)
+  - Locking symfony/http-kernel (v7.2.2)
+  - Locking symfony/lock (v7.2.0)
+  - Locking symfony/mailer (v7.2.0)
+  - Locking symfony/mime (v7.2.1)
+  - Locking symfony/polyfill-ctype (v1.31.0)
+  - Locking symfony/polyfill-iconv (v1.31.0)
+  - Locking symfony/polyfill-intl-grapheme (v1.31.0)
+  - Locking symfony/polyfill-intl-idn (v1.31.0)
+  - Locking symfony/polyfill-intl-normalizer (v1.31.0)
+  - Locking symfony/polyfill-mbstring (v1.31.0)
+  - Locking symfony/polyfill-php73 (v1.31.0)
+  - Locking symfony/polyfill-php80 (v1.31.0)
+  - Locking symfony/polyfill-php81 (v1.31.0)
+  - Locking symfony/polyfill-php82 (v1.31.0)
+  - Locking symfony/polyfill-php83 (v1.31.0)
+  - Locking symfony/process (v7.2.0)
+  - Locking symfony/psr-http-message-bridge (v7.2.0)
+  - Locking symfony/routing (v7.2.0)
+  - Locking symfony/serializer (v7.2.0)
+  - Locking symfony/service-contracts (v3.5.1)
+  - Locking symfony/string (v7.2.0)
+  - Locking symfony/translation (v7.2.2)
+  - Locking symfony/translation-contracts (v3.5.1)
+  - Locking symfony/validator (v7.2.2)
+  - Locking symfony/var-dumper (v7.2.0)
+  - Locking symfony/var-exporter (v7.2.0)
+  - Locking symfony/yaml (v7.2.0)
+  - Locking tabby/tabby (12.0.3)
+  - Locking tbachert/spi (v1.0.2)
+  - Locking theseer/tokenizer (1.2.3)
+  - Locking tijsverkoyen/css-to-inline-styles (v2.3.0)
+  - Locking tippyjs/tippyjs (6.3.7)
+  - Locking twig/twig (v3.16.0)
+  - Locking voku/portable-ascii (2.0.3)
+  - Locking webflo/drupal-finder (1.3.1)
+  - Locking webmozart/assert (1.11.0)
+  - Locking willdurand/geocoder (4.6.0)
+  - Locking wpai-inc/anthropic-sdk-php (0.2.1)
+  - Locking yethee/tiktoken (0.5.1)
+Writing lock file
+Installing dependencies from lock file (including require-dev)
+Package operations: 323 installs, 0 updates, 0 removals
+  - Downloading cweagans/composer-configurable-plugin (2.0.0)
+  - Installing cweagans/composer-configurable-plugin (2.0.0): Extracting archive
+  - Downloading cweagans/composer-patches (2.0.0-beta2)
+  - Installing cweagans/composer-patches (2.0.0-beta2): Extracting archive
+  - Downloading composer/installers (v2.3.0)
+  - Downloading drupal/core-composer-scaffold (11.1.1)
+  - Downloading php-http/discovery (1.20.0)
+  - Downloading drupal/core-project-message (11.1.1)
+  - Downloading phpstan/phpstan (1.12.16)
+  - Downloading phpstan/extension-installer (1.4.3)
+  - Downloading tbachert/spi (v1.0.2)
+  - Downloading squizlabs/php_codesniffer (3.11.2)
+  - Downloading dealerdirect/phpcodesniffer-composer-installer (v1.0.0)
+  - Downloading codemirror/codemirror (5.65.12)
+  - Downloading doctrine/deprecations (1.1.4)
+  - Downloading doctrine/collections (2.2.2)
+  - Downloading commerceguys/addressing (v2.2.4)
+  - Downloading composer/ca-bundle (1.5.5)
+  - Downloading symfony/finder (v7.2.2)
+  - Downloading composer/pcre (3.3.2)
+  - Downloading composer/class-map-generator (1.5.0)
+  - Downloading composer/metadata-minifier (1.0.0)
+  - Downloading composer/spdx-licenses (1.5.8)
+  - Downloading composer/xdebug-handler (3.0.5)
+  - Downloading symfony/string (v7.2.0)
+  - Downloading symfony/deprecation-contracts (v3.5.1)
+  - Downloading symfony/service-contracts (v3.5.1)
+  - Downloading symfony/console (v7.2.1)
+  - Downloading doctrine/inflector (2.0.10)
+  - Downloading doctrine/instantiator (2.0.0)
+  - Downloading dragonmantank/cron-expression (v3.4.0)
+  - Downloading twig/twig (v3.16.0)
+  - Downloading symfony/yaml (v7.2.0)
+  - Downloading symfony/translation-contracts (v3.5.1)
+  - Downloading symfony/validator (v7.2.2)
+  - Downloading symfony/serializer (v7.2.0)
+  - Downloading symfony/routing (v7.2.0)
+  - Downloading symfony/http-foundation (v7.2.2)
+  - Downloading symfony/psr-http-message-bridge (v7.2.0)
+  - Downloading symfony/process (v7.2.0)
+  - Downloading symfony/polyfill-iconv (v1.31.0)
+  - Downloading symfony/mime (v7.2.1)
+  - Downloading symfony/event-dispatcher-contracts (v3.5.1)
+  - Downloading symfony/event-dispatcher (v7.2.0)
+  - Downloading doctrine/lexer (2.1.1)
+  - Downloading egulias/email-validator (4.0.3)
+  - Downloading symfony/mailer (v7.2.0)
+  - Downloading symfony/var-dumper (v7.2.0)
+  - Downloading symfony/error-handler (v7.2.1)
+  - Downloading symfony/http-kernel (v7.2.2)
+  - Downloading symfony/filesystem (v7.2.0)
+  - Downloading symfony/var-exporter (v7.2.0)
+  - Downloading symfony/dependency-injection (v7.2.0)
+  - Downloading sebastian/diff (5.1.1)
+  - Downloading revolt/event-loop (v1.0.6)
+  - Downloading php-tuf/composer-stager (v2.0.0)
+  - Downloading pear/pear_exception (v1.0.2)
+  - Downloading pear/console_getopt (v1.4.3)
+  - Downloading pear/pear-core-minimal (v1.10.16)
+  - Downloading pear/archive_tar (1.5.0)
+  - Downloading mck89/peast (v1.16.3)
+  - Downloading masterminds/html5 (2.9.0)
+  - Downloading psr/cache (3.0.0)
+  - Downloading doctrine/annotations (2.0.2)
+  - Downloading asm89/stack-cors (v2.2.0)
+  - Downloading drupal/core (11.1.1)
+  - Downloading drupal/coffee (2.0.1)
+  - Downloading symfony/lock (v7.2.0)
+  - Downloading symfony/dom-crawler (v7.2.0)
+  - Downloading symfony/css-selector (v7.2.0)
+  - Downloading symfony/browser-kit (v7.2.0)
+  - Downloading sebastian/version (4.0.1)
+  - Downloading sebastian/type (4.0.0)
+  - Downloading sebastian/recursion-context (5.0.0)
+  - Downloading sebastian/object-reflector (3.0.0)
+  - Downloading sebastian/object-enumerator (5.0.0)
+  - Downloading sebastian/global-state (6.0.2)
+  - Downloading sebastian/exporter (5.1.2)
+  - Downloading sebastian/environment (6.1.0)
+  - Downloading sebastian/comparator (5.0.3)
+  - Downloading sebastian/code-unit (2.0.0)
+  - Downloading sebastian/cli-parser (2.0.1)
+  - Downloading phpunit/php-timer (6.0.0)
+  - Downloading phpunit/php-text-template (3.0.1)
+  - Downloading phpunit/php-invoker (4.0.0)
+  - Downloading phpunit/php-file-iterator (4.1.0)
+  - Downloading theseer/tokenizer (1.2.3)
+  - Downloading nikic/php-parser (v5.4.0)
+  - Downloading sebastian/lines-of-code (2.0.2)
+  - Downloading sebastian/complexity (3.2.0)
+  - Downloading sebastian/code-unit-reverse-lookup (3.0.0)
+  - Downloading phpunit/php-code-coverage (10.1.16)
+  - Downloading phar-io/version (3.2.1)
+  - Downloading phar-io/manifest (2.0.4)
+  - Downloading myclabs/deep-copy (1.12.1)
+  - Downloading phpunit/phpunit (10.5.41)
+  - Downloading phpstan/phpstan-phpunit (1.4.2)
+  - Downloading phpstan/phpdoc-parser (1.33.0)
+  - Downloading phpdocumentor/reflection-common (2.2.0)
+  - Downloading phpdocumentor/type-resolver (1.10.0)
+  - Downloading phpdocumentor/reflection-docblock (5.6.1)
+  - Downloading phpspec/prophecy (v1.20.0)
+  - Downloading phpspec/prophecy-phpunit (v2.3.0)
+  - Downloading php-http/promise (1.3.1)
+  - Downloading php-http/httplug (2.4.1)
+  - Downloading php-http/guzzle7-adapter (1.1.0)
+  - Downloading symfony/polyfill-php82 (v1.31.0)
+  - Downloading ramsey/collection (2.0.0)
+  - Downloading brick/math (0.12.1)
+  - Downloading ramsey/uuid (4.7.6)
+  - Downloading open-telemetry/sem-conv (1.27.1)
+  - Downloading open-telemetry/context (1.1.0)
+  - Downloading open-telemetry/api (1.2.0)
+  - Downloading nyholm/psr7-server (1.1.0)
+  - Downloading open-telemetry/sdk (1.2.0)
+  - Downloading google/protobuf (v4.29.3)
+  - Downloading open-telemetry/gen-otlp-protobuf (1.5.0)
+  - Downloading open-telemetry/exporter-otlp (1.2.0)
+  - Downloading mikey179/vfsstream (v1.6.12)
+  - Downloading micheh/phpcs-gitlab (1.1.0)
+  - Downloading phpstan/phpstan-deprecation-rules (1.2.1)
+  - Downloading mglaman/phpstan-drupal (1.3.2)
+  - Downloading lullabot/php-webdriver (v2.0.6)
+  - Downloading behat/mink (v1.12.0)
+  - Downloading lullabot/mink-selenium2-driver (v1.7.4)
+  - Downloading justinrainbow/json-schema (5.3.0)
+  - Downloading slevomat/coding-standard (8.15.0)
+  - Downloading sirbrillig/phpcs-variable-analysis (v2.11.22)
+  - Downloading drupal/coder (8.3.28)
+  - Downloading seld/signal-handler (2.0.2)
+  - Downloading seld/phar-utils (1.2.1)
+  - Downloading seld/jsonlint (1.11.0)
+  - Downloading react/promise (v3.2.0)
+  - Downloading composer/composer (2.8.5)
+  - Downloading colinodell/psr-testlogger (v1.3.0)
+  - Downloading behat/mink-browserkit-driver (v2.2.0)
+  - Downloading drupal/date_augmenter (1.1.1)
+  - Downloading drupal/default_content (2.0.0-alpha3)
+  - Downloading drupal/editoria11y (2.2.3)
+  - Downloading drupal/trash (3.0.10)
+  - Downloading drupal/token (1.15.0)
+  - Downloading drupal/scheduler (2.2.0)
+  - Downloading drupal/scheduler_content_moderation_integration (3.0.3)
+  - Downloading drupal/ctools (4.1.0)
+  - Downloading drupal/pathauto (1.13.0)
+  - Downloading drupal/linkit (7.0.2)
+  - Downloading mtownsend/xml-to-array (2.0.0)
+  - Downloading drupal/eca (2.1.1)
+  - Downloading enshrined/svg-sanitize (0.21.0)
+  - Downloading drupal/svg_image (3.2.1)
+  - Downloading drupal/crop (2.4.0)
+  - Downloading drupal/focal_point (2.1.2)
+  - Downloading drupal/bpmn_io (2.0.4)
+  - Downloading drupal/autosave_form (1.9.0)
+  - Downloading nette/utils (v4.0.5)
+  - Downloading nette/schema (v1.3.2)
+  - Downloading league/config (v1.2.0)
+  - Downloading league/commonmark (2.6.1)
+  - Downloading drupal/menu_link_attributes (1.5.0)
+  - Downloading drupal/klaro_js (3.0.1)
+  - Downloading drupal/klaro (3.0.0)
+  - Downloading php-http/multipart-stream-builder (1.4.2)
+  - Downloading openai-php/client (v0.10.3)
+  - Downloading drupal/key (1.19.0)
+  - Downloading yethee/tiktoken (0.5.1)
+  - Downloading league/html-to-markdown (5.1.1)
+  - Downloading drupal/ai (1.0.2)
+  - Downloading drupal/ai_provider_openai (1.0.1)
+  - Downloading voku/portable-ascii (2.0.3)
+  - Downloading symfony/translation (v7.2.2)
+  - Downloading psr/clock (1.0.0)
+  - Downloading symfony/clock (v7.2.0)
+  - Downloading carbonphp/carbon-doctrine-types (3.2.0)
+  - Downloading nesbot/carbon (3.8.4)
+  - Downloading illuminate/macroable (v11.39.0)
+  - Downloading psr/simple-cache (3.0.0)
+  - Downloading illuminate/contracts (v11.39.0)
+  - Downloading illuminate/conditionable (v11.39.0)
+  - Downloading illuminate/collections (v11.39.0)
+  - Downloading illuminate/support (v11.39.0)
+  - Downloading wpai-inc/anthropic-sdk-php (0.2.1)
+  - Downloading drupal/ai_provider_anthropic (1.0.0)
+  - Downloading drupal/ai_image_alt_text (1.0.0)
+  - Downloading drupal/ai_agents (1.0.1)
+  - Downloading drupal/google_tag (2.0.7)
+  - Downloading drupal/nouislider_js (15.8.1)
+  - Downloading drupal/better_exposed_filters (7.0.4)
+  - Downloading drupal/selective_better_exposed_filters (3.0.3)
+  - Downloading drupal/add_content_by_bundle (1.2.2)
+  - Downloading willdurand/geocoder (4.6.0)
+  - Downloading geocoder-php/common-http (4.6.0)
+  - Downloading geocoder-php/nominatim-provider (5.7.0)
+  - Downloading simshaun/recurr (v5.0.3)
+  - Downloading drupal/smart_date (4.2.1)
+  - Downloading itamair/geophp (1.6)
+  - Downloading drupal/geofield (1.64.0)
+  - Downloading drupal/leaflet (10.2.35)
+  - Downloading clue/stream-filter (v1.7.0)
+  - Downloading php-http/message (1.16.2)
+  - Downloading davedevelopment/stiphle (0.9.4)
+  - Downloading drupal/geocoder (4.26.0)
+  - Downloading drupal/addtocal_augment (1.2.3)
+  - Downloading drupal/address (2.0.3)
+  - Downloading drupal/webform (6.3.0-beta1)
+  - Downloading drupal/honeypot (2.2.0)
+  - Downloading drupal/captcha (2.0.7)
+  - Downloading drupal/friendlycaptcha (1.1.3)
+  - Downloading drupal/friendly_captcha_challenge (0.9.18)
+  - Downloading goalgorilla/rtseo.js (2.1.0)
+  - Downloading drupal/metatag (2.1.0)
+  - Downloading drupal/yoast_seo (2.1.0)
+  - Downloading drupal/token_or (2.3.0)
+  - Downloading drupal/sitemap (2.0.0)
+  - Downloading drupal/simple_sitemap (4.2.2)
+  - Downloading drupal/checklistapi (2.1.6)
+  - Downloading drupal/seo_checklist (5.2.4)
+  - Downloading drupal/robotstxt (1.6.0)
+  - Downloading drupal/field_group (3.6.0)
+  - Downloading drupal/project_browser (2.0.0-alpha7)
+  - Downloading drupal/easy_email_text_format (1.0.2)
+  - Downloading drupal/jquery_ui (1.7.0)
+  - Downloading drupal/jquery_ui_resizable (2.1.0)
+  - Downloading drupal/easy_email (3.0.4)
+  - Downloading drupal/easy_email_types_default (1.0.1)
+  - Downloading drupal/easy_email_types_core (1.0.3)
+  - Downloading tijsverkoyen/css-to-inline-styles (v2.3.0)
+  - Downloading html2text/html2text (4.3.2)
+  - Downloading drupal/mailsystem (4.5.0)
+  - Downloading drupal/symfony_mailer_lite (2.0.2)
+  - Downloading drupal/easy_email_theme (1.0.0)
+  - Downloading drupal/easy_email_standard (1.0.2)
+  - Downloading drupal/easy_email_express (1.0.3)
+  - Downloading drupal/redirect (1.11.0)
+  - Downloading drupal/easy_breadcrumb (2.0.9)
+  - Downloading drupal/simple_search_form (1.6.0)
+  - Downloading drupal/search_api (1.37.0)
+  - Downloading drupal/search_api_exclude (2.0.3)
+  - Downloading drupal/search_api_autocomplete (1.10.0)
+  - Downloading drupal/login_emailusername (3.0.0)
+  - Downloading drupal/sam (1.3.2)
+  - Downloading drupal/gin_toolbar (2.0.0)
+  - Downloading drupal/gin (4.0.2)
+  - Downloading drupal/dashboard (2.0.0)
+  - Downloading drupal/automatic_updates (3.1.7)
+  - Syncing drupal/experience_builder (dev-0.x 6568bce) into cache
+  - Downloading psy/psysh (v0.12.7)
+  - Downloading league/container (4.2.4)
+  - Downloading laravel/prompts (v0.1.25)
+  - Downloading grasmash/yaml-cli (3.2.1)
+  - Downloading grasmash/expander (3.0.1)
+  - Downloading consolidation/config (3.1.0)
+  - Downloading consolidation/site-alias (4.1.1)
+  - Downloading consolidation/site-process (5.4.2)
+  - Downloading consolidation/annotated-command (4.10.1)
+  - Downloading consolidation/robo (5.1.0)
+  - Downloading chi-teck/drupal-code-generator (4.1.0)
+  - Downloading drush/drush (13.3.3)
+  - Downloading jquery/inputmask (5.0.9)
+  - Downloading jquery/intl-tel-input (17.0.19)
+  - Downloading jquery/rateit (1.1.5)
+  - Downloading jquery/select2 (4.0.13)
+  - Downloading jquery/textcounter (0.9.1)
+  - Downloading jquery/timepicker (1.14.0)
+  - Downloading popperjs/popperjs (2.11.6)
+  - Downloading progress-tracker/progress-tracker (2.0.7)
+  - Downloading signature_pad/signature_pad (2.3.0)
+  - Downloading tabby/tabby (12.0.3)
+  - Downloading tippyjs/tippyjs (6.3.7)
+patches.lock.json does not exist. Creating a new patches.lock.json.
+  - Resolving patches from root package.
+  - Resolving patches from dependencies.
+  - Installing composer/installers (v2.3.0): Extracting archive
+  - Installing drupal/core-composer-scaffold (11.1.1): Extracting archive
+  - Installing php-http/discovery (1.20.0): Extracting archive
+  - Installing drupal/core-project-message (11.1.1): Extracting archive
+  - Installing composer/semver (3.4.3): Extracting archive
+  - Installing phpstan/phpstan (1.12.16): Extracting archive
+  - Installing phpstan/extension-installer (1.4.3): Extracting archive
+  - Installing tbachert/spi (v1.0.2): Extracting archive
+  - Installing squizlabs/php_codesniffer (3.11.2): Extracting archive
+  - Installing dealerdirect/phpcodesniffer-composer-installer (v1.0.0): Extracting archive
+  - Installing codemirror/codemirror (5.65.12): Extracting archive
+  - Installing doctrine/deprecations (1.1.4): Extracting archive
+  - Installing doctrine/collections (2.2.2): Extracting archive
+  - Installing commerceguys/addressing (v2.2.4): Extracting archive
+  - Installing composer/ca-bundle (1.5.5): Extracting archive
+  - Installing symfony/finder (v7.2.2): Extracting archive
+  - Installing composer/pcre (3.3.2): Extracting archive
+  - Installing composer/class-map-generator (1.5.0): Extracting archive
+  - Installing composer/metadata-minifier (1.0.0): Extracting archive
+  - Installing composer/spdx-licenses (1.5.8): Extracting archive
+  - Installing psr/log (3.0.2): Extracting archive
+  - Installing composer/xdebug-handler (3.0.5): Extracting archive
+  - Installing symfony/polyfill-mbstring (v1.31.0): Extracting archive
+  - Installing symfony/polyfill-intl-normalizer (v1.31.0): Extracting archive
+  - Installing symfony/polyfill-intl-grapheme (v1.31.0): Extracting archive
+  - Installing symfony/polyfill-ctype (v1.31.0): Extracting archive
+  - Installing symfony/string (v7.2.0): Extracting archive
+  - Installing symfony/deprecation-contracts (v3.5.1): Extracting archive
+  - Installing psr/container (2.0.2): Extracting archive
+  - Installing symfony/service-contracts (v3.5.1): Extracting archive
+  - Installing symfony/console (v7.2.1): Extracting archive
+  - Installing consolidation/log (3.1.0): Extracting archive
+  - Installing doctrine/inflector (2.0.10): Extracting archive
+  - Installing doctrine/instantiator (2.0.0): Extracting archive
+  - Installing webmozart/assert (1.11.0): Extracting archive
+  - Installing dragonmantank/cron-expression (v3.4.0): Extracting archive
+  - Installing symfony/polyfill-php81 (v1.31.0): Extracting archive
+  - Installing twig/twig (v3.16.0): Extracting archive
+  - Installing symfony/yaml (v7.2.0): Extracting archive
+  - Installing symfony/translation-contracts (v3.5.1): Extracting archive
+  - Installing symfony/polyfill-php83 (v1.31.0): Extracting archive
+  - Installing symfony/validator (v7.2.2): Extracting archive
+  - Installing symfony/serializer (v7.2.0): Extracting archive
+  - Installing symfony/routing (v7.2.0): Extracting archive
+  - Installing symfony/http-foundation (v7.2.2): Extracting archive
+  - Installing psr/http-message (2.0): Extracting archive
+  - Installing symfony/psr-http-message-bridge (v7.2.0): Extracting archive
+  - Installing symfony/process (v7.2.0): Extracting archive
+  - Installing symfony/polyfill-iconv (v1.31.0): Extracting archive
+  - Installing symfony/polyfill-intl-idn (v1.31.0): Extracting archive
+  - Installing symfony/mime (v7.2.1): Extracting archive
+  - Installing psr/event-dispatcher (1.0.0): Extracting archive
+  - Installing symfony/event-dispatcher-contracts (v3.5.1): Extracting archive
+  - Installing symfony/event-dispatcher (v7.2.0): Extracting archive
+  - Installing doctrine/lexer (2.1.1): Extracting archive
+  - Installing egulias/email-validator (4.0.3): Extracting archive
+  - Installing symfony/mailer (v7.2.0): Extracting archive
+  - Installing symfony/var-dumper (v7.2.0): Extracting archive
+  - Installing symfony/error-handler (v7.2.1): Extracting archive
+  - Installing symfony/http-kernel (v7.2.2): Extracting archive
+  - Installing symfony/filesystem (v7.2.0): Extracting archive
+  - Installing symfony/var-exporter (v7.2.0): Extracting archive
+  - Installing symfony/dependency-injection (v7.2.0): Extracting archive
+  - Installing sebastian/diff (5.1.1): Extracting archive
+  - Installing revolt/event-loop (v1.0.6): Extracting archive
+  - Installing php-tuf/composer-stager (v2.0.0): Extracting archive
+  - Installing pear/pear_exception (v1.0.2): Extracting archive
+  - Installing pear/console_getopt (v1.4.3): Extracting archive
+  - Installing pear/pear-core-minimal (v1.10.16): Extracting archive
+  - Installing pear/archive_tar (1.5.0): Extracting archive
+  - Installing mck89/peast (v1.16.3): Extracting archive
+  - Installing masterminds/html5 (2.9.0): Extracting archive
+  - Installing ralouphie/getallheaders (3.0.3): Extracting archive
+  - Installing psr/http-factory (1.1.0): Extracting archive
+  - Installing guzzlehttp/psr7 (2.7.0): Extracting archive
+  - Installing psr/http-client (1.0.3): Extracting archive
+  - Installing guzzlehttp/promises (2.0.4): Extracting archive
+  - Installing guzzlehttp/guzzle (7.9.2): Extracting archive
+  - Installing psr/cache (3.0.0): Extracting archive
+  - Installing doctrine/annotations (2.0.2): Extracting archive
+  - Installing asm89/stack-cors (v2.2.0): Extracting archive
+  - Installing drupal/core (11.1.1): Extracting archive
+  - Installing drupal/coffee (2.0.1): Extracting archive
+  - Installing symfony/lock (v7.2.0): Extracting archive
+  - Installing symfony/dom-crawler (v7.2.0): Extracting archive
+  - Installing symfony/css-selector (v7.2.0): Extracting archive
+  - Installing symfony/browser-kit (v7.2.0): Extracting archive
+  - Installing sebastian/version (4.0.1): Extracting archive
+  - Installing sebastian/type (4.0.0): Extracting archive
+  - Installing sebastian/recursion-context (5.0.0): Extracting archive
+  - Installing sebastian/object-reflector (3.0.0): Extracting archive
+  - Installing sebastian/object-enumerator (5.0.0): Extracting archive
+  - Installing sebastian/global-state (6.0.2): Extracting archive
+  - Installing sebastian/exporter (5.1.2): Extracting archive
+  - Installing sebastian/environment (6.1.0): Extracting archive
+  - Installing sebastian/comparator (5.0.3): Extracting archive
+  - Installing sebastian/code-unit (2.0.0): Extracting archive
+  - Installing sebastian/cli-parser (2.0.1): Extracting archive
+  - Installing phpunit/php-timer (6.0.0): Extracting archive
+  - Installing phpunit/php-text-template (3.0.1): Extracting archive
+  - Installing phpunit/php-invoker (4.0.0): Extracting archive
+  - Installing phpunit/php-file-iterator (4.1.0): Extracting archive
+  - Installing theseer/tokenizer (1.2.3): Extracting archive
+  - Installing nikic/php-parser (v5.4.0): Extracting archive
+  - Installing sebastian/lines-of-code (2.0.2): Extracting archive
+  - Installing sebastian/complexity (3.2.0): Extracting archive
+  - Installing sebastian/code-unit-reverse-lookup (3.0.0): Extracting archive
+  - Installing phpunit/php-code-coverage (10.1.16): Extracting archive
+  - Installing phar-io/version (3.2.1): Extracting archive
+  - Installing phar-io/manifest (2.0.4): Extracting archive
+  - Installing myclabs/deep-copy (1.12.1): Extracting archive
+  - Installing phpunit/phpunit (10.5.41): Extracting archive
+  - Installing phpstan/phpstan-phpunit (1.4.2): Extracting archive
+  - Installing phpstan/phpdoc-parser (1.33.0): Extracting archive
+  - Installing phpdocumentor/reflection-common (2.2.0): Extracting archive
+  - Installing phpdocumentor/type-resolver (1.10.0): Extracting archive
+  - Installing phpdocumentor/reflection-docblock (5.6.1): Extracting archive
+  - Installing phpspec/prophecy (v1.20.0): Extracting archive
+  - Installing phpspec/prophecy-phpunit (v2.3.0): Extracting archive
+  - Installing php-http/promise (1.3.1): Extracting archive
+  - Installing php-http/httplug (2.4.1): Extracting archive
+  - Installing php-http/guzzle7-adapter (1.1.0): Extracting archive
+  - Installing symfony/polyfill-php82 (v1.31.0): Extracting archive
+  - Installing ramsey/collection (2.0.0): Extracting archive
+  - Installing brick/math (0.12.1): Extracting archive
+  - Installing ramsey/uuid (4.7.6): Extracting archive
+  - Installing open-telemetry/sem-conv (1.27.1): Extracting archive
+  - Installing open-telemetry/context (1.1.0): Extracting archive
+  - Installing open-telemetry/api (1.2.0): Extracting archive
+  - Installing nyholm/psr7-server (1.1.0): Extracting archive
+  - Installing open-telemetry/sdk (1.2.0): Extracting archive
+  - Installing google/protobuf (v4.29.3): Extracting archive
+  - Installing open-telemetry/gen-otlp-protobuf (1.5.0): Extracting archive
+  - Installing open-telemetry/exporter-otlp (1.2.0): Extracting archive
+  - Installing mikey179/vfsstream (v1.6.12): Extracting archive
+  - Installing micheh/phpcs-gitlab (1.1.0): Extracting archive
+  - Installing webflo/drupal-finder (1.3.1): Extracting archive
+  - Installing phpstan/phpstan-deprecation-rules (1.2.1): Extracting archive
+  - Installing mglaman/phpstan-drupal (1.3.2): Extracting archive
+  - Installing lullabot/php-webdriver (v2.0.6): Extracting archive
+  - Installing behat/mink (v1.12.0): Extracting archive
+  - Installing lullabot/mink-selenium2-driver (v1.7.4): Extracting archive
+  - Installing justinrainbow/json-schema (5.3.0): Extracting archive
+  - Installing slevomat/coding-standard (8.15.0): Extracting archive
+  - Installing sirbrillig/phpcs-variable-analysis (v2.11.22): Extracting archive
+  - Installing drupal/coder (8.3.28): Extracting archive
+  - Installing symfony/polyfill-php80 (v1.31.0): Extracting archive
+  - Installing symfony/polyfill-php73 (v1.31.0): Extracting archive
+  - Installing seld/signal-handler (2.0.2): Extracting archive
+  - Installing seld/phar-utils (1.2.1): Extracting archive
+  - Installing seld/jsonlint (1.11.0): Extracting archive
+  - Installing react/promise (v3.2.0): Extracting archive
+  - Installing composer/composer (2.8.5): Extracting archive
+  - Installing colinodell/psr-testlogger (v1.3.0): Extracting archive
+  - Installing behat/mink-browserkit-driver (v2.2.0): Extracting archive
+  - Installing drupal/core-dev (11.1.1)
+  - Installing drupal/core-recommended (11.1.1)
+  - Installing drupal/date_augmenter (1.1.1): Extracting archive
+  - Installing drupal/default_content (2.0.0-alpha3): Extracting archive
+  - Installing drupal/editoria11y (2.2.3): Extracting archive
+  - Installing drupal/trash (3.0.10): Extracting archive
+  - Installing drupal/token (1.15.0): Extracting archive
+  - Installing drupal/scheduler (2.2.0): Extracting archive
+  - Installing drupal/scheduler_content_moderation_integration (3.0.3): Extracting archive
+  - Installing drupal/ctools (4.1.0): Extracting archive
+  - Installing drupal/pathauto (1.13.0): Extracting archive
+  - Installing drupal/linkit (7.0.2): Extracting archive
+  - Installing mtownsend/xml-to-array (2.0.0): Extracting archive
+  - Installing drupal/eca (2.1.1): Extracting archive
+  - Installing enshrined/svg-sanitize (0.21.0): Extracting archive
+  - Installing drupal/svg_image (3.2.1): Extracting archive
+  - Installing drupal/crop (2.4.0): Extracting archive
+  - Installing drupal/focal_point (2.1.2): Extracting archive
+  - Installing drupal/drupal_cms_image (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_image
+  - Installing drupal/eca_ui (2.1.1)
+  - Installing drupal/eca_modeller_bpmn (2.1.1)
+  - Installing drupal/bpmn_io (2.0.4): Extracting archive
+  - Installing drupal/autosave_form (1.9.0): Extracting archive
+  - Installing drupal/drupal_cms_content_type_base (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_content_type_base
+  - Installing drupal/drupal_cms_page (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_page
+  - Installing drupal/drupal_cms_accessibility_tools (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_accessibility_tools
+  - Installing nette/utils (v4.0.5): Extracting archive
+  - Installing nette/schema (v1.3.2): Extracting archive
+  - Installing dflydev/dot-access-data (v3.0.3): Extracting archive
+  - Installing league/config (v1.2.0): Extracting archive
+  - Installing league/commonmark (2.6.1): Extracting archive
+  - Installing drupal/menu_link_attributes (1.5.0): Extracting archive
+  - Installing drupal/klaro_js (3.0.1): Extracting archive
+  - Installing drupal/klaro (3.0.0): Extracting archive
+  - Installing drupal/drupal_cms_privacy_basic (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_privacy_basic
+  - Installing php-http/multipart-stream-builder (1.4.2): Extracting archive
+  - Installing openai-php/client (v0.10.3): Extracting archive
+  - Installing drupal/key (1.19.0): Extracting archive
+  - Installing yethee/tiktoken (0.5.1): Extracting archive
+  - Installing league/html-to-markdown (5.1.1): Extracting archive
+  - Installing drupal/ai (1.0.2): Extracting archive
+  - Installing drupal/ai_provider_openai (1.0.1): Extracting archive
+  - Installing voku/portable-ascii (2.0.3): Extracting archive
+  - Installing symfony/translation (v7.2.2): Extracting archive
+  - Installing psr/clock (1.0.0): Extracting archive
+  - Installing symfony/clock (v7.2.0): Extracting archive
+  - Installing carbonphp/carbon-doctrine-types (3.2.0): Extracting archive
+  - Installing nesbot/carbon (3.8.4): Extracting archive
+  - Installing illuminate/macroable (v11.39.0): Extracting archive
+  - Installing psr/simple-cache (3.0.0): Extracting archive
+  - Installing illuminate/contracts (v11.39.0): Extracting archive
+  - Installing illuminate/conditionable (v11.39.0): Extracting archive
+  - Installing illuminate/collections (v11.39.0): Extracting archive
+  - Installing illuminate/support (v11.39.0): Extracting archive
+  - Installing wpai-inc/anthropic-sdk-php (0.2.1): Extracting archive
+  - Installing drupal/ai_provider_anthropic (1.0.0): Extracting archive
+  - Installing drupal/ai_image_alt_text (1.0.0): Extracting archive
+  - Installing drupal/ai_agents (1.0.1): Extracting archive
+  - Installing drupal/drupal_cms_ai (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_ai
+  - Installing drupal/google_tag (2.0.7): Extracting archive
+  - Installing drupal/drupal_cms_google_analytics (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_google_analytics
+  - Installing drupal/drupal_cms_analytics (1.x-dev)
+  - Installing drupal/nouislider_js (15.8.1): Extracting archive
+  - Installing drupal/better_exposed_filters (7.0.4): Extracting archive
+  - Installing drupal/selective_better_exposed_filters (3.0.3): Extracting archive
+  - Installing drupal/add_content_by_bundle (1.2.2): Extracting archive
+  - Installing drupal/drupal_cms_blog (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_blog
+  - Installing drupal/drupal_cms_case_study (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_case_study
+  - Installing willdurand/geocoder (4.6.0): Extracting archive
+  - Installing geocoder-php/common-http (4.6.0): Extracting archive
+  - Installing geocoder-php/nominatim-provider (5.7.0): Extracting archive
+  - Installing simshaun/recurr (v5.0.3): Extracting archive
+  - Installing drupal/smart_date (4.2.1): Extracting archive
+  - Installing itamair/geophp (1.6): Extracting archive
+  - Installing drupal/geofield (1.64.0): Extracting archive
+  - Installing drupal/leaflet (10.2.35): Extracting archive
+  - Installing clue/stream-filter (v1.7.0): Extracting archive
+  - Installing php-http/message (1.16.2): Extracting archive
+  - Installing davedevelopment/stiphle (0.9.4): Extracting archive
+  - Installing drupal/geocoder (4.26.0): Extracting archive
+  - Installing drupal/addtocal_augment (1.2.3): Extracting archive
+  - Installing drupal/address (2.0.3): Extracting archive
+  - Installing drupal/drupal_cms_events (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_events
+  - Installing drupal/webform (6.3.0-beta1): Extracting archive
+  - Installing drupal/honeypot (2.2.0): Extracting archive
+  - Installing drupal/captcha (2.0.7): Extracting archive
+  - Installing drupal/friendlycaptcha (1.1.3): Extracting archive
+  - Installing drupal/friendly_captcha_challenge (0.9.18): Extracting archive
+  - Installing drupal/drupal_cms_anti_spam (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_anti_spam
+  - Installing drupal/drupal_cms_forms (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_forms
+  - Installing drupal/drupal_cms_news (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_news
+  - Installing drupal/drupal_cms_person (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_person
+  - Installing drupal/drupal_cms_project (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_project
+  - Installing goalgorilla/rtseo.js (2.1.0): Extracting archive
+  - Installing drupal/metatag (2.1.0): Extracting archive
+  - Installing drupal/yoast_seo (2.1.0): Extracting archive
+  - Installing drupal/token_or (2.3.0): Extracting archive
+  - Installing drupal/sitemap (2.0.0): Extracting archive
+  - Installing drupal/simple_sitemap (4.2.2): Extracting archive
+  - Installing drupal/checklistapi (2.1.6): Extracting archive
+  - Installing drupal/seo_checklist (5.2.4): Extracting archive
+  - Installing drupal/robotstxt (1.6.0): Extracting archive
+  - Installing drupal/field_group (3.6.0): Extracting archive
+  - Installing drupal/drupal_cms_seo_tools (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_seo_tools
+  - Installing drupal/project_browser (2.0.0-alpha7): Extracting archive
+  - Installing drupal/easy_email_text_format (1.0.2): Extracting archive
+  - Installing drupal/jquery_ui (1.7.0): Extracting archive
+  - Installing drupal/jquery_ui_resizable (2.1.0): Extracting archive
+  - Installing drupal/easy_email (3.0.4): Extracting archive
+  - Installing drupal/easy_email_types_default (1.0.1): Extracting archive
+  - Installing drupal/easy_email_types_core (1.0.3): Extracting archive
+  - Installing tijsverkoyen/css-to-inline-styles (v2.3.0): Extracting archive
+  - Installing html2text/html2text (4.3.2): Extracting archive
+  - Installing drupal/mailsystem (4.5.0): Extracting archive
+  - Installing drupal/symfony_mailer_lite (2.0.2): Extracting archive
+  - Installing drupal/easy_email_theme (1.0.0): Extracting archive
+  - Installing drupal/easy_email_standard (1.0.2): Extracting archive
+  - Installing drupal/easy_email_express (1.0.3): Extracting archive
+  - Installing drupal/redirect (1.11.0): Extracting archive
+  - Installing drupal/easy_breadcrumb (2.0.9): Extracting archive
+  - Installing drupal/drupal_cms_seo_basic (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_seo_basic
+  - Installing drupal/simple_search_form (1.6.0): Extracting archive
+  - Installing drupal/search_api (1.37.0): Extracting archive
+  - Installing drupal/search_api_exclude (2.0.3): Extracting archive
+  - Installing drupal/search_api_autocomplete (1.10.0): Extracting archive
+  - Installing drupal/drupal_cms_search (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_search
+  - Installing drupal/drupal_cms_remote_video (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_remote_video
+  - Installing drupal/drupal_cms_olivero (1.x-dev): Symlinking from repos/drupal/drupal_cms/drupal_cms_olivero
+  - Installing drupal/login_emailusername (3.0.0): Extracting archive
+  - Installing drupal/drupal_cms_authentication (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_authentication
+  - Installing drupal/sam (1.3.2): Extracting archive
+  - Installing drupal/gin_toolbar (2.0.0): Extracting archive
+  - Installing drupal/gin (4.0.2): Extracting archive
+  - Installing drupal/drupal_cms_admin_ui (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_admin_ui
+  - Installing drupal/dashboard (2.0.0): Extracting archive
+  - Installing drupal/automatic_updates (3.1.7): Extracting archive
+  - Installing drupal/drupal_cms_starter (1.x-dev): Symlinking from repos/drupal/drupal_cms/recipes/drupal_cms_starter
+  - Installing drupal/experience_builder (dev-0.x 6568bce): Cloning 6568bce0e4 from cache
+  - Installing psy/psysh (v0.12.7): Extracting archive
+  - Installing league/container (4.2.4): Extracting archive
+  - Installing laravel/prompts (v0.1.25): Extracting archive
+  - Installing grasmash/yaml-cli (3.2.1): Extracting archive
+  - Installing grasmash/expander (3.0.1): Extracting archive
+  - Installing consolidation/config (3.1.0): Extracting archive
+  - Installing consolidation/site-alias (4.1.1): Extracting archive
+  - Installing consolidation/site-process (5.4.2): Extracting archive
+  - Installing phootwork/lang (v3.2.3): Extracting archive
+  - Installing phootwork/collection (v3.2.3): Extracting archive
+  - Installing phpowermove/docblock (v4.0): Extracting archive
+  - Installing consolidation/output-formatters (4.6.0): Extracting archive
+  - Installing consolidation/annotated-command (4.10.1): Extracting archive
+  - Installing consolidation/robo (5.1.0): Extracting archive
+  - Installing consolidation/filter-via-dot-access-data (2.0.2): Extracting archive
+  - Installing chi-teck/drupal-code-generator (4.1.0): Extracting archive
+  - Installing drush/drush (13.3.3): Extracting archive
+  - Installing jquery/inputmask (5.0.9): Extracting archive
+  - Installing jquery/intl-tel-input (17.0.19): Extracting archive
+  - Installing jquery/rateit (1.1.5): Extracting archive
+  - Installing jquery/select2 (4.0.13): Extracting archive
+  - Installing jquery/textcounter (0.9.1): Extracting archive
+  - Installing jquery/timepicker (1.14.0): Extracting archive
+  - Installing popperjs/popperjs (2.11.6): Extracting archive
+  - Installing progress-tracker/progress-tracker (2.0.7): Extracting archive
+  - Installing signature_pad/signature_pad (2.3.0): Extracting archive
+  - Installing tabby/tabby (12.0.3): Extracting archive
+  - Installing tippyjs/tippyjs (6.3.7): Extracting archive
+  - Patching drupal/core
+      - Found cached patch at /home/www/.composer/cache/patches/cf81f867c053876f8a76c6be64ef23a8b207c51b00b1edaabd303fddcffc317e.patch
+      - Found cached patch at /home/www/.composer/cache/patches/390b348bf36a7cf2ad53931870f79fc3b0972f0755874f1b9aa56cac8512e0c1.patch
+      - Found cached patch at /home/www/.composer/cache/patches/9f9afc554e83d7d1ad55f602b897fdc13a5c0aca0ca9c566f764dc4f2ddddb1d.patch
+  - Patching drupal/default_content
+      - Found cached patch at /home/www/.composer/cache/patches/2660ac03daf6d98707d4545122c3098f58445ce35da6140f3088a4b322f3ef91.patch
+36 package suggestions were added by new dependencies, use `composer suggest` to see details.
+Generating optimized autoload files
+108 packages you are using are looking for funding.
+Use the `composer fund` command to find out more!
+Scaffolding files for drupal/core:
+  - Copy [web-root]/.htaccess from assets/scaffold/files/htaccess
+  - Copy [web-root]/README.md from assets/scaffold/files/drupal.README.md
+  - Copy [web-root]/index.php from assets/scaffold/files/index.php
+  - Copy [web-root]/.csslintrc from assets/scaffold/files/csslintrc
+  - Copy [web-root]/robots.txt from assets/scaffold/files/robots.txt
+  - Copy [web-root]/update.php from assets/scaffold/files/update.php
+  - Copy [web-root]/INSTALL.txt from assets/scaffold/files/drupal.INSTALL.txt
+  - Copy [web-root]/.eslintignore from assets/scaffold/files/eslintignore
+  - Copy [web-root]/.eslintrc.json from assets/scaffold/files/eslintrc.json
+  - Copy [web-root]/.ht.router.php from assets/scaffold/files/ht.router.php
+  - Copy [web-root]/sites/README.txt from assets/scaffold/files/sites.README.txt
+  - Copy [project-root]/.editorconfig from assets/scaffold/files/editorconfig
+  - Copy [web-root]/example.gitignore from assets/scaffold/files/example.gitignore
+  - Copy [web-root]/themes/README.txt from assets/scaffold/files/themes.README.txt
+  - Copy [project-root]/.gitattributes from assets/scaffold/files/gitattributes
+  - Copy [web-root]/modules/README.txt from assets/scaffold/files/modules.README.txt
+  - Copy [web-root]/profiles/README.txt from assets/scaffold/files/profiles.README.txt
+  - Copy [project-root]/recipes/README.txt from assets/scaffold/files/recipes.README.txt
+  - Copy [web-root]/sites/example.sites.php from assets/scaffold/files/example.sites.php
+  - Copy [web-root]/sites/development.services.yml from assets/scaffold/files/development.services.yml
+  - Copy [web-root]/sites/example.settings.local.php from assets/scaffold/files/example.settings.local.php
+  - Copy [web-root]/sites/default/default.services.yml from assets/scaffold/files/default.services.yml
+  - Copy [web-root]/sites/default/default.settings.php from assets/scaffold/files/default.settings.php
+phpstan/extension-installer: Extensions installed
+> composer/composer: installed
+> composer/pcre: installed
+> mglaman/phpstan-drupal: installed
+> nesbot/carbon: installed
+> phpstan/phpstan-deprecation-rules: installed
+> phpstan/phpstan-phpunit: installed
+PHP CodeSniffer Config installed_paths set to ../../drupal/coder/coder_sniffer,../../sirbrillig/phpcs-variable-analysis,../../slevomat/coding-standard
+1m32.373s
+
+Symlink Drupal CMS installer into web root.
+0m0.008s
+
+added 205 packages, and audited 206 packages in 1m
+
+40 packages are looking for funding
+  run `npm fund` for details
+
+1 high severity vulnerability
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+1m4.889s
+
+npm WARN EBADENGINE Unsupported engine {
+npm WARN EBADENGINE   package: 'vite-template-redux@0.0.0',
+npm WARN EBADENGINE   required: { node: '^20.0.0' },
+npm WARN EBADENGINE   current: { node: 'v18.19.0', npm: '9.2.0' }
+npm WARN EBADENGINE }
+npm WARN deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported
+npm WARN deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+npm WARN deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported
+npm WARN deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead
+npm WARN deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead
+npm WARN deprecated @babel/plugin-proposal-nullish-coalescing-operator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-nullish-coalescing-operator instead.
+npm WARN deprecated @babel/plugin-proposal-class-properties@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-class-properties instead.
+npm WARN deprecated @babel/plugin-proposal-private-methods@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-private-methods instead.
+npm WARN deprecated @babel/plugin-proposal-optional-chaining@7.21.0: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-optional-chaining instead.
+npm WARN deprecated @babel/plugin-proposal-numeric-separator@7.18.6: This proposal has been merged to the ECMAScript standard and thus this plugin is no longer maintained. Please use @babel/plugin-transform-numeric-separator instead.
+npm WARN deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+
+added 1051 packages, and audited 1052 packages in 2m
+
+251 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+2m30.785s
+
+
+> vite-template-redux@0.0.0 build
+> npm run type-check && vite build
+
+
+> vite-template-redux@0.0.0 type-check
+> tsc --noEmit --pretty
+
+vite v5.4.11 building for production...
+transforming...
+✓ 1672 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html          0.53 kB │ gzip:   0.33 kB
+dist/assets/index.css  687.11 kB │ gzip:  78.97 kB
+dist/assets/index.js   975.67 kB │ gzip: 309.55 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 48.89s
+2m20.506s
+
+Create the private files directory.
+0m0.002s
+
+Set up settings.php file.
+0m0.005s
+
+Install Drupal base system.
+0m3.179s
+0m5.635s
+
+Apply the Drupal CMS starter recipe.
+
+In ExtensionList.php line 347:
+                                                       
+  The theme stark does not exist or is not installed.  
+                                                       
+
+5m4.610s
+
+In ExtensionList.php line 347:
+                                                       
+  The theme stark does not exist or is not installed.  
+                                                       
+
+1m12.007s
+1m8.748s
+
+ [success] Successfully uninstalled: drupal_cms_installer
+0m48.031s
+
+ [success] Cache rebuild complete.
+0m12.226s
+
+Total elapsed time: 0:16:13

@@ -1,0 +1,5 @@
+enabled_sources:
+  - drupalorg_jsonapi
+allow_ui_install: false
+allowed_projects: {}
+max_selections: null

@@ -1,0 +1,11 @@
+name: Project Browser test
+type: module
+description: 'Support module for testing Project Browser.'
+package: Testing
+dependencies:
+  - project_browser:project_browser
+
+# Information added by Drupal.org packaging script on 2025-01-09
+version: '2.0.0-alpha7'
+project: 'project_browser'
+datestamp: 1736444385

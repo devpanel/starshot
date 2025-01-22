@@ -1,0 +1,44 @@
+services:
+  trash.manager:
+    class: Drupal\trash\TrashManager
+    arguments: ['@entity.definition_update_manager', '@entity.last_installed_schema.repository', '@config.factory']
+
+  trash.entity_purger:
+    class: Drupal\trash\TrashEntityPurger
+    arguments: ['@entity_type.manager', '@trash.manager', '@config.factory', '@datetime.time', '@queue', '@settings']
+
+  trash.config_subscriber:
+    class: Drupal\trash\EventSubscriber\TrashConfigSubscriber
+    arguments: ['@entity_type.manager', '@trash.manager', '@entity.last_installed_schema.repository', '@router.builder']
+    tags:
+      - { name: event_subscriber }
+
+  trash.ignore_subscriber:
+    class: Drupal\trash\EventSubscriber\TrashIgnoreSubscriber
+    arguments: ['@trash.manager']
+    tags:
+      - { name: event_subscriber }
+
+  trash.route_subscriber:
+    class: Drupal\trash\Routing\RouteSubscriber
+    arguments: ['@entity_type.manager', '@trash.manager']
+    tags:
+      - { name: event_subscriber }
+
+  trash.route_enhancer:
+    class: Drupal\trash\Routing\RouteEnhancer
+    arguments: ['@current_user', '@trash.manager']
+    tags:
+      # Use a higher priority than route_enhancer.param_conversion, so trashed
+      # entities can be loaded by the entity converter.
+      - { name: route_enhancer, priority: 6000 }
+
+  trash.route_processor:
+    class: Drupal\trash\RouteProcessor\TrashRouteProcessor
+    arguments: ['@request_stack', '@current_route_match']
+    tags:
+      - { name: route_processor_outbound }
+
+  trash.uninstall_validator:
+    class: Drupal\trash\TrashUninstallValidator
+    arguments: ['@entity_type.manager', '@trash.manager']

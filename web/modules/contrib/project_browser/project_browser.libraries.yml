@@ -1,0 +1,30 @@
+svelte:
+  js:
+    sveltejs/public/build/bundle.js: { attributes: { defer: true }}
+  css:
+    theme:
+      sveltejs/css/seven.css: {}
+      sveltejs/css/claro.css: {}
+  dependencies:
+    - core/drupalSettings
+    - core/drupal
+    - core/drupal.debounce
+    - core/drupal.dialog
+    - core/drupal.announce
+    - core/drupal.message
+    - core/once
+    - project_browser/project_browser
+
+project_browser:
+  css:
+    theme:
+      css/pb.css: {}
+
+tabledrag:
+  js:
+    js/project_browser.admin.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once
+    - core/drupal.message

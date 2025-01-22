@@ -1,0 +1,49 @@
+{
+    "_hash": "ddd1439aceb886ae6f7f1a47b24ce6198c76580b593521608b618b20d47dd5dc",
+    "patches": {
+        "drupal/core": [
+            {
+                "package": "drupal/core",
+                "description": "#3481164: Announcements Feed breaks `test-site.php install`",
+                "url": "https://www.drupal.org/files/issues/2024-10-16/3481164.patch",
+                "sha256": "cf81f867c053876f8a76c6be64ef23a8b207c51b00b1edaabd303fddcffc317e",
+                "depth": 2,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "#3495988: Add redirect for incomplete install",
+                "url": "https://git.drupalcode.org/project/drupal/-/merge_requests/10680.patch",
+                "sha256": "390b348bf36a7cf2ad53931870f79fc3b0972f0755874f1b9aa56cac8512e0c1",
+                "depth": 2,
+                "extra": {
+                    "provenance": "root"
+                }
+            },
+            {
+                "package": "drupal/core",
+                "description": "#3499225: Fix recipe command ignoring dependencies",
+                "url": "https://git.drupalcode.org/project/drupal/-/merge_requests/10886.patch",
+                "sha256": "9f9afc554e83d7d1ad55f602b897fdc13a5c0aca0ca9c566f764dc4f2ddddb1d",
+                "depth": 2,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ],
+        "drupal/default_content": [
+            {
+                "package": "drupal/default_content",
+                "description": "#3160146: Add a Normalizer and Denormalizer to support Layout Builder",
+                "url": "https://git.drupalcode.org/project/default_content/-/merge_requests/15.diff",
+                "sha256": "2660ac03daf6d98707d4545122c3098f58445ce35da6140f3088a4b322f3ef91",
+                "depth": 1,
+                "extra": {
+                    "provenance": "root"
+                }
+            }
+        ]
+    }
+}

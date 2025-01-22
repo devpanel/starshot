@@ -1,0 +1,45 @@
+parameters:
+  level: 1
+  reportUnmatchedIgnoredErrors: true
+  excludePaths:
+    # The node_modules contains some PHP to ignore.
+    - sveltejs
+    # The recipe form contains a couple of errors that cannot be ignored.
+    # @todo Remove this exclusion when support for Drupal 10 is dropped in https://www.drupal.org/i/3494848.
+    - src/Form/RecipeForm.php
+  # Every ignore should be documented.
+  ignoreErrors:
+    -
+      # @see https://www.drupal.org/docs/develop/development-tools/phpstan/handling-unsafe-usage-of-new-static#s-ignoring-the-issue
+      identifier: new.static
+
+    # @todo: Remove the following rules when support is dropped for Drupal 10.2, which does not have recipes.
+    -
+      message: "#^Access to constant COMPOSER_PROJECT_TYPE on an unknown class Drupal\\\\Core\\\\Recipe\\\\Recipe\\.$#"
+      paths:
+        - src/Plugin/ProjectBrowserSource/Recipes.php
+        - src/RecipeActivator.php
+        - tests/src/Kernel/RecipesSourceTest.php
+      reportUnmatched: false
+    -
+      message: "#^Call to static method [a-zA-Z]+\\(\\) on an unknown class Drupal\\\\Core\\\\Recipe\\\\Recipe[a-zA-Z]*\\.$#"
+      path: src/RecipeActivator.php
+      reportUnmatched: false
+    -
+      message: "#^Class Drupal\\\\Core\\\\Recipe\\\\RecipeAppliedEvent not found\\.$#"
+      path: src/RecipeActivator.php
+      reportUnmatched: false
+    -
+      message: "#^Parameter \\$event of method Drupal\\\\project_browser\\\\RecipeActivator\\:\\:onApply\\(\\) has invalid type Drupal\\\\Core\\\\Recipe\\\\RecipeAppliedEvent\\.$#"
+      path: src/RecipeActivator.php
+      reportUnmatched: false
+
+    -
+      message: "#^Call to static method createFromDirectory\\(\\) on an unknown class Drupal\\\\Core\\\\Recipe\\\\Recipe\\.$#"
+      path: tests/src/Kernel/RecipeActivatorTest.php
+      reportUnmatched: false
+
+    -
+      message: "#^Call to static method processRecipe\\(\\) on an unknown class Drupal\\\\Core\\\\Recipe\\\\RecipeRunner\\.$#"
+      path: tests/src/Kernel/RecipeActivatorTest.php
+      reportUnmatched: false

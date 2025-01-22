@@ -1,0 +1,7 @@
+services:
+  trash.commands:
+    class: Drupal\trash\Commands\TrashCommands
+    arguments:
+      - '@entity_type.manager'
+      - '@trash.manager'
+    tags: [{ name: drush.command }]

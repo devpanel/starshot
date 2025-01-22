@@ -1,0 +1,28 @@
+project_browser.admin_settings:
+  type: config_object
+  label: "Project Browser admin settings"
+  mapping:
+    enabled_sources:
+      type: sequence
+      label: 'Enabled for project data'
+      sequence:
+        type: string
+        label: 'Source'
+    allow_ui_install:
+      type: boolean
+      label: 'Allow installing packages from within the UI'
+    allowed_projects:
+      type: sequence
+      label: 'Allow-lists of projects, keyed by source plugin ID'
+      sequence:
+        type: sequence
+        label: 'List of allowed projects'
+        sequence:
+          type: string
+          label: 'Project identifier'
+          constraints:
+            NotBlank: []
+    max_selections:
+      type: integer
+      nullable: true
+      label: 'The maximum number of projects that can be chosen for installation at once. Internal use only.'

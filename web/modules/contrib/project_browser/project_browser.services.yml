@@ -1,0 +1,34 @@
+services:
+  _defaults:
+    autowire: true
+
+  logger.channel.project_browser:
+    parent: logger.channel_base
+    arguments: ['project_browser']
+  Drupal\project_browser\Plugin\ProjectBrowserSourceManager:
+    parent: default_plugin_manager
+  Drupal\project_browser\EnabledSourceHandler:
+    arguments:
+      $keyValueFactory: '@keyvalue.expirable'
+    calls:
+      - [setLogger, ['@logger.channel.project_browser']]
+    tags:
+      - { name: event_subscriber }
+  cache.project_browser:
+    class: Drupal\Core\Cache\CacheBackendInterface
+    tags:
+      - { name: cache.bin }
+    factory: cache_factory:get
+    arguments: [project_browser]
+  Drupal\project_browser\Activator:
+    tags:
+      - { name: service_collector, tag: project_browser.activator, call: addActivator }
+  Drupal\project_browser\ActivatorInterface: '@Drupal\project_browser\Activator'
+  Drupal\project_browser\ModuleActivator:
+    public: false
+    tags:
+      - { name: project_browser.activator }
+  Drupal\project_browser\Routing\ProjectEnhancer:
+    public: false
+    tags:
+      - { name: route_enhancer }

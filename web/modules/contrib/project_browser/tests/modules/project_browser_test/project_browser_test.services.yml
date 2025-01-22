@@ -1,0 +1,16 @@
+services:
+  project_browser_test.time:
+    class: Drupal\project_browser_test\Datetime\TestTime
+    decorates: datetime.time
+    arguments: ['@project_browser_test.time.inner']
+  project_browser_test.drupalorg_client_middleware:
+    class: Drupal\project_browser_test\DrupalOrgClientMiddleware
+    tags:
+      - { name: http_client_middleware }
+    arguments: ['@module_handler', '@state']
+  Drupal\project_browser_test\TestActivator:
+    autowire: true
+    public: false
+    decorates: 'Drupal\project_browser\ActivatorInterface'
+    arguments:
+      - '@.inner'

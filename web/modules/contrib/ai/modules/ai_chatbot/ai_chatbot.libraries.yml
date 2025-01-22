@@ -1,0 +1,25 @@
+chat:
+  css:
+    theme:
+      css/chat.css: {}
+form-stream:
+  js:
+    js/showdown.min.js: {}
+    js/form-stream.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/once
+deepchat:
+  css:
+    theme:
+      css/deepchat.css: { }
+  js:
+    deepchat/deepchat.bundle.js: {  attributes: { type: module } }
+    js/deepchat-init.js : {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/drupal.ajax
+    - core/drupal.dialog.ajax
