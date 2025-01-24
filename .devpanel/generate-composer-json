@@ -39,12 +39,6 @@ array_walk($data['repositories'], function (array &$repository): void {
   }
 });
 
-// If we're in "canary" mode, allow dev versions of all dependencies.
-if (getenv('CANARY')) {
-  $data['minimum-stability'] = 'dev';
-  $data['prefer-stable'] = FALSE;
-}
-
 // Make packages.drupal.org the lowest-priority repository, which will force the
 // components' local path repositories to take precedence.
 $repository = $data['repositories']['drupal'];
