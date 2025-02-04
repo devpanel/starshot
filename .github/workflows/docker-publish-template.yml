@@ -6,28 +6,26 @@ on:
       - develop
       - test/*
 jobs:
-  setup-environmet:
+  setup:
     runs-on: ubuntu-latest
+    outputs:
+      base_image: ${{ steps.set_env.outputs.base_image }}
     steps:
-      - name: Set environment variable BASE_IMAGE
-        id: set_env
+      - id: set_env
         run: |
           if [[ "${{ github.ref_name }}" == "main" ]]; then
-            echo "BASE_IMAGE=devpanel/php:8.3-base" >> $GITHUB_ENV
+            echo "::set-output name=base_image::devpanel/php:8.3-base"
           elif [[ "${{ github.ref_name }}" == "develop" ]] || [[ "${{ github.ref_name }}" =~ ^test/ ]]; then
-            echo "BASE_IMAGE=devpanel/php:8.3-base" >> $GITHUB_ENV
+            echo "::set-output name=base_image::devpanel/php:8.3-base-rc"
+          else
+            echo "::set-output name=base_image::devpanel/php:8.3-base-default"
           fi
-
-      - name: Use BASE_IMAGE in service
-        run: |
-          echo "Using BASE_IMAGE: $BASE_IMAGE"
-          # Additional commands can be added here if needed
 
   build-application:
     runs-on: ubuntu-latest
     services:
       webserver:
-        image: ${{ needs.setup-environmet.env.BASE_IMAGE }}
+        image: ${{ needs.setup.outputs.base_image }}
         env:
           APP_ROOT: '/devpanel/build'        
           WEB_ROOT: '/devpanel/build/web'
@@ -70,7 +68,7 @@ jobs:
 
     - name: Setup Drupal
       run: |
-        echo ${{ needs.setup-environmet.env.BASE_IMAGE }}
+        echo ${{ needs.setup.outputs.base_image }}
         echo "PREPARE DIR FOR INSTALL" 
         docker exec ${{ job.services.webserver.id }} bash -c "sudo rm -rf \$APP_ROOT && sudo mkdir -p \$APP_ROOT"
         docker exec ${{ job.services.webserver.id }} bash -c "sudo cp -r /app/. \$APP_ROOT/." 
