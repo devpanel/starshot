@@ -9,10 +9,10 @@ jobs:
   build-application:
     runs-on: ubuntu-latest
     env:
-      BASE_IMAGE: ${{ github.ref_name == 'main' && '8.3-base' || github.ref_name == 'develop' && '8.3-base-rc' || startsWith(github.ref_name, 'test/') && '8.3-base-rc' }}
+      BASE_IMAGE: ${{ github.ref_name == 'main' && 'base' || github.ref_name == 'develop' && 'base-rc' || startsWith(github.ref_name, 'test/') && 'base-rc' }}
     services:
       webserver:
-        image: devpanel/php:${{ env.BASE_IMAGE }}
+        image: devpanel/php:8.3-${{ env.BASE_IMAGE }}
         env:
           APP_ROOT: '/devpanel/build'        
           WEB_ROOT: '/devpanel/build/web'
