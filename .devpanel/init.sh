@@ -15,15 +15,20 @@
 # For GNU Affero General Public License see <https://www.gnu.org/licenses/>.
 # ----------------------------------------------------------------------
 
-LOG_FILE="$APP_ROOT/logs/init-$(date +%F-%T).log"
-exec > >(tee $LOG_FILE) 2>&1
+
 
 TIMEFORMAT=%lR
 DDEV_DOCROOT=${WEB_ROOT##*/}
 SETTINGS_FILE_PATH=$WEB_ROOT/sites/default/settings.php
 
 #== Clone source code.
-if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
+
+if [ ! -d $APP_ROOT/repos/drupal/drupal_cms ]; then
+  # Force add git submodule if not init success
+  # See https://stackoverflow.com/questions/3336995/git-will-not-init-sync-update-new-submodules
+  git submodule status || git submodule add -f  https://git.drupalcode.org/project/drupal_cms.git repos/drupal/drupal_cms
+  
+  
   echo
   time git submodule update --init --remote --recursive
   RETURN_CODE=$?
@@ -40,7 +45,7 @@ if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   fi
 
   #== Patch for issue #3497485.
-  if ! git merge-base --is-ancestor d1fa2bd04f186684ff262493d92ebcd2c283cf24 HEAD 2> /dev/null; then
+  if ! git merge-base --is-ancestor 86d48c24bdf96494a8a017d15c368574794d580a HEAD 2> /dev/null; then
     echo
     echo 'Apply patch for issue #3497485.'
     time git apply $APP_ROOT/patches/drupal/drupal_cms/373.patch
@@ -91,7 +96,25 @@ fi
 #== Install JavaScript dependencies if needed.
 cd $APP_ROOT/repos/drupal/drupal_cms
 if [ ! -d node_modules ]; then
-  time npm -q clean-install --foreground-scripts
+  time npm -q clean-install
+  RETURN_CODE=$?
+  if [ $RETURN_CODE != 0 ]; then
+    exit $RETURN_CODE
+  fi
+fi
+
+#== Build Experience Builder's JavaScript bundle, if needed.
+cd $APP_ROOT
+XB_UI_PATH=$DDEV_DOCROOT/modules/contrib/experience_builder/ui
+if [ ! -d $XB_UI_PATH/dist ]; then
+  echo
+  time npm -q --prefix $XB_UI_PATH install
+  RETURN_CODE=$?
+  if [ $RETURN_CODE != 0 ]; then
+    exit $RETURN_CODE
+  fi
+  echo
+  time npm -q --prefix $XB_UI_PATH run build
   RETURN_CODE=$?
   if [ $RETURN_CODE != 0 ]; then
     exit $RETURN_CODE
@@ -99,7 +122,6 @@ if [ ! -d node_modules ]; then
 fi
 
 #== Create the private files directory.
-cd $APP_ROOT
 if [ ! -d private ]; then
   echo
   echo 'Create the private files directory.'
