@@ -6,13 +6,28 @@ on:
       - develop
       - test/*
 jobs:
+  setup-environmet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set environment variable BASE_IMAGE
+        id: set_env
+        run: |
+          if [[ "${{ github.ref_name }}" == "main" ]]; then
+            echo "BASE_IMAGE=devpanel/php:8.3-base" >> $GITHUB_ENV
+          elif [[ "${{ github.ref_name }}" == "develop" ]] || [[ "${{ github.ref_name }}" =~ ^test/ ]]; then
+            echo "BASE_IMAGE=devpanel/php:8.3-base-rc" >> $GITHUB_ENV
+          fi
+
+      - name: Use BASE_IMAGE in service
+        run: |
+          echo "Using BASE_IMAGE: $BASE_IMAGE"
+          # Additional commands can be added here if needed
+
   build-application:
     runs-on: ubuntu-latest
-    env:
-      BASE_IMAGE: ${{ github.ref_name == 'main' && 'base' || github.ref_name == 'develop' && 'base-rc' || startsWith(github.ref_name, 'test/') && 'base-rc' }}
     services:
       webserver:
-        image: devpanel/php:8.3-${{ env.BASE_IMAGE }}
+        image: ${{ env.BASE_IMAGE }}
         env:
           APP_ROOT: '/devpanel/build'        
           WEB_ROOT: '/devpanel/build/web'
