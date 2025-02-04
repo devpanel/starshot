@@ -27,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       webserver:
-        image: ${{ env.BASE_IMAGE }}
+        image: ${{ needs.setup-environmet.env.BASE_IMAGE }}
         env:
           APP_ROOT: '/devpanel/build'        
           WEB_ROOT: '/devpanel/build/web'
