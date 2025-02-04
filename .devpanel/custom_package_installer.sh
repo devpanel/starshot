@@ -12,11 +12,11 @@
 sudo apt-get update
 sudo apt-get install -y nano npm
 
-sudo pecl update-channels
-sudo pecl install apcu <<< ''
-echo 'extension=apcu.so' | sudo tee /usr/local/etc/php/conf.d/apcu.ini
-sudo pecl install uploadprogress
-echo 'extension=uploadprogress.so' | sudo tee /usr/local/etc/php/conf.d/uploadprogress.ini
-if sudo /etc/init.d/apache2 status > /dev/null; then
-  sudo /etc/init.d/apache2 reload
-fi
+# sudo pecl update-channels
+# sudo pecl install apcu <<< ''
+# echo 'extension=apcu.so' | sudo tee /usr/local/etc/php/conf.d/apcu.ini
+# sudo pecl install uploadprogress
+# echo 'extension=uploadprogress.so' | sudo tee /usr/local/etc/php/conf.d/uploadprogress.ini
+# if sudo /etc/init.d/apache2 status > /dev/null; then
+#   sudo /etc/init.d/apache2 reload
+# fi
