@@ -8,18 +8,6 @@ on:
 jobs:
   build-application:
     runs-on: ubuntu-latest
-    name: Docker build and push template
-
-on:
-  push:
-    branches:
-      - main
-      - develop
-      - test/*
-
-jobs:
-  build-application:
-    runs-on: ubuntu-latest
     env:
       BASE_IMAGE: ${{ github.ref_name == 'main' && '8.3-base' || github.ref_name == 'develop' && '8.3-base-rc' || startsWith(github.ref_name, 'test/') && '8.3-base-rc' }}
     services:
