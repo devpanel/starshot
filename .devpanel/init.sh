@@ -15,15 +15,20 @@
 # For GNU Affero General Public License see <https://www.gnu.org/licenses/>.
 # ----------------------------------------------------------------------
 
-LOG_FILE="$APP_ROOT/logs/init-$(date +%F-%T).log"
-exec > >(tee $LOG_FILE) 2>&1
+
 
 TIMEFORMAT=%lR
 DDEV_DOCROOT=${WEB_ROOT##*/}
 SETTINGS_FILE_PATH=$WEB_ROOT/sites/default/settings.php
 
 #== Clone source code.
-if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
+
+if [ ! -d $APP_ROOT/repos/drupal/drupal_cms ]; then
+  # Force add git submodule if not init success
+  # See https://stackoverflow.com/questions/3336995/git-will-not-init-sync-update-new-submodules
+  git submodule status || git submodule add -f  https://git.drupalcode.org/project/drupal_cms.git repos/drupal/drupal_cms
+  
+  
   echo
   time git submodule update --init --remote --recursive
   RETURN_CODE=$?
