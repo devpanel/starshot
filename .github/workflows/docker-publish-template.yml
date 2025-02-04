@@ -5,17 +5,12 @@ on:
       - main
       - develop
       - test/*
-env:
-  BASE_IMAGE: ${{ github.ref_name == 'main' && 'devpanel/php:8.3-base' || github.ref_name == 'develop' && 'devpanel/php:8.3-base-rc' || startsWith(github.ref_name, 'test/') && 'devpanel/php:8.3-base-rc' }}
-
 jobs:
-  
   build-application:
     runs-on: ubuntu-latest
-
     services:
       webserver:
-        image: ${{ env.BASE_IMAGE }}
+        image: devpanel/php:8.3-base
         env:
           APP_ROOT: '/devpanel/build'        
           WEB_ROOT: '/devpanel/build/web'
