@@ -4,7 +4,7 @@ on:
     branches:
       - main
       - develop
-      - feature/*
+      - test/*
 jobs:
   build-application:
     runs-on: ubuntu-latest
@@ -28,7 +28,7 @@ jobs:
         ports:
           - 80:80
         volumes:
-          - ${{ github.workspace }}:/devpanel/build/  # Mounting the checked-out code
+          - ${{ github.workspace }}:/app/  # Mounting the checked-out code
       mysql:
         image: mysql:8.0
         env:
@@ -54,6 +54,7 @@ jobs:
     - name: Setup Drupal
       run: |
         echo "PREPARE DIR FOR INSTALL" 
+        docker exec ${{ job.services.webserver.id }} bash -c "sudo rm -rf \$APP_ROOT && sudo mkdir -p \$APP_ROOT"
         docker exec ${{ job.services.webserver.id }} bash -c "sudo chown -R www:www \$APP_ROOT"
         docker exec ${{ job.services.webserver.id }} bash -c "export && cd \$APP_ROOT && ls -al"
         echo "SET UP GIT" 
