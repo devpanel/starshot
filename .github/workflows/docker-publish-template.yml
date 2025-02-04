@@ -31,29 +31,6 @@ jobs:
           - 80:80
         volumes:
           - ${{ github.workspace }}:/app/  # Mounting the checked-out code
-
-          
-    services:
-      webserver:
-        image: devpanel/php:8.3-base
-        env:
-          APP_ROOT: '/devpanel/build'        
-          WEB_ROOT: '/devpanel/build/web'
-          CODES_USER_DATA_DIR: '/devpanel/build/.vscode'
-          CODES_WORKING_DIR: '/devpanel/build'
-          APACHE_RUN_USER: 'www'
-          APACHE_RUN_GROUP: 'www'
-          CODES_ENABLE: 'yes'
-          DB_HOST: mysql
-          DB_PORT: 3306
-          DB_ROOT_PASSWORD: root
-          DB_NAME: drupaldb
-          DB_USER: user
-          DB_PASSWORD: password
-        ports:
-          - 80:80
-        volumes:
-          - ${{ github.workspace }}:/app/  # Mounting the checked-out code
       mysql:
         image: mysql:8.0
         env:
