@@ -5,27 +5,17 @@ on:
       - main
       - develop
       - test/*
-jobs:
-  setup:
-    runs-on: ubuntu-latest
-    outputs:
-      base_image: ${{ steps.set_env.outputs.base_image }}
-    steps:
-      - id: set_env
-        run: |
-          if [[ "${{ github.ref_name }}" == "main" ]]; then
-            echo "::set-output name=base_image::devpanel/php:8.3-base"
-          elif [[ "${{ github.ref_name }}" == "develop" ]] || [[ "${{ github.ref_name }}" =~ ^test/ ]]; then
-            echo "::set-output name=base_image::devpanel/php:8.3-base-rc"
-          else
-            echo "::set-output name=base_image::devpanel/php:8.3-base-default"
-          fi
+env:
+  BASE_IMAGE: ${{ github.ref_name == 'main' && 'devpanel/php:8.3-base' || github.ref_name == 'develop' && 'devpanel/php:8.3-base-rc' || startsWith(github.ref_name, 'test/') && 'devpanel/php:8.3-base-rc' }}
 
+jobs:
+  
   build-application:
     runs-on: ubuntu-latest
+
     services:
       webserver:
-        image: ${{ needs.setup.outputs.base_image }}
+        image: ${{ env.BASE_IMAGE }}
         env:
           APP_ROOT: '/devpanel/build'        
           WEB_ROOT: '/devpanel/build/web'
@@ -68,7 +58,6 @@ jobs:
 
     - name: Setup Drupal
       run: |
-        echo ${{ needs.setup.outputs.base_image }}
         echo "PREPARE DIR FOR INSTALL" 
         docker exec ${{ job.services.webserver.id }} bash -c "sudo rm -rf \$APP_ROOT && sudo mkdir -p \$APP_ROOT"
         docker exec ${{ job.services.webserver.id }} bash -c "sudo cp -r /app/. \$APP_ROOT/." 
