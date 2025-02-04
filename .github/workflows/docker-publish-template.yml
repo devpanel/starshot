@@ -15,7 +15,7 @@ jobs:
           if [[ "${{ github.ref_name }}" == "main" ]]; then
             echo "BASE_IMAGE=devpanel/php:8.3-base" >> $GITHUB_ENV
           elif [[ "${{ github.ref_name }}" == "develop" ]] || [[ "${{ github.ref_name }}" =~ ^test/ ]]; then
-            echo "BASE_IMAGE=devpanel/php:8.3-base-rc" >> $GITHUB_ENV
+            echo "BASE_IMAGE=devpanel/php:8.3-base" >> $GITHUB_ENV
           fi
 
       - name: Use BASE_IMAGE in service
@@ -70,6 +70,7 @@ jobs:
 
     - name: Setup Drupal
       run: |
+        echo ${{ needs.setup-environmet.env.BASE_IMAGE }}
         echo "PREPARE DIR FOR INSTALL" 
         docker exec ${{ job.services.webserver.id }} bash -c "sudo rm -rf \$APP_ROOT && sudo mkdir -p \$APP_ROOT"
         docker exec ${{ job.services.webserver.id }} bash -c "sudo cp -r /app/. \$APP_ROOT/." 
