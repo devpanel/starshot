@@ -22,11 +22,11 @@ DDEV_DOCROOT=${WEB_ROOT##*/}
 SETTINGS_FILE_PATH=$WEB_ROOT/sites/default/settings.php
 
 #== Clone source code.
-
+echo "Clone source code."
 if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   # Force add git submodule if not init success
   # See https://stackoverflow.com/questions/3336995/git-will-not-init-sync-update-new-submodules
-  #git submodule status || git submodule add -f  https://git.drupalcode.org/project/drupal_cms.git repos/drupal/drupal_cms
+  git submodule status || git submodule add -f  https://git.drupalcode.org/project/drupal_cms.git repos/drupal/drupal_cms
   
   echo
   time git submodule update --init --remote --recursive
