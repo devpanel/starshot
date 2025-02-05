@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       webserver:
-        image: devpanel/php:8.3-base
+        image: devpanel/php:8.3-base-rc
         env:
           APP_ROOT: '/devpanel/build'        
           WEB_ROOT: '/devpanel/build/web'
