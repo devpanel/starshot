@@ -92,4 +92,5 @@ jobs:
     - name: Push to tag latest
       if: endsWith(github.ref, '/main')
       run: |
+        docker commit ${{ job.services.webserver.id }} devpanel/starshot:latest
         docker push devpanel/starshot:latest
