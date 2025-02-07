@@ -33,7 +33,6 @@ if [ $RETURN_CODE != 0 ]; then
 fi
 
 #== Clone source code.
-cd $APP_ROOT
 echo "Clone source code."
 if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   echo
@@ -53,6 +52,7 @@ if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
 fi
 
 #== Composer install.
+cd $APP_ROOT
 if [ ! -f composer.lock ]; then
   echo
   echo 'Generate composer.json.'
