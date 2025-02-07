@@ -15,20 +15,27 @@
 # For GNU Affero General Public License see <https://www.gnu.org/licenses/>.
 # ----------------------------------------------------------------------
 
-
+LOG_FILE="$APP_ROOT/logs/init-$(date +%F-%T).log"
+exec > >(tee $LOG_FILE) 2>&1
 
 TIMEFORMAT=%lR
 DDEV_DOCROOT=${WEB_ROOT##*/}
 SETTINGS_FILE_PATH=$WEB_ROOT/sites/default/settings.php
 
-#== Clone source code.
-echo "Clone source code."
+#== Remove root-owned files.
 cd $APP_ROOT
+echo
+echo Remove root-owned files.
+time sudo rm -rf lost+found
+RETURN_CODE=$?
+if [ $RETURN_CODE != 0 ]; then
+  exit $RETURN_CODE
+fi
+
+#== Clone source code.
+cd $APP_ROOT
+echo "Clone source code."
 if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
-  # Force add git submodule if not init success
-  # See https://stackoverflow.com/questions/3336995/git-will-not-init-sync-update-new-submodules
-  git submodule status || git submodule add -f  https://git.drupalcode.org/project/drupal_cms.git repos/drupal/drupal_cms
-  
   echo
   time git submodule update --init --remote --recursive
   RETURN_CODE=$?
@@ -43,27 +50,6 @@ if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   if [ $RETURN_CODE != 0 ]; then
     exit $RETURN_CODE
   fi
-
-  #== Patch for issue #3497485.
-  # if ! git merge-base --is-ancestor d1fa2bd04f186684ff262493d92ebcd2c283cf24 HEAD 2> /dev/null; then
-  #   echo
-  #   echo 'Apply patch for issue #3497485.'
-  #   time git apply $APP_ROOT/patches/drupal/drupal_cms/373.patch
-  #   RETURN_CODE=$?
-  #   if [ $RETURN_CODE != 0 ]; then
-  #     exit $RETURN_CODE
-  #   fi
-  # fi
-fi
-
-#== Remove root-owned files.
-cd $APP_ROOT
-echo
-echo Remove root-owned files.
-time sudo rm -rf lost+found
-RETURN_CODE=$?
-if [ $RETURN_CODE != 0 ]; then
-  exit $RETURN_CODE
 fi
 
 #== Composer install.
