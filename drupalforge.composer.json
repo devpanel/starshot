@@ -212,6 +212,9 @@
             "drupal/core": {
                 "#3495988: Add redirect for incomplete install": "https://git.drupalcode.org/project/drupal/-/merge_requests/10680.patch",
                 "#3499225: Fix recipe command ignoring dependencies": "https://git.drupalcode.org/project/drupal/-/merge_requests/10886.patch"
+            },
+            "drupal/recipe_installer_kit": {
+                "#3497485: Fix remaining duplication of batch jobs": "https://git.drupalcode.org/project/recipe_installer_kit/-/merge_requests/4.patch"
             }
         }
     }
