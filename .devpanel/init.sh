@@ -45,15 +45,15 @@ if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   fi
 
   #== Patch for issue #3497485.
-  if ! git merge-base --is-ancestor d1fa2bd04f186684ff262493d92ebcd2c283cf24 HEAD 2> /dev/null; then
-    echo
-    echo 'Apply patch for issue #3497485.'
-    time git apply $APP_ROOT/patches/drupal/drupal_cms/373.patch
-    RETURN_CODE=$?
-    if [ $RETURN_CODE != 0 ]; then
-      exit $RETURN_CODE
-    fi
-  fi
+  # if ! git merge-base --is-ancestor d1fa2bd04f186684ff262493d92ebcd2c283cf24 HEAD 2> /dev/null; then
+  #   echo
+  #   echo 'Apply patch for issue #3497485.'
+  #   time git apply $APP_ROOT/patches/drupal/drupal_cms/373.patch
+  #   RETURN_CODE=$?
+  #   if [ $RETURN_CODE != 0 ]; then
+  #     exit $RETURN_CODE
+  #   fi
+  # fi
 fi
 
 #== Remove root-owned files.
