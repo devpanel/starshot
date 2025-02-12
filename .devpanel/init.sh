@@ -33,9 +33,9 @@ if [ $RETURN_CODE != 0 ]; then
 fi
 
 #== Clone source code.
-echo "Clone source code."
 if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   echo
+  echo "Clone source code."
   time git submodule update --init --remote --recursive
   RETURN_CODE=$?
   if [ $RETURN_CODE != 0 ]; then
@@ -82,6 +82,8 @@ fi
 #== Install JavaScript dependencies if needed.
 cd $APP_ROOT/repos/drupal/drupal_cms
 if [ ! -d node_modules ]; then
+  echo
+  echo 'Install JavaScript dependencies.'
   time npm -q clean-install --foreground-scripts
   RETURN_CODE=$?
   if [ $RETURN_CODE != 0 ]; then
@@ -121,12 +123,24 @@ if [ -d recipes/drupal_cms_starter ] && [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u
     time .devpanel/install > /dev/null
   done
   drush sdel drupal_cms_profile.profile_modules_installed
+  RETURN_CODE=$?
+  if [ $RETURN_CODE != 0 ]; then
+    exit $RETURN_CODE
+  fi
 
   echo
   echo 'Apply the Drupal CMS starter recipe.'
   until time drush -q recipe $APP_ROOT/recipes/drupal_cms_starter; do
     :
   done
+
+  echo
+  echo 'Tell Automatic Updates about patches.'
+  time drush -n cset --input-format=yaml package_manager.settings additional_known_files_in_project_root '["patches.json", "patches.lock.json"]'
+  RETURN_CODE=$?
+  if [ $RETURN_CODE != 0 ]; then
+    exit $RETURN_CODE
+  fi
 
   echo
   time drush -n pmu drupal_cms_installer
