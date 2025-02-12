@@ -34,12 +34,22 @@ fi
 
 #== Clone source code.
 if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
-  echo
   echo "Clone source code."
+  echo
   time git submodule update --init --remote --recursive
   RETURN_CODE=$?
   if [ $RETURN_CODE != 0 ]; then
     exit $RETURN_CODE
+  fi
+
+  # Check git submodule init successfully
+  # See https://stackoverflow.com/questions/3336995/git-will-not-init-sync-update-new-submodules
+  if [ -z "$(git submodule status)" ]; then
+    echo "Force init submodule"
+    echo  
+    time git submodule add -f  https://git.drupalcode.org/project/drupal_cms.git repos/drupal/drupal_cms
+    echo
+    time git submodule update --init --remote --recursive
   fi
 
   cd $APP_ROOT/repos/drupal/drupal_cms
