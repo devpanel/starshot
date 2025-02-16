@@ -206,5 +206,18 @@
         "signature_pad/signature_pad": "*",
         "tabby/tabby": "*",
         "tippyjs/tippyjs": "*"
+    },
+    "extra": {
+        "drupal-scaffold": {
+            "file-mapping": {
+                "[web-root]/sites/default/settings.php": {
+                    "path": "web/core/assets/scaffold/files/default.settings.php",
+                    "overwrite": false
+                }
+            }
+        }
+    },
+    "scripts": {
+        "post-drupal-scaffold-cmd": "cd web/sites/default && (patch -Np1 -r /dev/null < \"${APP_ROOT}\"/.devpanel/drupal-settings.patch | : )"
     }
 }
