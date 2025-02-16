@@ -30,7 +30,7 @@ $merge_deep = function (array ...$arrays) use (&$merge_deep): array {
 
 $base = $read_json('repos/drupal/drupal_cms/project_template/composer.json');
 $dev = $read_json('repos/drupal/drupal_cms/dev.composer.json');
-$drupalforge = $read_json('drupalforge.composer.json');
+$drupalforge = $read_json('.devpanel/drupalforge.composer.json');
 $data = $merge_deep($base, $dev, $drupalforge);
 
 array_walk($data['repositories'], function (array &$repository): void {
