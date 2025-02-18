@@ -12,6 +12,7 @@ jobs:
       webserver:
         image: devpanel/php:8.3-base
         env:
+          DP_APP_ID: 'starshot'
           APP_ROOT: '/devpanel/build'        
           WEB_ROOT: '/devpanel/build/web'
           CODES_USER_DATA_DIR: '/devpanel/build/.vscode'
