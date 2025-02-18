@@ -70,7 +70,7 @@ jobs:
         docker exec ${{ job.services.webserver.id }} bash -c "\$APP_ROOT/.devpanel/quickstart/create_quickstart.sh" 
         echo "MAKE COPY BUILD TO REAL APP_ROOT" 
         docker exec ${{ job.services.webserver.id }} bash -c "sudo rm -rf /var/www/html && sudo mkdir -p /var/www/html"
-        docker exec ${{ job.services.webserver.id }} bash -c "sudo rsync -av  \$APP_ROOT /var/www/html" 
+        docker exec ${{ job.services.webserver.id }} bash -c "sudo rsync -av  \$APP_ROOT/. /var/www/html/." 
         docker exec ${{ job.services.webserver.id }} bash -c "sudo chown -R www:www /var/www/html"
 
 
