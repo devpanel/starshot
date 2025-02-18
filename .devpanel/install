@@ -6,7 +6,7 @@
 $_SERVER['HTTP_USER_AGENT'] = 'Drupal Forge';
 $_GET['profile'] = 'drupal_cms_installer';
 $_GET['langcode'] = 'en';
-$_GET['recipes'][] = 'drupal_cms_starter';
+$_GET['recipes'] = '';
 $_GET['site_name'] = 'Drupal CMS';
 
 register_shutdown_function('_install_drupal_cms_profile_modules');
