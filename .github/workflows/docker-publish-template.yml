@@ -26,6 +26,7 @@ jobs:
           DB_NAME: drupaldb
           DB_USER: user
           DB_PASSWORD: password
+          DB_DRIVER: mysql
         ports:
           - 80:80
         volumes:
