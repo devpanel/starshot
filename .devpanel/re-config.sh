@@ -34,17 +34,10 @@ if [[ -f "$APP_ROOT/composer.json" ]]; then
   cd $APP_ROOT && composer install
 fi
 
-
-#== Create settings files
-# @link: https://www.drupal.org/docs/7/install/step-3-create-settingsphp-and-the-files-directory
-if [[ ! -f "$SETTINGS_FILES_PATH" ]]; then
-  sudo cp $APP_ROOT/.devpanel/drupal-settings.php $SETTINGS_FILES_PATH
-fi
-
 #== Generate hash salt
 echo 'Generate hash salt ...'
 DRUPAL_HASH_SALT=$(openssl rand -hex 32);
-sudo sed -i -e "s/^\$settings\['hash_salt'\].*/\$settings\['hash_salt'\] = '$DRUPAL_HASH_SALT';/g" $SETTINGS_FILES_PATH
+echo $DRUPAL_HASH_SALT > $APP_ROOT/.devpanel/salt.txt
 
 
 # #Securing file permissions and ownership
