@@ -8,8 +8,7 @@
             "#3499225: Fix recipe command ignoring dependencies": "https://git.drupalcode.org/project/drupal/-/merge_requests/10886.patch"
         },
         "drupal/recipe_installer_kit": {
-            "#3497485: Fix remaining duplication of batch jobs": "https://git.drupalcode.org/project/recipe_installer_kit/-/merge_requests/4.patch",
-            "#3507245: Fix recipe IDs in applied recipes state": "https://git.drupalcode.org/project/recipe_installer_kit/-/merge_requests/5.patch"
+            "#3497485: Fix remaining duplication of batch jobs": "https://git.drupalcode.org/project/recipe_installer_kit/-/merge_requests/4.patch"
         }
     }
 }
