@@ -86,6 +86,10 @@ fi
 cd $APP_ROOT
 if [ -d recipes/drupal_cms_starter ] && [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables')" ]; then
   echo
+  echo 'Generate hash salt.'
+  openssl rand -hex 32 > $APP_ROOT/.devpanel/salt.txt
+
+  echo
   echo 'Install Drupal base system.'
   while [ -z "$(drush sget drupal_cms_profile.profile_modules_installed 2> /dev/null)" ]; do
     time .devpanel/install > /dev/null

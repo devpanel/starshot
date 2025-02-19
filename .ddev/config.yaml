@@ -39,6 +39,8 @@ web_environment:
   - DB_USER=db
   - DB_PASSWORD=db
   - DB_NAME=db
+  - DP_APP_ID=starshot
+  - DB_DRIVER=mysql
 webimage_extra_packages:
   # Add Cypress' system dependencies.
   # See https://docs.cypress.io/guides/getting-started/installing-cypress#UbuntuDebian
