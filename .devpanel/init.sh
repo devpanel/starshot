@@ -48,6 +48,13 @@ if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   cd $APP_ROOT/repos/drupal/drupal_cms
   echo
   time git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d '/')
+
+  #== Patch for issue #3508008.
+  if ! git merge-base --is-ancestor d0a29dfe335cc2529c4632be5b77b1b5e9ffd522 HEAD 2> /dev/null; then
+    echo
+    echo 'Apply patch for issue #3508008.'
+    time git apply $APP_ROOT/patches/drupal/drupal_cms/512.patch
+  fi
 fi
 
 #== Composer install.
@@ -87,8 +94,8 @@ cd $APP_ROOT
 if [ -d recipes/drupal_cms_starter ] && [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables')" ]; then
   echo
   echo 'Generate hash salt.'
-  openssl rand -hex 32 > $APP_ROOT/.devpanel/salt.txt
-
+  time openssl rand -hex 32 > $APP_ROOT/.devpanel/salt.txt
+ 
   echo
   echo 'Install Drupal base system.'
   while [ -z "$(drush sget drupal_cms_profile.profile_modules_installed 2> /dev/null)" ]; do
@@ -99,8 +106,9 @@ if [ -d recipes/drupal_cms_starter ] && [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u
   echo
   echo 'Apply the Drupal CMS starter recipe.'
   until time drush -q recipe $APP_ROOT/recipes/drupal_cms_starter; do
-    :
+    time drush cr || :
   done
+  drush sset --input-format=yaml installer.applied_recipes '["drupal/drupal_cms_starter"]'
 
   echo
   echo 'Tell Automatic Updates about patches.'
