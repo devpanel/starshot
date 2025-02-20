@@ -207,6 +207,9 @@
         "tabby/tabby": "*",
         "tippyjs/tippyjs": "*"
     },
+    "config": {
+        "process-timeout": 900
+    },
     "extra": {
         "drupal-scaffold": {
             "file-mapping": {
