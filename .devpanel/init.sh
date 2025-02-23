@@ -48,6 +48,13 @@ if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
   cd $APP_ROOT/repos/drupal/drupal_cms
   echo
   time git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d '/')
+
+  #== Add composer.json for xb_test.
+  if [ ! -f $APP_ROOT/repos/drupal/drupal_cms/xb_test/composer.json ]; then
+    echo
+    echo 'Apply patch for issue #3508008.'
+    time git apply $APP_ROOT/patches/drupal/drupal_cms/xb_test.patch
+  fi
 fi
 
 #== Composer install.
