@@ -55,6 +55,13 @@ if [ -z "$(ls -A repos/drupal/drupal_cms)" ]; then
     echo 'Install JavaScript dependencies.'
     time npm -q clean-install --foreground-scripts
   fi
+
+  #== Add composer.json for xb_test.
+  if [ ! -f repos/drupal/drupal_cms/xb_test/composer.json ]; then
+    echo
+    echo 'Add composer.json for xb_test.'
+    time git apply $APP_ROOT/patches/drupal/drupal_cms/xb_test.patch
+  fi
   cd $APP_ROOT
 
   #== Symlink Drupal CMS installer into web root.

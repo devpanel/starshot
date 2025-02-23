@@ -1,0 +1,12 @@
+diff --git a/recipe.yml b/recipe.yml
+index 079e4a8..c7499d1 100644
+--- a/recipe.yml
++++ b/recipe.yml
+@@ -75,6 +75,7 @@ config:
+             - drupal_cms_project
+             - drupal_cms_search
+             - drupal_cms_seo_tools
++            - xb_test
+         enabled_sources:
+           - drupalorg_jsonapi
+           - recipes

@@ -3,6 +3,9 @@
         "drupal/automatic_updates": {
             "#3498018: Add configuration for additional known files in project root": "https://git.drupalcode.org/project/automatic_updates/-/merge_requests/1099.patch"
         },
+        "drupal/drupal_cms_starter": {
+            "Allow the Experience Builder demo": "patches/drupal/drupal_cms_starter/xb_test.patch"
+        },
         "drupal/core": {
             "#3495988: Add redirect for incomplete install": "https://git.drupalcode.org/project/drupal/-/merge_requests/10680.patch",
             "#3499225: Fix recipe command ignoring dependencies": "https://git.drupalcode.org/project/drupal/-/merge_requests/10886.patch",
