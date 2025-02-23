@@ -62,6 +62,13 @@ if [ -z "$(ls -A repos/drupal/drupal_cms)" ]; then
   echo 'Symlink Drupal CMS installer into web root.'
   mkdir -p $WEB_ROOT/profiles
   time ln -s -f $(realpath -s --relative-to=$WEB_ROOT/profiles repos/drupal/drupal_cms/project_template/web/profiles/drupal_cms_installer) $WEB_ROOT/profiles/
+
+  #== Add composer.json for xb_test.
+  if [ ! -f repos/drupal/drupal_cms/xb_test/composer.json ]; then
+    echo
+    echo 'Apply patch for issue #3508008.'
+    time git apply patches/drupal/drupal_cms/xb_test.patch
+  fi
 fi
 
 #== Composer install.

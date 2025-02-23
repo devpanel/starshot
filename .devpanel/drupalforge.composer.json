@@ -191,6 +191,10 @@
                 },
                 "license": "MIT"
             }
+        },
+        "xb_test": {
+            "type": "path",
+            "url": "xb_test"
         }
     },
     "require": {
@@ -205,7 +209,8 @@
         "progress-tracker/progress-tracker": "*",
         "signature_pad/signature_pad": "*",
         "tabby/tabby": "*",
-        "tippyjs/tippyjs": "*"
+        "tippyjs/tippyjs": "*",
+        "drupal/xb_test": "*"
     },
     "config": {
         "process-timeout": 900
