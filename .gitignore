@@ -1,4 +1,5 @@
 /.cache/
+/.devpanel/dumps/
 /.devpanel/salt.txt
 /.editorconfig
 /.gitattributes
