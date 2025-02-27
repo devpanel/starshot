@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # ---------------------------------------------------------------------
 # Copyright (C) 2024 DevPanel
 #
@@ -22,6 +22,7 @@ exec > >(tee $LOG_FILE) 2>&1
 TIMEFORMAT=%lR
 DDEV_DOCROOT=${WEB_ROOT##*/}
 SETTINGS_FILE_PATH=$WEB_ROOT/sites/default/settings.php
+COMPOSER_NO_AUDIT=1
 
 #== Remove root-owned files.
 cd $APP_ROOT
@@ -84,24 +85,39 @@ fi
 
 #== Pre-install starter recipe.
 cd $APP_ROOT
-if [ -d recipes/drupal_cms_starter ] && [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables')" ]; then
+if [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables')" ]; then
   echo
   echo 'Generate hash salt.'
   time openssl rand -hex 32 > $APP_ROOT/.devpanel/salt.txt
  
   echo
   echo 'Install Drupal base system.'
-  while [ -z "$(drush sget drupal_cms_profile.profile_modules_installed 2> /dev/null)" ]; do
+  while [ -z "$(drush sget recipe_installer_kit.profile_modules_installed 2> /dev/null)" ]; do
     time .devpanel/install > /dev/null
   done
-  drush sdel drupal_cms_profile.profile_modules_installed
+  drush sdel recipe_installer_kit.profile_modules_installed
 
   echo
-  echo 'Apply the Drupal CMS starter recipe.'
-  until time drush --include=.devpanel/drush -q recipe ../recipes/drupal_cms_starter; do
-    time drush cr
+  echo 'Apply required recipes.'
+  RECIPES=$(drush sget --format=yaml recipe_installer_kit.required_recipes | grep '^  - .\+/.\+' | cut -f 4 -d ' ')
+  RECIPES_PATH=$(drush --include=.devpanel/drush crp)
+  RECIPES_APPLIED=''
+  for RECIPE in $RECIPES; do
+    RECIPE_PATH=$RECIPES_PATH/$(echo $RECIPE | cut -f 2 -d '/')
+    if [ -d $RECIPE_PATH ]; then
+      until time drush --include=.devpanel/drush -q recipe $RECIPE_PATH; do
+        time drush cr
+      done
+
+      if [ -n "$RECIPES_APPLIED" ]; then
+        RECIPES_APPLIED="$RECIPES_APPLIED,\"$RECIPE\""
+      else
+        RECIPES_APPLIED="\"$RECIPE\""
+      fi
+    fi
   done
-  drush sset --input-format=yaml installer.applied_recipes '["drupal/drupal_cms_starter"]'
+  drush sdel recipe_installer_kit.required_recipes
+  drush sset --input-format=yaml installer.applied_recipes "[$RECIPES_APPLIED]"
 
   echo
   echo 'Tell Automatic Updates about patches.'

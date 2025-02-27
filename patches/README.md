@@ -1,2 +1,2 @@
-Holds patches that cannot be applied by Composer.
+Holds patches that Composer cannot download and apply.
 Path structure is vendor/project/patch.
