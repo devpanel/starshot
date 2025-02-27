@@ -19,7 +19,8 @@ function _install_drupal_cms_profile_modules() {
     foreach ($batch['operations'] as $step) {
       call_user_func_array($step[0], array_merge($step[1], [&$context]));
     }
-    \Drupal::state()->set('drupal_cms_profile.profile_modules_installed', TRUE);
+    \Drupal::state()->set('recipe_installer_kit.profile_modules_installed', TRUE);
+    \Drupal::state()->set('recipe_installer_kit.required_recipes', $install_state['profile_info']['recipes']['required'] ?? []);
   }
 }
 
