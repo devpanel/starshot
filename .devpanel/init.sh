@@ -22,7 +22,8 @@ exec > >(tee $LOG_FILE) 2>&1
 TIMEFORMAT=%lR
 DDEV_DOCROOT=${WEB_ROOT##*/}
 SETTINGS_FILE_PATH=$WEB_ROOT/sites/default/settings.php
-COMPOSER_NO_AUDIT=1
+# For faster performance, don't audit dependencies automatically.
+export COMPOSER_NO_AUDIT=1
 
 #== Remove root-owned files.
 cd $APP_ROOT
@@ -103,7 +104,7 @@ if [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 
   RECIPES_PATH=$(drush --include=.devpanel/drush crp)
   RECIPES_APPLIED=''
   for RECIPE in $RECIPES; do
-    RECIPE_PATH=$RECIPES_PATH/$(echo $RECIPE | cut -f 2 -d '/')
+    RECIPE_PATH=$RECIPES_PATH/${RECIPE##*/}
     if [ -d $RECIPE_PATH ]; then
       until time drush --include=.devpanel/drush -q recipe $RECIPE_PATH; do
         time drush cr

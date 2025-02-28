@@ -221,6 +221,6 @@
         }
     },
     "scripts": {
-        "post-drupal-scaffold-cmd": "cd web/sites/default && (patch -Np1 -r /dev/null < \"${APP_ROOT}\"/.devpanel/drupal-settings.patch || : )"
+        "post-drupal-scaffold-cmd": "cd web/sites/default && test -n \"$(grep 'include \\$devpanel_settings;' settings.php)\" || patch -Np1 -r /dev/null < $APP_ROOT/.devpanel/drupal-settings.patch || :"
     }
 }
