@@ -16,23 +16,22 @@
 # ----------------------------------------------------------------------
 set -eu -o pipefail
 
-LOG_FILE="$APP_ROOT/logs/init-$(date +%F-%T).log"
+cd $APP_ROOT
+
+LOG_FILE="logs/init-$(date +%F-%T).log"
 exec > >(tee $LOG_FILE) 2>&1
 
 TIMEFORMAT=%lR
-DDEV_DOCROOT=${WEB_ROOT##*/}
-SETTINGS_FILE_PATH=$WEB_ROOT/sites/default/settings.php
 # For faster performance, don't audit dependencies automatically.
 export COMPOSER_NO_AUDIT=1
 
 #== Remove root-owned files.
-cd $APP_ROOT
 echo
 echo Remove root-owned files.
 time sudo rm -rf lost+found
 
 #== Clone source code.
-if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
+if [ -z "$(ls -A repos/drupal/drupal_cms)" ]; then
   echo "Clone source code."
   echo
   time git submodule update --init --remote --recursive
@@ -46,51 +45,50 @@ if [ -z "$(ls -A $APP_ROOT/repos/drupal/drupal_cms)" ]; then
     echo
     time git submodule update --init --remote --recursive
   fi
-
-  cd $APP_ROOT/repos/drupal/drupal_cms
+  cd repos/drupal/drupal_cms
   echo
   time git checkout $(git branch -r | grep "origin/HEAD" | cut -f 3 -d '/')
+
+  #== Install JavaScript dependencies if needed.
+  if [ ! -d node_modules ]; then
+    echo
+    echo 'Install JavaScript dependencies.'
+    time npm -q clean-install --foreground-scripts
+  fi
+  cd $APP_ROOT
+
+  #== Symlink Drupal CMS installer into web root.
+  echo
+  echo 'Symlink Drupal CMS installer into web root.'
+  mkdir -p $WEB_ROOT/profiles
+  time ln -s -f $(realpath -s --relative-to=$WEB_ROOT/profiles repos/drupal/drupal_cms/project_template/web/profiles/drupal_cms_installer) $WEB_ROOT/profiles/
 fi
 
 #== Composer install.
-cd $APP_ROOT
-if [ ! -f composer.lock ]; then
+if [ ! -f composer.json ]; then
   echo
   echo 'Generate composer.json.'
   time .devpanel/generate-composer-json > composer.json
-
-  echo
-  time composer -n install --no-progress
 fi
-
-#== Symlink Drupal CMS installer into web root.
 echo
-echo 'Symlink Drupal CMS installer into web root.'
-time ln -s -f $(realpath -s --relative-to=$DDEV_DOCROOT/profiles repos/drupal/drupal_cms/project_template/$DDEV_DOCROOT/profiles/drupal_cms_installer) $DDEV_DOCROOT/profiles
-
-#== Install JavaScript dependencies if needed.
-cd $APP_ROOT/repos/drupal/drupal_cms
-if [ ! -d node_modules ]; then
-  echo
-  echo 'Install JavaScript dependencies.'
-  time npm -q clean-install --foreground-scripts
-fi
+time composer -n install --no-progress
 
 #== Create the private files directory.
-cd $APP_ROOT
 if [ ! -d private ]; then
   echo
   echo 'Create the private files directory.'
   time mkdir private
 fi
 
-#== Pre-install starter recipe.
-cd $APP_ROOT
-if [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables')" ]; then
+#== Generate hash salt.
+if [ ! -f .devpanel/salt.txt ]; then
   echo
   echo 'Generate hash salt.'
-  time openssl rand -hex 32 > $APP_ROOT/.devpanel/salt.txt
- 
+  time openssl rand -hex 32 > .devpanel/salt.txt
+fi
+
+#== Pre-install starter recipe.
+if [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 'show tables')" ]; then
   echo
   echo 'Install Drupal base system.'
   while [ -z "$(drush sget recipe_installer_kit.profile_modules_installed 2> /dev/null)" ]; do
