@@ -80,6 +80,13 @@ if [ ! -d private ]; then
   time mkdir private
 fi
 
+#== Create the config sync directory.
+if [ ! -d config/sync ]; then
+  echo
+  echo 'Create the config sync directory.'
+  time mkdir -p config/sync
+fi
+
 #== Generate hash salt.
 if [ ! -f .devpanel/salt.txt ]; then
   echo
@@ -127,6 +134,8 @@ if [ -z "$(mysql -h $DB_HOST -P $DB_PORT -u $DB_USER -p$DB_PASSWORD $DB_NAME -e 
 
   echo
   time drush cr
+else
+  drush -n updb
 fi
 
 INIT_DURATION=$SECONDS
